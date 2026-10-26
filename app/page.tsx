@@ -15,6 +15,7 @@ import {
   Globe,
   ExternalLink,
   Users,
+  User,
 } from "lucide-react";
 
 // ============================================================================
@@ -1533,6 +1534,7 @@ export default function AcademicPortfolio() {
                 --------------------------------------------------------------- */}
             <section id="about" className="scroll-mt-24">
               <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+                <User className="w-3.5 h-3.5" />
                 <span>{data.about.sectionTitle}</span>
               </h2>
 
