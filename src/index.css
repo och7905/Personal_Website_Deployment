@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 라이트 모드 글자색 강제 고정 */
+html:not(.dark) body,
+html:not(.dark) main,
+html:not(.dark) aside,
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) p,
+html:not(.dark) span {
+  color: #09090b !important;
+}
+
+/* 다크 모드 글자색 복원 */
+html.dark body,
+html.dark main,
+html.dark aside,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark p,
+html.dark span {
+  color: #f4f4f5 !important;
+}

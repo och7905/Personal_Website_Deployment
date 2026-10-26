@@ -79,6 +79,7 @@ React, TypeScript, Tailwind CSS, Lucide React를 기반으로 제작된 **학술
 │   └── profile.jpg          # 메인 프로필 사진
 ├── src/
 │   ├── App.tsx              # 포트폴리오 메인 컴포넌트 & 다국어 데이터 (Vite 진입점)
+│   ├── index.css            # Tailwind 글로벌 스타일
 │   └── main.tsx             # React 루트 렌더러
 ├── app/
 │   └── page.tsx             # Next.js App Router 호환 파일 (App.tsx와 100% 동기화)

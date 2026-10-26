@@ -94,6 +94,7 @@
 │   └── profile.jpg               # 개인 프로필 사진 (모든 언어에서 사용)
 ├── src/
 │   ├── App.tsx                   # 메인 포트폴리오 컴포넌트, 다국어 데이터, VisitorCounter, PrintableCV
+│   ├── index.css                 # Tailwind CSS 글로벌 스타일
 │   └── main.tsx                  # React 18 루트 렌더러
 ├── app/
 │   └── page.tsx                  # Next.js App Router 호환용 (src/App.tsx와 100% 동기화)

@@ -88,6 +88,16 @@ const BlogIcon = ({ className }: { className?: string }) => (
 // ============================================================================
 export type Language = "ko" | "ja" | "en";
 
+export interface EducationItem {
+  period: string;
+  degree: string;
+  institution: string;
+  location: string;
+  url?: string;
+  lab?: string;
+  description?: string;
+}
+
 export const portfolioDataByLang = {
   // --------------------------------------------------------------------------
   // 한국어 (Korean)
@@ -901,7 +911,7 @@ export function PrintableCV({
           {sectionHeadings.education}
         </h2>
         <div className="space-y-2">
-          {data.education.items.map((edu, idx) => (
+          {data.education.items.map((edu: EducationItem, idx: number) => (
             <div key={idx} className="break-inside-avoid grid grid-cols-[105px_1fr] gap-2 items-baseline">
               <span className="text-[10.5px] font-semibold text-zinc-700 tabular-nums">
                 {edu.period}
