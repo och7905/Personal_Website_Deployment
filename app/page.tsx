@@ -98,6 +98,20 @@ export interface EducationItem {
   description?: string;
 }
 
+export const getAssetUrl = (path: string): string => {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  const cleanPath = path.startsWith("./") ? path.slice(2) : path.startsWith("/") ? path.slice(1) : path;
+  try {
+    const base = (import.meta as any)?.env?.BASE_URL || "./";
+    return base.endsWith("/") ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
+  } catch {
+    return `./${cleanPath}`;
+  }
+};
+
 export const portfolioDataByLang = {
   // --------------------------------------------------------------------------
   // 한국어 (Korean)
@@ -112,7 +126,7 @@ export const portfolioDataByLang = {
       lab: "AIONE 연구실 (AIONE Lab)",
       location: "대한민국 대전",
       email: "och7905@naver.com",
-      profileImage: "/profile.jpg",
+      profileImage: "./profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -331,7 +345,7 @@ export const portfolioDataByLang = {
       lab: "AIONE 研究室 (AIONE Lab)",
       location: "大韓民国 大田",
       email: "och7905@naver.com",
-      profileImage: "/profile.jpg",
+      profileImage: "./profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -549,7 +563,7 @@ export const portfolioDataByLang = {
       lab: "AIONE Laboratory",
       location: "Daejeon, Republic of Korea",
       email: "och7905@naver.com",
-      profileImage: "/profile.jpg",
+      profileImage: "./profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -1371,9 +1385,16 @@ export default function AcademicPortfolio() {
                 {/* 프로필 이미지 (모서리 둥근 사각형, 좌측 정렬) */}
                 <div className="relative group w-36 h-36 rounded-2xl overflow-hidden ring-1 ring-zinc-300 dark:ring-zinc-700 shadow-md bg-zinc-100 dark:bg-zinc-800 shrink-0">
                   <img
-                    src={data.personal.profileImage}
+                    src={getAssetUrl(data.personal.profileImage)}
                     alt={data.personal.name}
                     className="w-full h-full object-cover grayscale-[5%] group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.fallbackTried) {
+                        target.dataset.fallbackTried = "true";
+                        target.src = "./profile.jpg";
+                      }
+                    }}
                   />
                 </div>
 

@@ -81,6 +81,9 @@
   ```
 - `Experience` 소속 기관명 옆에 외부 링크(`ExternalLink`) 아이콘 배치 및 호버 시 대각선 이동 애니메이션(`group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5`) 적용.
 
+### 2.8 서브패스 정적 리소스 경로 호환 (`getAssetUrl`)
+- GitHub Pages 서브패스(예: `/Personal_Website_Deployment/`) 배포 시 절대 경로(`/profile.jpg`) 호출로 인한 404 이미지 깨짐을 방지하기 위해 `getAssetUrl` 헬퍼 함수를 사용하여 `import.meta.env.BASE_URL` 기반 상대 경로(`profileImage: "./profile.jpg"`)로 동적 해석 및 `onError` 2차 폴백을 적용했습니다.
+
 ---
 
 ## 3. 프로젝트 구조 및 파일 매핑 (Project Structure & File Mapping)
