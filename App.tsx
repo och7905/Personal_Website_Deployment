@@ -101,8 +101,7 @@ export const portfolioDataByLang = {
       lab: "AIONE 연구실 (AIONE Lab)",
       location: "대한민국 대전",
       email: "och7905@naver.com",
-      profileImage:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      profileImage: "/profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -132,7 +131,7 @@ export const portfolioDataByLang = {
         "현재 대전대학교 AIONE 연구실에서 학생 랩장이자 학부 연구생으로 활동하며, 멀티모달 생성 모델 및 데이터 전처리 파이프라인 개발에 집중하고 있습니다. 탄탄한 컴퓨터 공학 기초 지식을 바탕으로 신뢰성 높고 효율적인 시스템을 개발하는 끈기 있는 소프트웨어 엔지니어로 성장하고자 합니다.",
       ],
       highlights: [
-        { keyword: "AIONE 연구실", url: "#experience" },
+        { keyword: "AIONE 연구실", url: "https://sites.google.com/view/aionelab/education?authuser=0" },
         { keyword: "백엔드 시스템 엔지니어링", url: "#skills" },
         { keyword: "멀티모달 생성 모델", url: "#experience" },
       ],
@@ -146,8 +145,8 @@ export const portfolioDataByLang = {
           period: "2022 – 현재",
           degree: "컴퓨터공학과 학사 과정 (B.Eng.)",
           institution: "대전대학교",
-          lab: "AIONE Lab",
           location: "대전",
+          url: "https://www.dju.ac.kr",
           description: "학부 재학 / 백엔드 및 AI 엔지니어링 전공 탐구",
         },
       ],
@@ -161,6 +160,7 @@ export const portfolioDataByLang = {
           institution: "AIONE 연구실",
           lab: "AIONE Lab",
           location: "대전",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
           description:
             "멀티모달 비디오-투-오디오(Video-to-Audio) 생성 모델 연구 주도, 연구실 운영 총괄 및 데이터 전처리 파이프라인 구축.",
         },
@@ -178,6 +178,7 @@ export const portfolioDataByLang = {
           role: "공식 학생 서포터즈",
           institution: "대전대학교 SW중심대학사업단",
           location: "대전",
+          url: "https://www.dju.ac.kr/sw/main.do",
           description:
             "소프트웨어 사업단 주요 성과 홍보 카드뉴스 및 기술 블로그 제작, 학술 교류 행사 기획 및 운영.",
         },
@@ -186,6 +187,7 @@ export const portfolioDataByLang = {
           role: "피어 튜터 (전공기초 레벨업 튜터링 - 이산수학)",
           institution: "대전대학교 교수학습개발원 (CTL)",
           location: "대전",
+          url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "기초 이산수학 공식 8주 동료 튜터링 프로그램 운영, 논리 증명 및 이산 구조에 관한 학부생 멘토링.",
         },
@@ -318,8 +320,7 @@ export const portfolioDataByLang = {
       lab: "AIONE 研究室 (AIONE Lab)",
       location: "大韓民国 大田",
       email: "och7905@naver.com",
-      profileImage:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      profileImage: "/profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -349,7 +350,7 @@ export const portfolioDataByLang = {
         "現在、大田大学校 AIONE研究室にて学生リーダーおよび学部研究員として活動し、マルチモーダル生成モデルやデータ前処理パイプラインの開発に取り組んでいます。強固なコンピュータサイエンスの基礎知識に基づき、信頼性が高く効率的なシステムを築くソフトウェアエンジニアを目指しています。",
       ],
       highlights: [
-        { keyword: "AIONE研究室", url: "#experience" },
+        { keyword: "AIONE研究室", url: "https://sites.google.com/view/aionelab/education?authuser=0" },
         { keyword: "バックエンドシステムエンジニアリング", url: "#skills" },
         { keyword: "マルチモーダル生成モデル", url: "#experience" },
       ],
@@ -363,8 +364,8 @@ export const portfolioDataByLang = {
           period: "2022 – 現在",
           degree: "コンピュータ工学科 学士課程 (B.Eng.)",
           institution: "大田大学校",
-          lab: "AIONE Lab",
           location: "大田、韓国",
+          url: "https://www.dju.ac.kr",
           description: "学部在学 / バックエンドおよびAIエンジニアリング専攻",
         },
       ],
@@ -378,6 +379,7 @@ export const portfolioDataByLang = {
           institution: "AIONE 研究室",
           lab: "AIONE Lab",
           location: "大田、韓国",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
           description:
             "マルチモーダル Video-to-Audio 生成モデル研究の主導、研究室運営管理およびデータ前処理パイプラインの構築。",
         },
@@ -395,6 +397,7 @@ export const portfolioDataByLang = {
           role: "公式学生サポーターズ",
           institution: "大田大学校 SW中心大学事業団",
           location: "大田、韓国",
+          url: "https://www.dju.ac.kr/sw/main.do",
           description:
             "学部SW成果の広報カードニュースおよび技術ブログ制作、学術交流イベントの企画・運営。",
         },
@@ -403,6 +406,7 @@ export const portfolioDataByLang = {
           role: "ピアチューター（専攻基礎レベルアップチュータリング - 離散数学）",
           institution: "大田大学校 教授学習開発院（CTL）",
           location: "大田、韓国",
+          url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "基礎離散数学の公式8週間ピアチュータリングプログラムを運営、論理証明および離散構造に関する学部生のメンタリング指導。",
         },
@@ -534,8 +538,7 @@ export const portfolioDataByLang = {
       lab: "AIONE Laboratory",
       location: "Daejeon, Republic of Korea",
       email: "och7905@naver.com",
-      profileImage:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      profileImage: "/profile.jpg",
       cvUrl: "#",
     },
     ui: {
@@ -565,7 +568,7 @@ export const portfolioDataByLang = {
         "Currently serving as a student researcher at AIONE Lab, Daejeon University, I focus on multimodal generative models and data pipeline development. Grounded in solid computer science fundamentals, my goal is to grow into a resilient software engineer dedicated to building dependable and efficient systems.",
       ],
       highlights: [
-        { keyword: "AIONE Lab", url: "#experience" },
+        { keyword: "AIONE Lab", url: "https://sites.google.com/view/aionelab/education?authuser=0" },
         { keyword: "backend system engineering", url: "#skills" },
         { keyword: "multimodal generative models", url: "#experience" },
       ],
@@ -579,8 +582,8 @@ export const portfolioDataByLang = {
           period: "2022 – Present",
           degree: "B.Eng. in Computer Engineering",
           institution: "Daejeon University",
-          lab: "AIONE Lab",
           location: "Daejeon, Korea",
+          url: "https://www.dju.ac.kr",
           description: "Undergraduate Student / Focus on Backend & AI Engineering",
         },
       ],
@@ -594,6 +597,7 @@ export const portfolioDataByLang = {
           institution: "AIONE Laboratory",
           lab: "AIONE Lab",
           location: "Daejeon, Korea",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
           description:
             "Leading research on multimodal video-to-audio generation models, managing lab operations, and constructing data preprocessing pipelines.",
         },
@@ -611,6 +615,7 @@ export const portfolioDataByLang = {
           role: "Official Student Supporter",
           institution: "SW University Project Group, Daejeon University",
           location: "Daejeon, Korea",
+          url: "https://www.dju.ac.kr/sw/main.do",
           description:
             "Promoted departmental SW milestones by creating technical card news, blog write-ups, and organizing academic outreach initiatives.",
         },
@@ -619,6 +624,7 @@ export const portfolioDataByLang = {
           role: "Peer Tutor (Major Foundational Level-Up Tutoring - Discrete Mathematics)",
           institution: "Center for Teaching and Learning, Daejeon University",
           location: "Daejeon, Korea",
+          url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "Led an official 8-week peer tutoring program for foundational Discrete Mathematics, mentoring undergraduate peers on logic proofs and discrete structures.",
         },
@@ -1041,7 +1047,7 @@ export function PrintableCV({
 // ============================================================================
 export default function AcademicPortfolio() {
   const [language, setLanguage] = useState<Language>("ko");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
   const [mounted, setMounted] = useState(false);
 
@@ -1068,10 +1074,15 @@ export default function AcademicPortfolio() {
       }
     }
 
-    // 다크모드 복원
+    // 다크모드 기본 우선 복원 ('light'로 명시된 경우만 라이트 모드 전환, 첫 방문/null/dark는 다크 모드 유지)
     const savedTheme = localStorage.getItem("academic-portfolio-theme");
-    if (savedTheme === "dark") {
+    if (savedTheme === "light") {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    } else {
       setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("academic-portfolio-theme", "dark");
     }
   }, []);
 
@@ -1163,35 +1174,40 @@ export default function AcademicPortfolio() {
     }
   };
 
-  // 7) 키워드 하이라이팅 렌더링 헬퍼 (JSX 파싱 및 정규식 오류 방지)
+  // 8) 본문 속 하이라이트 키워드 하이퍼링크 렌더링 함수
   const renderParagraphWithHighlights = (
     paragraph: string,
     highlights: Array<{ keyword: string; url: string }>
   ) => {
-    if (!highlights || highlights.length === 0) {
-      return paragraph;
-    }
-
+    if (!highlights || highlights.length === 0) return paragraph;
     const escapedKeywords = highlights
       .map((h) => h.keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
       .filter(Boolean)
       .join("|");
-
     if (!escapedKeywords) return paragraph;
-
-    const regex = new RegExp("(" + escapedKeywords + ")", "g");
+    const regex = new RegExp(`(${escapedKeywords})`, "g");
     const parts = paragraph.split(regex);
-
     return parts.map((part, pIdx) => {
       const matched = highlights.find((h) => h.keyword === part);
       if (matched) {
+        const isExternal = matched.url.startsWith("http");
         return (
           <a
             key={pIdx}
             href={matched.url}
-            className="font-semibold text-rose-700 dark:text-rose-400 underline underline-offset-4 decoration-rose-300 dark:decoration-rose-700 hover:decoration-rose-700 dark:hover:decoration-rose-400 transition-colors"
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            onClick={
+              !isExternal && matched.url.startsWith("#")
+                ? (e) => scrollToSection(e, matched.url.slice(1))
+                : undefined
+            }
+            className="inline-flex items-baseline gap-0.5 font-semibold text-zinc-950 dark:text-zinc-100 hover:text-rose-600 dark:hover:text-rose-400 hover:underline underline-offset-4 transition-all duration-200 cursor-pointer"
           >
-            {part}
+            <span>{part}</span>
+            {isExternal && (
+              <ExternalLink className="w-3 h-3 ml-0.5 opacity-60 hover:opacity-100 transition-opacity inline shrink-0 self-center" />
+            )}
           </a>
         );
       }
@@ -1226,7 +1242,7 @@ export default function AcademicPortfolio() {
                     className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
                       language === "ko"
                         ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-800 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="한국어로 변경"
                   >
@@ -1238,7 +1254,7 @@ export default function AcademicPortfolio() {
                     className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
                       language === "ja"
                         ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-800 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="日本語に変更"
                   >
@@ -1250,7 +1266,7 @@ export default function AcademicPortfolio() {
                     className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
                       language === "en"
                         ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-800 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="Switch to English"
                   >
@@ -1270,21 +1286,21 @@ export default function AcademicPortfolio() {
                 {/* 이름 및 직책/소속 정보 (좌측 정렬, 명확한 위계, 고대비 색상 적용) */}
                 <div className="space-y-2 text-left w-full flex flex-col items-start">
                   <div className="flex flex-col items-start text-left">
-                    <h1 className="text-2xl font-extrabold tracking-tight text-zinc-950 dark:text-white leading-tight">
+                    <h1 className="text-2xl font-extrabold tracking-tight text-black dark:text-white leading-tight">
                       {data.personal.name}
                     </h1>
-                    <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">
+                    <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-300 mt-0.5">
                       {data.personal.nameSub}
                     </span>
                   </div>
 
-                  <p className="text-sm font-bold text-zinc-900 dark:text-zinc-200 leading-snug">
+                  <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-300 leading-snug">
                     {data.personal.title}
                   </p>
-                  <p className="text-xs leading-relaxed text-zinc-800 dark:text-zinc-300 font-medium">
+                  <p className="text-xs leading-relaxed text-zinc-900 dark:text-zinc-300 font-semibold">
                     {data.personal.department}
                     <br />
-                    <span className="font-semibold text-zinc-800 dark:text-zinc-300">
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-300">
                       {data.personal.affiliation}
                     </span>
                     {data.personal.lab && (
@@ -1307,7 +1323,7 @@ export default function AcademicPortfolio() {
                         rel={social.url.startsWith("http") ? "noopener noreferrer" : undefined}
                         aria-label={social.name}
                         title={social.label || social.name}
-                        className="p-2 rounded-xl text-zinc-900 dark:text-zinc-200 hover:text-rose-700 dark:hover:text-rose-400 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors border border-zinc-300 dark:border-zinc-700 shadow-sm"
+                        className="p-2 rounded-xl text-black dark:text-zinc-300 hover:text-rose-700 dark:hover:text-rose-400 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors border border-zinc-300 dark:border-zinc-700 shadow-sm"
                       >
                         <IconComponent className="w-4 h-4" />
                       </a>
@@ -1329,7 +1345,7 @@ export default function AcademicPortfolio() {
 
                 {/* 데스크톱 세로 네비게이션 메뉴 */}
                 <nav className="hidden lg:block pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full text-left">
-                  <p className="text-[10px] font-bold tracking-widest text-zinc-700 dark:text-zinc-400 uppercase mb-3">
+                  <p className="text-[10px] font-bold tracking-widest text-zinc-900 dark:text-zinc-400 uppercase mb-3">
                     {data.ui.navTitle}
                   </p>
                   <ul className="space-y-1 w-full">
@@ -1340,10 +1356,10 @@ export default function AcademicPortfolio() {
                           <a
                             href={`#${item.id}`}
                             onClick={(e) => scrollToSection(e, item.id)}
-                            className={`group flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                            className={`group flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                               isActive
-                                ? "text-rose-700 dark:text-rose-400 font-bold bg-rose-50 dark:bg-rose-950/40 translate-x-1"
-                                : "text-zinc-800 hover:text-rose-700 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
+                                ? "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 translate-x-1"
+                                : "text-zinc-800 dark:text-zinc-400 hover:text-rose-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
                             }`}
                           >
                             <span>{item.label}</span>
@@ -1363,19 +1379,19 @@ export default function AcademicPortfolio() {
               </div>
 
               {/* 사이드바 최하단: 좌측 [다크/라이트모드 토글 버튼] & 우측 [지역 정보] */}
-              <div className="pt-6 mt-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs text-zinc-900 dark:text-zinc-200 w-full font-medium">
+              <div className="pt-6 mt-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs text-black dark:text-zinc-200 w-full font-medium">
                 {/* 좌측: 테마 모드 토글 버튼 */}
                 <button
                   type="button"
                   onClick={toggleDarkMode}
-                  className="inline-flex items-center gap-2 text-xs font-semibold p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-zinc-900 dark:text-zinc-200"
+                  className="inline-flex items-center gap-2 text-xs font-bold p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-black dark:text-zinc-200"
                   aria-label="Toggle Dark Mode"
                   title={isDarkMode ? data.ui.lightMode : data.ui.darkMode}
                 >
                   {isDarkMode ? (
                     <Sun className="w-4 h-4 text-amber-400 shrink-0" />
                   ) : (
-                    <Moon className="w-4 h-4 text-zinc-700 dark:text-zinc-300 shrink-0" />
+                    <Moon className="w-4 h-4 text-black dark:text-zinc-300 shrink-0" />
                   )}
                   <span>{isDarkMode ? data.ui.lightMode : data.ui.darkMode}</span>
                 </button>
@@ -1401,20 +1417,20 @@ export default function AcademicPortfolio() {
                 01. ABOUT ME
                 --------------------------------------------------------------- */}
             <section id="about" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <span>{data.about.sectionTitle}</span>
               </h2>
 
-              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-zinc-900 dark:text-zinc-200">
+              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-zinc-900 dark:text-zinc-300">
                 {data.about.introParagraphs.map((paragraph, idx) => (
-                  <p key={idx} className="text-zinc-900 dark:text-zinc-200 font-normal leading-relaxed">
+                  <p key={idx} className="text-zinc-900 dark:text-zinc-300 font-normal leading-relaxed">
                     {renderParagraphWithHighlights(paragraph, data.about.highlights)}
                   </p>
                 ))}
 
                 <div className="pt-2">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-900 dark:bg-zinc-800/80 dark:border-zinc-700 dark:text-zinc-200 text-xs shadow-sm font-medium">
-                    <Coffee className="w-3.5 h-3.5 text-rose-700 dark:text-rose-400 shrink-0" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 dark:bg-zinc-800/80 dark:border-zinc-700 dark:text-zinc-300 text-xs shadow-sm font-medium">
+                    <Coffee className="w-3.5 h-3.5 text-zinc-600 dark:text-zinc-400 shrink-0" />
                     <span>{data.about.hobbyNote}</span>
                   </div>
                 </div>
@@ -1425,39 +1441,46 @@ export default function AcademicPortfolio() {
                 02. EDUCATION
                 --------------------------------------------------------------- */}
             <section id="education" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <GraduationCap className="w-3.5 h-3.5" />
                 <span>{data.education.sectionTitle}</span>
               </h2>
 
-              <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-2">
                 {data.education.items.map((edu, idx) => (
                   <div
                     key={idx}
-                    className="py-4 first:pt-0 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
                       {edu.period}
                     </span>
                     <div className="space-y-1">
-                      <h3 className="text-sm sm:text-base font-bold text-zinc-950 dark:text-white">
-                        {edu.degree}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300">
-                        <span className="font-semibold text-zinc-800 dark:text-zinc-300">
-                          {edu.institution}
-                        </span>
-                        {edu.lab && (
-                          <span className="text-rose-700 dark:text-rose-400 ml-1.5 font-bold">
-                            · {edu.lab}
-                          </span>
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <h3 className="text-sm sm:text-base font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                          {edu.degree}
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-zinc-900 dark:text-zinc-200 font-semibold">
+                        {edu.url ? (
+                          <a
+                            href={edu.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 hover:text-rose-600 dark:hover:text-rose-400 hover:underline underline-offset-4 transition-colors group/link"
+                          >
+                            <span>{edu.institution}</span>
+                            <ExternalLink className="w-3.5 h-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </a>
+                        ) : (
+                          <span>{edu.institution}</span>
                         )}
-                        <span className="text-zinc-700 dark:text-zinc-400 ml-1.5 font-normal">
+                        <span className="text-zinc-600 dark:text-zinc-400 ml-1.5 font-normal">
                           ({edu.location})
                         </span>
                       </p>
                       {edu.description && (
-                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 pt-0.5 leading-relaxed font-normal">
+                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 pt-0.5 leading-relaxed font-normal">
                           {edu.description}
                         </p>
                       )}
@@ -1471,35 +1494,47 @@ export default function AcademicPortfolio() {
                 03. EXPERIENCE
                 --------------------------------------------------------------- */}
             <section id="experience" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>{data.experience.sectionTitle}</span>
               </h2>
 
-              <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-2">
                 {data.experience.items.map((exp, idx) => (
                   <div
                     key={idx}
-                    className="py-4 first:pt-0 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
                       {exp.period}
                     </span>
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm sm:text-base font-bold text-zinc-950 dark:text-white">
+                        <h3 className="text-sm sm:text-base font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {exp.role}
                         </h3>
-                        <span className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 font-semibold">
-                          @ {exp.institution}
-                        </span>
+                        {exp.url ? (
+                          <a
+                            href={exp.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-300 hover:text-rose-600 dark:hover:text-rose-400 hover:underline underline-offset-4 transition-colors group/link"
+                          >
+                            <span>@ {exp.institution}</span>
+                            <ExternalLink className="w-3.5 h-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </a>
+                        ) : (
+                          <span className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-300">
+                            @ {exp.institution}
+                          </span>
+                        )}
                         {exp.lab && (
-                          <span className="text-xs text-rose-700 dark:text-rose-400 font-bold">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
                             [{exp.lab}]
                           </span>
                         )}
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed pt-0.5 font-normal">
+                      <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                         {exp.description}
                       </p>
                     </div>
@@ -1512,7 +1547,7 @@ export default function AcademicPortfolio() {
                 04. PUBLICATIONS
                 --------------------------------------------------------------- */}
             <section id="publications" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>{data.publications.sectionTitle}</span>
               </h2>
@@ -1522,16 +1557,33 @@ export default function AcademicPortfolio() {
                   {data.publications.items.map((paper, idx) => (
                     <div
                       key={idx}
-                      className="border-l-4 border-rose-700 dark:border-rose-500 pl-4 py-1.5 transition-all duration-200 hover:translate-x-0.5"
+                      className="border-l-4 border-rose-600 dark:border-rose-500 pl-4 py-1.5 transition-all duration-200 hover:translate-x-0.5"
                     >
-                      <h3 className="text-sm sm:text-base font-bold text-zinc-950 dark:text-white leading-snug">
+                      <h3 className="text-sm sm:text-base font-bold text-black dark:text-white leading-snug">
                         {paper.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 mt-1 font-medium">
-                        {paper.authors.join(", ")}
+                      <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 mt-1 font-normal">
+                        {paper.authors.map((author, aIdx) => {
+                          const isSelf =
+                            author.includes("오창현") ||
+                            author.toLowerCase().includes("changhyeon oh") ||
+                            author.includes("オ・チャンヒョン");
+                          return (
+                            <span key={aIdx}>
+                              {isSelf ? (
+                                <span className="font-bold text-black dark:text-white underline underline-offset-2">
+                                  {author}
+                                </span>
+                              ) : (
+                                author
+                              )}
+                              {aIdx < paper.authors.length - 1 && ", "}
+                            </span>
+                          );
+                        })}
                       </p>
                       <div className="flex flex-wrap items-center gap-2 mt-1.5 text-xs">
-                        <span className="italic text-zinc-700 dark:text-zinc-400 font-medium">
+                        <span className="italic text-zinc-600 dark:text-zinc-400 font-normal">
                           {paper.venue}, {paper.year}
                         </span>
                       </div>
@@ -1539,7 +1591,7 @@ export default function AcademicPortfolio() {
                   ))}
                 </div>
               ) : (
-                <div className="p-4 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/40 text-xs font-medium text-zinc-800 dark:text-zinc-300">
+                <div className="p-4 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/40 text-xs font-medium text-zinc-700 dark:text-zinc-400">
                   {data.ui.emptyPub}
                 </div>
               )}
@@ -1549,29 +1601,29 @@ export default function AcademicPortfolio() {
                 05. HONORS & SCHOLARSHIPS
                 --------------------------------------------------------------- */}
             <section id="honors" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <Award className="w-3.5 h-3.5" />
                 <span>{data.honors.sectionTitle}</span>
               </h2>
 
-              <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-2">
                 {data.honors.items.map((honor, idx) => (
                   <div
                     key={idx}
-                    className="py-3.5 first:pt-0 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
                       {honor.year}
                     </span>
                     <div className="space-y-0.5">
-                      <h3 className="text-sm font-bold text-zinc-950 dark:text-white">
+                      <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                         {honor.title}
                       </h3>
-                      <p className="text-xs font-bold text-rose-700 dark:text-rose-400">
+                      <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-300">
                         {honor.issuer}
                       </p>
                       {honor.description && (
-                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed font-normal">
+                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed font-normal">
                           {honor.description}
                         </p>
                       )}
@@ -1585,34 +1637,34 @@ export default function AcademicPortfolio() {
                 06. COMPETITIONS
                 --------------------------------------------------------------- */}
             <section id="competitions" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
                 <Trophy className="w-3.5 h-3.5" />
                 <span>{data.competitions.sectionTitle}</span>
               </h2>
 
-              <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="space-y-2">
                 {data.competitions.items.map((comp, idx) => (
                   <div
                     key={idx}
-                    className="py-3.5 first:pt-0 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-700 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
                       {comp.year}
                     </span>
-                    <div className="space-y-0.5">
+                    <div className="space-y-1">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm font-bold text-zinc-950 dark:text-white">
+                        <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {comp.title}
                         </h3>
-                        <span className="text-xs font-bold text-rose-700 dark:text-rose-400">
-                          ({comp.award})
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
+                          [{comp.award}]
                         </span>
                       </div>
                       <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-300">
                         {data.ui.organizerLabel} {comp.organizer}
                       </p>
                       {comp.description && (
-                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed pt-0.5 font-normal">
+                        <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                           {comp.description}
                         </p>
                       )}
@@ -1626,7 +1678,7 @@ export default function AcademicPortfolio() {
                 07. SKILLS
                 --------------------------------------------------------------- */}
             <section id="skills" className="scroll-mt-24 pb-32">
-              <h2 className="text-xs font-bold tracking-widest text-rose-700 dark:text-rose-400 uppercase mb-6 flex items-center gap-2">
+              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-6 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5" />
                 <span>{data.skills.sectionTitle}</span>
               </h2>
@@ -1634,16 +1686,17 @@ export default function AcademicPortfolio() {
               <div className="space-y-5">
                 {data.skills.groups.map((skillGroup, idx) => (
                   <div key={idx} className="space-y-2">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-950 dark:text-white">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-black dark:text-white">
                       {skillGroup.category}
                     </h3>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {skillGroup.items.map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-xs font-semibold text-zinc-900 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-700 hover:border-rose-600 hover:text-rose-700 dark:hover:text-rose-400 transition-colors shadow-sm"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium bg-zinc-100 border border-zinc-200 text-zinc-800 hover:border-zinc-300 hover:text-black dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:text-white transition-all shadow-sm cursor-default"
                         >
-                          {skill}
+                          <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+                          <span>{skill}</span>
                         </span>
                       ))}
                     </div>
@@ -1655,9 +1708,9 @@ export default function AcademicPortfolio() {
             {/* ---------------------------------------------------------------
                 FOOTER
                 --------------------------------------------------------------- */}
-            <footer className="pt-12 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-              <p className="font-semibold text-zinc-800 dark:text-zinc-300">{data.ui.copyright}</p>
-              <p className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">{data.ui.footerNote}</p>
+            <footer className="pt-12 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+              <p className="font-bold text-black dark:text-zinc-300">{data.ui.copyright}</p>
+              <p className="text-[11px] font-semibold text-zinc-800 dark:text-zinc-400">{data.ui.footerNote}</p>
             </footer>
 
           </main>
