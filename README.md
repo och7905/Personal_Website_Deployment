@@ -207,7 +207,7 @@ publications: {
 *작성자의 이름(오창현 / Changhyeon Oh)은 저자 목록에서 자동으로 볼드 밑줄 처리됩니다.*
 
 ### 6. 방문자 카운터 스토리지 관리 (`VisitorCounter`)
-`src/App.tsx` 내 `STORAGE_TOTAL_KEY`, `STORAGE_TODAY_KEY` 상수를 통해 브라우저 스토리지 키를 관리하며, 별도의 불안정한 외부 API 의존성 없이 로컬 스토리지에서 안전하게 카운트가 관리됩니다.
+`src/App.tsx` 내 `portfolio_visited`(세션 키)와 `visitor_today_${YYYY-MM-DD}`, `visitor_total`(로컬 키)을 통해 브라우저 스토리지를 관리하며, 클릭 이벤트 없이 세션 단위로 안전하게 카운트가 관리됩니다.
 
 ---
 

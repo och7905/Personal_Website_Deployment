@@ -51,12 +51,15 @@
   ```
 
 ### 2.4 순수 브라우저 스토리지 기반 방문자 카운터 (`VisitorCounter`)
-- **설계 의도**: 외부 CounterAPI(`api.counterapi.dev`)의 빈번한 410 / 404 HTTP 오류, 통신 지연, 광고 차단기(AdBlock) 차단에 따른 콘솔 에러를 원천 차단하기 위해 **외부 API 통신을 완전히 배제**했습니다.
-- **동작 메커니즘**:
-  - `localStorage` 및 `sessionStorage`를 활용한 클라이언트 측 안전 집계.
-  - 당일 방문 일자(`visitor_visited_date_v1` = `YYYY-MM-DD`)를 조회하여, **당일 최초 접속 시에만** 오늘 방문자 수(1부터 시작)와 누적 방문자 수(+1)를 증가시키고 저장.
-  - 새로고침이나 같은 날 재방문 시에는 카운트를 증가시키지 않고 저장된 값을 유지(수치 왜곡 방지).
-  - 과거 테스트용 더미 키(`portfolio_visitor_*`, `portfolio_*_v2`)는 마운트 시 자동 `removeItem` 처리.
+- **설계 의도**: 외부 CounterAPI(`api.counterapi.dev`)의 빈번한 410 / 404 HTTP 오류, 통신 지연, 광고 차단기(AdBlock) 차단에 따른 콘솔 에러를 원천 차단하기 위해 **외부 API 통신을 완전히 배제**하고 정직한 세션 기반 로컬 스토리지를 활용합니다.
+- **동작 메커니즘 (정직한 세션 기반 집계)**:
+  - 방문 판별 기준: `sessionStorage.getItem('portfolio_visited')`
+  - **세션 키가 없을 때 (새 방문자 / 새 창 열기)**:
+    - `visitor_today_${YYYY-MM-DD}` 및 `visitor_total` 키를 `localStorage`에서 조회하여 +1 증가 후 재저장.
+    - `sessionStorage.setItem('portfolio_visited', 'true')` 기록.
+  - **세션 키가 이미 존재할 때 (단순 새로고침)**:
+    - 카운트를 증가시키지 않고 `localStorage`에 저장된 최신 값을 그대로 읽어와 표시 (최소 1 보장).
+  - 클릭으로 숫자가 올라가는 임시 핸들러(`onClick`)를 전면 배제하고 `cursor-default` 스타일 적용.
 - **UI 디자인**:
   - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 세련된 알약형(Capsule) 배지:
     `[ 👥 🟢 Visitors · Today 1 · Total 1 ]`

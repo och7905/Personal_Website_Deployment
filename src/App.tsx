@@ -1044,12 +1044,8 @@ export function PrintableCV({
 }
 
 // ============================================================================
-// 4. 방문자 통계 컴포넌트: VisitorCounter (순수 브라우저 스토리지 집계)
+// 4. 방문자 통계 컴포넌트: VisitorCounter (정직한 세션 기반 브라우저 집계)
 // ============================================================================
-const STORAGE_TOTAL_KEY = "visitor_count_total_v1";
-const STORAGE_TODAY_KEY = "visitor_count_today_v1";
-const STORAGE_DATE_KEY = "visitor_visited_date_v1";
-
 export function VisitorCounter() {
   const [counts, setCounts] = useState<{ today: number; total: number }>({
     today: 1,
@@ -1060,60 +1056,44 @@ export function VisitorCounter() {
     try {
       if (typeof window === "undefined") return;
 
-      // 과거 레거시 스토리지 키 정리
-      try {
-        localStorage.removeItem("portfolio_visitor_total_count");
-        localStorage.removeItem("portfolio_visitor_today_count");
-        localStorage.removeItem("portfolio_total_v2");
-        localStorage.removeItem("portfolio_today_v2");
-      } catch {}
+      const todayKey = `visitor_today_${new Date().toISOString().slice(0, 10)}`;
+      const totalKey = "visitor_total";
+      const sessionKey = "portfolio_visited";
 
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const todayStr = `${year}-${month}-${day}`;
+      const hasVisitedThisSession = sessionStorage.getItem(sessionKey);
 
-      let isFirstVisitToday = true;
-      try {
-        const visitedDate =
-          localStorage.getItem(STORAGE_DATE_KEY) || sessionStorage.getItem(STORAGE_DATE_KEY);
-        if (visitedDate === todayStr) {
-          isFirstVisitToday = false;
-        }
-      } catch {}
-
-      let currentTotal = 1;
       let currentToday = 1;
+      let currentTotal = 1;
 
-      try {
-        const storedTotal = parseInt(localStorage.getItem(STORAGE_TOTAL_KEY) || "0", 10);
-        const storedToday = parseInt(localStorage.getItem(STORAGE_TODAY_KEY) || "0", 10);
+      if (!hasVisitedThisSession) {
+        // 새 방문자 또는 브라우저 창을 새로 연 경우: 카운트 +1 증가
+        const storedToday = parseInt(localStorage.getItem(todayKey) || "0", 10);
+        const storedTotal = parseInt(localStorage.getItem(totalKey) || "0", 10);
 
-        if (isFirstVisitToday) {
-          // 당일 최초 방문 시: 오늘 카운트 1부터 시작, 누적 카운트 +1
-          currentToday = 1;
-          currentTotal = storedTotal > 0 ? storedTotal + 1 : 1;
-          localStorage.setItem(STORAGE_DATE_KEY, todayStr);
-          sessionStorage.setItem(STORAGE_DATE_KEY, todayStr);
-          localStorage.setItem(STORAGE_TODAY_KEY, String(currentToday));
-          localStorage.setItem(STORAGE_TOTAL_KEY, String(currentTotal));
-        } else {
-          // 당일 재방문 시: 기존 저장 카운트 유지
-          currentToday = storedToday > 0 ? storedToday : 1;
-          currentTotal = storedTotal > 0 ? storedTotal : 1;
-        }
-      } catch {}
+        currentToday = storedToday > 0 ? storedToday + 1 : 1;
+        currentTotal = storedTotal > 0 ? storedTotal + 1 : 1;
+
+        localStorage.setItem(todayKey, String(currentToday));
+        localStorage.setItem(totalKey, String(currentTotal));
+        sessionStorage.setItem(sessionKey, "true");
+      } else {
+        // 같은 세션(창)에서 새로고침만 한 경우: 기존 카운트 그대로 조회 (최소값 1 보장)
+        const storedToday = parseInt(localStorage.getItem(todayKey) || "0", 10);
+        const storedTotal = parseInt(localStorage.getItem(totalKey) || "0", 10);
+
+        currentToday = Math.max(1, storedToday);
+        currentTotal = Math.max(1, storedTotal);
+      }
 
       setCounts({ today: currentToday, total: currentTotal });
     } catch {
-      // 오류 발생 시 기본값(1) 유지
+      // 브라우저 스토리지 차단/시크릿 모드 예외 시 기본값(1) 유지
     }
   }, []);
 
   return (
     <div
-      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200/60 dark:bg-zinc-900/70 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 shadow-sm transition-all select-none"
+      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200/60 dark:bg-zinc-900/70 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 shadow-sm transition-all select-none cursor-default"
       title="사이트 방문자 수 (Today / Total Views)"
     >
       <div className="flex items-center gap-1.5">
