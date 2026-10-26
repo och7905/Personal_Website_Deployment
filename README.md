@@ -57,6 +57,15 @@ React, TypeScript, Tailwind CSS, Lucide React를 기반으로 제작된 **학술
 ### 8. 🖼️ 로컬 프로필 이미지 지원
 - `public/profile.jpg` 경로를 통해 사용자 개인 사진을 로컬에서 즉시 렌더링.
 
+### 9. 📊 방문자 수 카운터 (`VisitorCounter`)
+- Lucide React의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점을 배치한 직관적인 알약형(Capsule) 배지 UI: `[ 👥 🟢 Visitors · Today 1 · Total 1 ]`.
+- 외부 서버나 불안정한 서드파티 API 통신 없이 브라우저 스토리지(`localStorage` / `sessionStorage`)를 기반으로 **오늘 방문자 수(Today)**와 **전체 누적 방문자 수(Total)**를 안전하게 집계.
+- 외부 네트워크 호출이 일절 없어 콘솔 에러(404, 410 등)가 원천 발생하지 않으며, 오프라인이나 광고 차단기(AdBlock) 환경에서도 100% 무결점 렌더링을 보장.
+- 당일 최초 접속 시에만 오늘 및 누적 카운트를 증가시키고, 새로고침 시에는 단순 조회만 수행하여 불필요한 카운트 뻥튀기를 방지.
+
+### 10. 🎨 섹션 헤더 강제 로즈 컬러링 (`!text-rose-500 font-extrabold`)
+- '01. About Me'부터 '07. Technical Skills'까지 7개 전 섹션의 제목에 Tailwind의 `!text-rose-500 dark:!text-rose-500 font-extrabold`를 적용하여 상위 계층 CSS 우선순위 간섭을 원천 차단하고 다크 모드/라이트 모드 모두에서 선명하고 일관된 브랜드 포인트 컬러를 유지.
+
 ---
 
 ## 📁 프로젝트 구조
@@ -76,6 +85,7 @@ React, TypeScript, Tailwind CSS, Lucide React를 기반으로 제작된 **학술
 ├── index.css                # Tailwind 지시자 및 글로벌 스타일
 ├── tailwind.config.js       # darkMode: "class" 테마 설정
 ├── package.json             # 프로젝트 종속성 및 스크립트
+├── CONTEXT.md               # 프로젝트 설계 맥락 및 인수인계 문서
 └── README.md                # 포트폴리오 가이드 및 문서
 ```
 
@@ -147,8 +157,21 @@ about: {
 }
 ```
 
-### 3. 경력 및 외부 링크 (`experience`)
+### 4. 학력 및 경력 (`education`, `experience`)
 ```typescript
+education: {
+  sectionTitle: "02. Education",
+  items: [
+    {
+      period: "2022 – 현재",
+      degree: "컴퓨터공학과 학사 과정 (B.Eng.)",
+      institution: "대전대학교",
+      location: "대전",
+      url: "https://www.dju.ac.kr", // 학교 공식 웹사이트
+      description: "학부 재학 / 백엔드 및 AI 엔지니어링 전공 탐구",
+    },
+  ],
+},
 experience: {
   sectionTitle: "03. Experience",
   items: [
@@ -166,7 +189,7 @@ experience: {
 }
 ```
 
-### 4. 연구 논문 추가 (`publications`)
+### 5. 연구 논문 추가 (`publications`)
 ```typescript
 publications: {
   sectionTitle: "04. Publications",
@@ -183,6 +206,9 @@ publications: {
 ```
 *작성자의 이름(오창현 / Changhyeon Oh)은 저자 목록에서 자동으로 볼드 밑줄 처리됩니다.*
 
+### 6. 방문자 카운터 스토리지 관리 (`VisitorCounter`)
+`src/App.tsx` 내 `STORAGE_TOTAL_KEY`, `STORAGE_TODAY_KEY` 상수를 통해 브라우저 스토리지 키를 관리하며, 별도의 불안정한 외부 API 의존성 없이 로컬 스토리지에서 안전하게 카운트가 관리됩니다.
+
 ---
 
 ## 🛠️ 핵심 기술 및 아키텍처
@@ -194,6 +220,7 @@ publications: {
 | **Icons** | Lucide React | 정밀하고 가벼운 벡터 아이콘 시스템 |
 | **Build Tool** | Vite | 초고속 HMR 및 최적화된 번들링 |
 | **Print / PDF** | Native CSS Print Styles (`@media print`) | 별도 라이브러리 없이 표준 브라우저 인쇄를 통한 고화질 벡터 PDF 출력 |
+| **Analytics** | Pure Browser Storage | 외부 API 통신 실패 및 콘솔 에러 없는 브라우저 자체 기반 안전 방문자 수 집계 |
 
 ---
 
@@ -207,6 +234,9 @@ publications: {
 
 ### Q3. 프로필 사진을 변경하려면 어떻게 해야 하나요?
 원하는 사진 파일을 `public/profile.jpg` 이름으로 덮어쓰기하거나, 다른 파일명을 사용할 경우 `portfolioDataByLang`의 `profileImage` 경로(예: `"/my-photo.png"`)를 수정하시면 됩니다.
+
+### Q4. 방문자 수는 새로고침할 때마다 계속 올라가나요?
+아닙니다. 브라우저의 `localStorage` 및 `sessionStorage`에 당일 방문 일자(`portfolio_visited_today_date`)를 기록하여, 당일 최초 접속 시에만 카운트를 증가(`up`)시키고 이후 새로고침 시에는 단순 조회(GET)만 실행하므로 새로고침으로 인한 수치 왜곡이 발생하지 않습니다.
 
 ---
 

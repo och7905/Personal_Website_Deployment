@@ -14,6 +14,7 @@ import {
   Code2,
   Globe,
   ExternalLink,
+  Users,
 } from "lucide-react";
 
 // ============================================================================
@@ -1043,7 +1044,110 @@ export function PrintableCV({
 }
 
 // ============================================================================
-// 4. 메인 컴포넌트: AcademicPortfolio
+// 4. 방문자 통계 컴포넌트: VisitorCounter (순수 브라우저 스토리지 집계)
+// ============================================================================
+const STORAGE_TOTAL_KEY = "visitor_count_total_v1";
+const STORAGE_TODAY_KEY = "visitor_count_today_v1";
+const STORAGE_DATE_KEY = "visitor_visited_date_v1";
+
+export function VisitorCounter() {
+  const [counts, setCounts] = useState<{ today: number; total: number }>({
+    today: 1,
+    total: 1,
+  });
+
+  useEffect(() => {
+    try {
+      if (typeof window === "undefined") return;
+
+      // 과거 레거시 스토리지 키 정리
+      try {
+        localStorage.removeItem("portfolio_visitor_total_count");
+        localStorage.removeItem("portfolio_visitor_today_count");
+        localStorage.removeItem("portfolio_total_v2");
+        localStorage.removeItem("portfolio_today_v2");
+      } catch {}
+
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const todayStr = `${year}-${month}-${day}`;
+
+      let isFirstVisitToday = true;
+      try {
+        const visitedDate =
+          localStorage.getItem(STORAGE_DATE_KEY) || sessionStorage.getItem(STORAGE_DATE_KEY);
+        if (visitedDate === todayStr) {
+          isFirstVisitToday = false;
+        }
+      } catch {}
+
+      let currentTotal = 1;
+      let currentToday = 1;
+
+      try {
+        const storedTotal = parseInt(localStorage.getItem(STORAGE_TOTAL_KEY) || "0", 10);
+        const storedToday = parseInt(localStorage.getItem(STORAGE_TODAY_KEY) || "0", 10);
+
+        if (isFirstVisitToday) {
+          // 당일 최초 방문 시: 오늘 카운트 1부터 시작, 누적 카운트 +1
+          currentToday = 1;
+          currentTotal = storedTotal > 0 ? storedTotal + 1 : 1;
+          localStorage.setItem(STORAGE_DATE_KEY, todayStr);
+          sessionStorage.setItem(STORAGE_DATE_KEY, todayStr);
+          localStorage.setItem(STORAGE_TODAY_KEY, String(currentToday));
+          localStorage.setItem(STORAGE_TOTAL_KEY, String(currentTotal));
+        } else {
+          // 당일 재방문 시: 기존 저장 카운트 유지
+          currentToday = storedToday > 0 ? storedToday : 1;
+          currentTotal = storedTotal > 0 ? storedTotal : 1;
+        }
+      } catch {}
+
+      setCounts({ today: currentToday, total: currentTotal });
+    } catch {
+      // 오류 발생 시 기본값(1) 유지
+    }
+  }, []);
+
+  return (
+    <div
+      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200/60 dark:bg-zinc-900/70 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 shadow-sm transition-all select-none"
+      title="사이트 방문자 수 (Today / Total Views)"
+    >
+      <div className="flex items-center gap-1.5">
+        <Users className="w-3 h-3 text-zinc-500 dark:text-zinc-400 shrink-0" />
+        <span className="relative flex h-1.5 w-1.5 shrink-0">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+        </span>
+        <span className="font-semibold text-zinc-800 dark:text-zinc-200 tracking-tight">Visitors</span>
+      </div>
+
+      <span className="text-zinc-300 dark:text-zinc-700">·</span>
+
+      <span className="inline-flex items-baseline gap-1">
+        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Today</span>
+        <span className="text-black dark:text-zinc-100 font-semibold tabular-nums">
+          {counts.today.toLocaleString()}
+        </span>
+      </span>
+
+      <span className="text-zinc-300 dark:text-zinc-700">·</span>
+
+      <span className="inline-flex items-baseline gap-1">
+        <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Total</span>
+        <span className="text-black dark:text-zinc-100 font-semibold tabular-nums">
+          {counts.total.toLocaleString()}
+        </span>
+      </span>
+    </div>
+  );
+}
+
+// ============================================================================
+// 5. 메인 컴포넌트: AcademicPortfolio
 // ============================================================================
 export default function AcademicPortfolio() {
   const [language, setLanguage] = useState<Language>("ko");
@@ -1417,7 +1521,7 @@ export default function AcademicPortfolio() {
                 01. ABOUT ME
                 --------------------------------------------------------------- */}
             <section id="about" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <span>{data.about.sectionTitle}</span>
               </h2>
 
@@ -1441,7 +1545,7 @@ export default function AcademicPortfolio() {
                 02. EDUCATION
                 --------------------------------------------------------------- */}
             <section id="education" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <GraduationCap className="w-3.5 h-3.5" />
                 <span>{data.education.sectionTitle}</span>
               </h2>
@@ -1494,7 +1598,7 @@ export default function AcademicPortfolio() {
                 03. EXPERIENCE
                 --------------------------------------------------------------- */}
             <section id="experience" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>{data.experience.sectionTitle}</span>
               </h2>
@@ -1547,7 +1651,7 @@ export default function AcademicPortfolio() {
                 04. PUBLICATIONS
                 --------------------------------------------------------------- */}
             <section id="publications" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>{data.publications.sectionTitle}</span>
               </h2>
@@ -1601,7 +1705,7 @@ export default function AcademicPortfolio() {
                 05. HONORS & SCHOLARSHIPS
                 --------------------------------------------------------------- */}
             <section id="honors" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <Award className="w-3.5 h-3.5" />
                 <span>{data.honors.sectionTitle}</span>
               </h2>
@@ -1637,7 +1741,7 @@ export default function AcademicPortfolio() {
                 06. COMPETITIONS
                 --------------------------------------------------------------- */}
             <section id="competitions" className="scroll-mt-24">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
                 <Trophy className="w-3.5 h-3.5" />
                 <span>{data.competitions.sectionTitle}</span>
               </h2>
@@ -1678,7 +1782,7 @@ export default function AcademicPortfolio() {
                 07. SKILLS
                 --------------------------------------------------------------- */}
             <section id="skills" className="scroll-mt-24 pb-32">
-              <h2 className="text-xs font-bold tracking-widest text-rose-600 dark:text-rose-400 uppercase mb-6 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-6 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5" />
                 <span>{data.skills.sectionTitle}</span>
               </h2>
@@ -1708,9 +1812,9 @@ export default function AcademicPortfolio() {
             {/* ---------------------------------------------------------------
                 FOOTER
                 --------------------------------------------------------------- */}
-            <footer className="pt-12 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <footer className="pt-12 border-t border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="font-bold text-black dark:text-zinc-300">{data.ui.copyright}</p>
-              <p className="text-[11px] font-semibold text-zinc-800 dark:text-zinc-400">{data.ui.footerNote}</p>
+              <VisitorCounter />
             </footer>
 
           </main>
