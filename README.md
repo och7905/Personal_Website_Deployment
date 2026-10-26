@@ -41,7 +41,7 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 
 ### 5. 🔗 외부 링크(`ExternalLink`) 시각화 및 미세 인터랙션
 - **About Me**: 핵심 키워드(`AIONE 연구실`, `백엔드 시스템 엔지니어링`, `멀티모달 생성 모델`) 클릭 시 외부 공식 사이트 이동 또는 내부 섹션 부드러운 스크롤 연동.
-- **Experience**: 소속 기관(`@ AIONE 연구실`, `@ 대전대학교 SW중심대학사업단`, `@ 대전대학교 CTL` 등)에 실제 공식 URL 연동 및 호버 시 대각선 상향 미세 애니메이션(`group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5`) 동작.
+- **Experience**: 소속 기관(`@ AIONE 연구실`, `@ 대전대학교 SW중심대학사업단`, `@ 대전대학교 CTL`, `@ 대한민국 해병대 (ROKMC)`, `@ 대전대학교 HRC 봉사단` 등)에 실제 공식 URL 연동 및 호버 시 대각선 상향 미세 애니메이션(`group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5`) 동작.
 - **Education**: 소속 학교(`대전대학교`) 공식 링크 연동.
 
 ### 6. 🎴 카드형 호버 하이라이트 (Hover Card Interaction)
@@ -49,7 +49,7 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 - 호버 시 항목 제목(`h3`)이 로즈 포인트 컬러(`group-hover:text-rose-600 dark:group-hover:text-rose-400`)로 부드럽게 전환.
 
 ### 7. 🏷️ 세련된 뱃지 및 기술 스택 태그 디자인
-- 경력 소속 랩실(`[AIONE Lab]`) 및 대회 수상(`[Participant]`) 뱃지에 **반투명 로즈 틴트 스타일** 적용:
+- 경력 소속 랩실(`[AIONE Lab]`), 직무 및 보직 뱃지(`[유격전 조교] [무선통신병]`), 대회 수상(`[Participant]`) 뱃지에 **반투명 로즈 틴트 스타일** 적용:
   ```tsx
   className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono"
   ```
@@ -59,11 +59,15 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 - `public/profile.jpg` 및 `src/assets/profile.jpg`에 개인 사진을 저장.
 - Vite의 `import.meta.env.BASE_URL`을 동적으로 해석하는 `getAssetUrl` 헬퍼 함수와 `onError` 상대 경로 폴백을 통해, GitHub Pages 서브 디렉터리 배포 환경에서도 404 이미지 깨짐 없이 즉각 렌더링.
 
-### 9. 📊 정직한 세션 기반 방문자 카운터 (`VisitorCounter`)
-- Lucide React의 `Users` 아이콘과 초록색 라이브 펄스(Pulse) 점을 배치한 직관적인 알약형(Capsule) 배지 UI: `[ 👥 🟢 Visitors · Today 1 · Total 1 ]`.
-- 외부 서버나 불안정한 서드파티 API 통신 없이 브라우저 스토리지(`localStorage` / `sessionStorage`)를 기반으로 **오늘 방문자 수(Today)**와 **전체 누적 방문자 수(Total)**를 안전하게 집계.
-- `sessionStorage`의 `portfolio_visited`를 판별하여 새 창 방문 시에만 카운트를 증가시키고, 새로고침 시에는 단순 조회만 수행하여 수치 왜곡을 원천 방지.
-- 클릭 이벤트(`onClick`)가 없는 정직한 통계 배지이며, 마우스 오버 시 `title="사이트 방문자 수 (Today / Total Views)"` 툴팁 노출.
+### 9. 📊 글로벌 API 연동 방문자 카운터 (`VisitorCounter`)
+- Lucide React의 `Users` 아이콘과 초록색 라이브 펄스(Pulse) 점을 배치한 직관적인 알약형(Capsule) 배지 UI: `[ 👥 🟢 Visitors · Today {todayCount} · Total {totalCount} ]`.
+- `localStorage`를 완전히 배제하여 기기별 숫자 분리 현상을 제거하고, 오픈 CounterAPI를 연동하여 Today(당일) 및 Total(누적) 카운터를 전역에서 실시간 통합 관리.
+- 고유 키 분리:
+  - 당일 방문 키: `och7905 / portfolio-today-${dateStr}` (예: `portfolio-today-2026-10-26`)
+  - 전체 누적 키: `och7905 / portfolio-total`
+- `sessionStorage`의 `visited_session`을 기반으로 첫 방문 시에만 1 증가(`/up`)시키고, F5 새로고침 시에는 단순 조회(GET)만 수행하여 수치 왜곡을 원천 방지.
+- 로딩 중 `-` 표시 및 타임아웃(5초) 예외 처리를 통해 항상 부드럽고 안정적으로 렌더링.
+- 마우스 오버 시 `title="사이트 방문자 수 (Today / Total Views)"` 툴팁 노출.
 
 ### 10. 🎨 전 섹션 헤더 강제 로즈 스타일 & 통일된 아이콘
 - '01. About Me'부터 '07. Technical Skills'까지 7개 전 섹션의 제목에 Tailwind의 `!text-rose-500 dark:!text-rose-500 font-extrabold`를 적용하여 상위 계층 CSS 우선순위 간섭을 원천 차단.

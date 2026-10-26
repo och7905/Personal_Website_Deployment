@@ -59,19 +59,23 @@
   </footer>
   ```
 
-### 2.4 순수 브라우저 스토리지 기반 방문자 카운터 (`VisitorCounter`)
-- **설계 의도**: 외부 CounterAPI(`api.counterapi.dev`)의 빈번한 410 / 404 HTTP 오류, 통신 지연, 광고 차단기(AdBlock) 차단에 따른 콘솔 에러를 원천 차단하기 위해 **외부 API 통신을 완전히 배제**하고 정직한 세션 기반 로컬 스토리지를 활용합니다.
-- **동작 메커니즘 (정직한 세션 기반 집계)**:
-  - 방문 판별 기준: `sessionStorage.getItem('portfolio_visited')`
-  - **세션 키가 없을 때 (새 방문자 / 새 창 열기)**:
-    - `visitor_today_${new Date().toISOString().slice(0, 10)}` 및 `visitor_total` 키를 `localStorage`에서 조회하여 +1 증가 후 재저장.
-    - `sessionStorage.setItem('portfolio_visited', 'true')` 기록.
-  - **세션 키가 이미 존재할 때 (단순 새로고침)**:
-    - 카운트를 증가시키지 않고 `localStorage`에 저장된 최신 값을 그대로 읽어와 표시 (최소 1 보장).
-  - 클릭으로 숫자가 올라가는 임시 핸들러(`onClick`)를 전면 배제하고 `cursor-default` 스타일 적용.
+### 2.4 글로벌 API 연동 방문자 카운터 (`VisitorCounter`)
+- **설계 의도**: `localStorage` 사용 시 발생하는 PC와 모바일 간의 숫자 불일치를 원천 해결하고, 전 세계 모든 접속자가 하나의 통합된 실시간 수치를 공유하도록 오픈 CounterAPI를 연동하여 Today(당일) 및 Total(누적) 방문자 수를 집계합니다.
+- **동작 메커니즘 (세션 기반 1회 집계 & 중복 증가 방지)**:
+  - 세션 판별 기준: `sessionStorage.getItem('visited_session')`
+  - 고유 키 분리:
+    - 당일 방문 키: `och7905 / portfolio-today-${dateStr}` (예: `portfolio-today-2026-10-26`)
+    - 전체 누적 키: `och7905 / portfolio-total`
+  - **첫 방문일 경우 (새 창 / 새 세션)**:
+    - Total 및 Today 카운터 증가(`/up`) API를 병렬 호출(`Promise.all`).
+    - 증가된 숫자를 각각 `counts.total`, `counts.today` state에 바인딩하고 `sessionStorage.setItem('visited_session', 'true')` 기록.
+  - **세션 내 재방문 / 새로고침일 경우**:
+    - Total 및 Today 단순 조회(GET) API를 호출하여 새로고침 남발로 인한 무한 증가 방지.
+  - **로딩 및 예외 처리**:
+    - 데이터 로딩 중에는 `-` 표시, 네트워크 장애 또는 404/타임아웃(5초) 시 기본값(1)으로 안전하게 폴백.
 - **UI 디자인**:
-  - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 세련된 알약형(Capsule) 배지:
-    `[ 👥 🟢 Visitors · Today 1 · Total 1 ]`
+  - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 커스텀 배지 스타일 복구:
+    `[ 👥 🟢 Visitors · Today {todayCount} · Total {totalCount} ]`
   - 접근성 툴팁: `title="사이트 방문자 수 (Today / Total Views)"`
 
 ### 2.5 실시간 3개 국어 번역 스위처 (KO / JA / EN)
@@ -97,6 +101,17 @@
 - 모바일(lg 미만) 환경에서 우측 상단 고정(`fixed top-4 right-4 z-50 lg:hidden`) 반투명 블러 토글 버튼(`Menu` ↔ `X`) 배치.
 - 탭 시 반투명 딤(dim) 배경과 함께 우측에서 매끄럽게 슬라이드되는 목차 드로어(`isMobileNavOpen`) 구현.
 - 7개 섹션 목차 실시간 스크롤 스파이 하이라이트, 부드러운 스크롤 이동 및 탭 즉시 자동 닫힘, 테마 토글/CV 바로가기, `Escape` 키 닫기 및 바디 스크롤 잠금 적용.
+
+### 2.10 경력 항목 정렬 및 이력 배지 시스템 (`ExperienceItem`)
+- `ExperienceItem` 인터페이스(`badges?: string[]`)를 통해 직무·보직 배지를 기존 랩 배지와 일관된 로즈 알약 배지(`bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 font-mono text-[11px]`) 스타일로 다중 렌더링 지원.
+- 모든 경력 항목은 엄격한 최신 역연대순(**2026 -> 2024 -> 2023 -> 2022**)으로 정렬:
+  1. `2026 – 현재`: 일영 (GDGoC 대전대학교 챕터) [GDGoC]
+  2. `2026`: 대전대학교 SW중심대학사업단 (공식 링크 연동 ↗)
+  3. `2026`: 대전대학교 교수학습개발원 (CTL) (공식 링크 연동 ↗)
+  4. `2024 – 현재`: AIONE 연구실 [AIONE Lab] (공식 링크 연동 ↗)
+  5. `2023`: 병장 만기전역 (1291기) @ 대한민국 해병대 (ROKMC) [유격전 조교] [무선통신병] (공식 링크 연동 ↗)
+  6. `2022`: 대전대학교 HRC 봉사단 [디지털 격차 해소] [사회공헌] (공식 링크 연동 ↗)
+- 3개 국어(KO / JA / EN) 및 A4 학술 CV(`PrintableCV`)에 통일된 개발자 톤앤매너로 탑재되어 있습니다.
 
 ---
 
@@ -151,7 +166,7 @@
    - `src/App.tsx` 수정 시 루트 호환 파일들(`page.tsx`, `App.tsx`, `app/page.tsx`)을 함께 갱신하고 SHA-256 해시 일치를 확인합니다.
 5. **빌드 안정성 유지**:
    - `package.json`의 build 스크립트는 `"build": "vite build"`로 유지하여 CI 환경에서 불필요한 컴파일 중단을 방지합니다.
-   - `src/App.tsx` 내의 타입 정의(`EducationItem` 등)를 온전하게 보존합니다.
+   - `src/App.tsx` 내의 타입 정의(`EducationItem`, `ExperienceItem` 등)를 온전하게 보존합니다.
 
 ---
 

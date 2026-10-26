@@ -101,6 +101,17 @@ export interface EducationItem {
   description?: string;
 }
 
+export interface ExperienceItem {
+  period: string;
+  role: string;
+  institution: string;
+  location: string;
+  url?: string;
+  lab?: string;
+  badges?: string[];
+  description: string;
+}
+
 export const getAssetUrl = (path: string): string => {
   if (!path) return "";
   if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
@@ -183,16 +194,6 @@ export const portfolioDataByLang = {
       sectionTitle: "03. Experience",
       items: [
         {
-          period: "2024 – 현재",
-          role: "학생 랩장 & 학부 연구생",
-          institution: "AIONE 연구실",
-          lab: "AIONE Lab",
-          location: "대전",
-          url: "https://sites.google.com/view/aionelab/education?authuser=0",
-          description:
-            "멀티모달 비디오-투-오디오(Video-to-Audio) 생성 모델 연구 주도, 연구실 운영 총괄 및 데이터 전처리 파이프라인 구축.",
-        },
-        {
           period: "2026 – 현재",
           role: "멤버 / 개발자",
           institution: "일영 (GDGoC 대전대학교 챕터)",
@@ -218,6 +219,36 @@ export const portfolioDataByLang = {
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "기초 이산수학 공식 8주 동료 튜터링 프로그램 운영, 논리 증명 및 이산 구조에 관한 학부생 멘토링.",
+        },
+        {
+          period: "2024 – 현재",
+          role: "학생 랩장 & 학부 연구생",
+          institution: "AIONE 연구실",
+          lab: "AIONE Lab",
+          location: "대전",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
+          description:
+            "멀티모달 비디오-투-오디오(Video-to-Audio) 생성 모델 연구 주도, 연구실 운영 총괄 및 데이터 전처리 파이프라인 구축.",
+        },
+        {
+          period: "2023",
+          role: "병장 만기전역 (1291기)",
+          institution: "대한민국 해병대 (ROKMC)",
+          url: "https://www.rokmc.mil.kr:10005/index.do",
+          badges: ["유격전 조교", "무선통신병"],
+          location: "대한민국",
+          description:
+            "무선 통신망 운용 임무 수행 및 유격 교육 조교로 활동하며 강한 책임감, 위기 대응 능력, 팀 통솔 리더십을 길렀습니다.",
+        },
+        {
+          period: "2022",
+          role: "봉사단원",
+          institution: "대전대학교 HRC 봉사단",
+          url: "https://www.dju.ac.kr/hrc/main.do",
+          badges: ["디지털 격차 해소", "사회공헌"],
+          location: "대전",
+          description:
+            "지역 어르신 대상 스마트폰 기초 활용 및 필수 모바일 앱 실습 교육 진행. 디지털 정보 격차를 완화하고 비전공자 및 사용자 눈높이에 맞춘 커뮤니케이션 역량 체득.",
         },
       ],
     },
@@ -402,16 +433,6 @@ export const portfolioDataByLang = {
       sectionTitle: "03. Experience",
       items: [
         {
-          period: "2024 – 現在",
-          role: "学生リーダー & 学部研究員",
-          institution: "AIONE 研究室",
-          lab: "AIONE Lab",
-          location: "大田、韓国",
-          url: "https://sites.google.com/view/aionelab/education?authuser=0",
-          description:
-            "マルチモーダル Video-to-Audio 生成モデル研究の主導、研究室運営管理およびデータ前処理パイプラインの構築。",
-        },
-        {
           period: "2026 – 現在",
           role: "メンバー / 開発者",
           institution: "日迎（GDGoC 大田大学校チャプター）",
@@ -437,6 +458,36 @@ export const portfolioDataByLang = {
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "基礎離散数学の公式8週間ピアチュータリングプログラムを運営、論理証明および離散構造に関する学部生のメンタリング指導。",
+        },
+        {
+          period: "2024 – 現在",
+          role: "学生リーダー & 学部研究員",
+          institution: "AIONE 研究室",
+          lab: "AIONE Lab",
+          location: "大田、韓国",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
+          description:
+            "マルチモーダル Video-to-Audio 生成モデル研究の主導、研究室運営管理およびデータ前処理パイプラインの構築。",
+        },
+        {
+          period: "2023",
+          role: "兵長 満期除隊（第1291期）",
+          institution: "大韓民国海兵隊 (ROKMC)",
+          url: "https://www.rokmc.mil.kr:10005/index.do",
+          badges: ["遊撃戦助教", "無線通信兵"],
+          location: "大韓民国",
+          description:
+            "無線通信網の運用任務を遂行し、遊撃訓練助教として活動しながら、強い責任感、危機対応能力、チーム統率リーダーシップを培いました。",
+        },
+        {
+          period: "2022",
+          role: "ボランティア団員",
+          institution: "大田大学校 HRCボランティア団",
+          url: "https://www.dju.ac.kr/hrc/main.do",
+          badges: ["デジタル格差解消", "社会貢献"],
+          location: "大田、韓国",
+          description:
+            "地域高齢者向けのスマートフォン基礎活用および必須モバイルアプリ実践教育を実施。デジタル情報格差を緩和し、非専門家や利用者の目線に合わせたコミュニケーション能力を習得。",
         },
       ],
     },
@@ -620,16 +671,6 @@ export const portfolioDataByLang = {
       sectionTitle: "03. Experience",
       items: [
         {
-          period: "2024 – Present",
-          role: "Student Lab Leader & Undergraduate Researcher",
-          institution: "AIONE Laboratory",
-          lab: "AIONE Lab",
-          location: "Daejeon, Korea",
-          url: "https://sites.google.com/view/aionelab/education?authuser=0",
-          description:
-            "Leading research on multimodal video-to-audio generation models, managing lab operations, and constructing data preprocessing pipelines.",
-        },
-        {
           period: "2026 – Present",
           role: "Member / Developer",
           institution: "Il-Young (GDGoC Daejeon University Chapter)",
@@ -655,6 +696,36 @@ export const portfolioDataByLang = {
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
             "Led an official 8-week peer tutoring program for foundational Discrete Mathematics, mentoring undergraduate peers on logic proofs and discrete structures.",
+        },
+        {
+          period: "2024 – Present",
+          role: "Student Lab Leader & Undergraduate Researcher",
+          institution: "AIONE Laboratory",
+          lab: "AIONE Lab",
+          location: "Daejeon, Korea",
+          url: "https://sites.google.com/view/aionelab/education?authuser=0",
+          description:
+            "Leading research on multimodal video-to-audio generation models, managing lab operations, and constructing data preprocessing pipelines.",
+        },
+        {
+          period: "2023",
+          role: "Sergeant (Honorably Discharged, 1291st Class)",
+          institution: "Republic of Korea Marine Corps (ROKMC)",
+          url: "https://www.rokmc.mil.kr:10005/index.do",
+          badges: ["Ranger Assistant Instructor", "Tactical Radio Operator"],
+          location: "Republic of Korea",
+          description:
+            "Operated tactical wireless communication networks and served as a Ranger assistant instructor, cultivating strong accountability, crisis management, and team leadership.",
+        },
+        {
+          period: "2022",
+          role: "Volunteer Member",
+          institution: "HRC Volunteer Corps, Daejeon University",
+          url: "https://www.dju.ac.kr/hrc/main.do",
+          badges: ["Digital Divide Relief", "Social Contribution"],
+          location: "Daejeon, Korea",
+          description:
+            "Conducted hands-on training for local senior citizens on essential smartphone utilization and daily mobile apps, bridging the digital information gap while mastering user-centric communication skills.",
         },
       ],
     },
@@ -957,7 +1028,7 @@ export function PrintableCV({
           {sectionHeadings.experience}
         </h2>
         <div className="space-y-2.5">
-          {data.experience.items.map((exp, idx) => (
+          {data.experience.items.map((exp: ExperienceItem, idx: number) => (
             <div key={idx} className="break-inside-avoid grid grid-cols-[105px_1fr] gap-2 items-baseline">
               <span className="text-[10.5px] font-semibold text-zinc-700 tabular-nums">
                 {exp.period}
@@ -967,6 +1038,9 @@ export function PrintableCV({
                   <span className="text-[11px] font-bold text-black">{exp.role}</span>
                   <span className="text-[11px] font-semibold text-zinc-800">@ {exp.institution}</span>
                   {exp.lab && <span className="text-[10px] font-semibold text-zinc-700">[{exp.lab}]</span>}
+                  {exp.badges?.map((b: string, bIdx: number) => (
+                    <span key={bIdx} className="text-[10px] font-semibold text-zinc-700">[{b}]</span>
+                  ))}
                 </div>
                 <p className="text-[10px] text-zinc-700 mt-0.5 leading-snug">{exp.description}</p>
               </div>
@@ -1071,51 +1145,95 @@ export function PrintableCV({
 }
 
 // ============================================================================
-// 4. 방문자 통계 컴포넌트: VisitorCounter (정직한 세션 기반 브라우저 집계)
+// 4. 방문자 통계 컴포넌트: VisitorCounter (글로벌 API 연동 Today & Total 세션 집계)
 // ============================================================================
 export function VisitorCounter() {
-  const [counts, setCounts] = useState<{ today: number; total: number }>({
-    today: 1,
-    total: 1,
+  const [counts, setCounts] = useState<{ today: number | null; total: number | null }>({
+    today: null,
+    total: null,
   });
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let hasVisited = false;
     try {
-      if (typeof window === "undefined") return;
-
-      const todayKey = `visitor_today_${new Date().toISOString().slice(0, 10)}`;
-      const totalKey = "visitor_total";
-      const sessionKey = "portfolio_visited";
-
-      const hasVisitedThisSession = sessionStorage.getItem(sessionKey);
-
-      let currentToday = 1;
-      let currentTotal = 1;
-
-      if (!hasVisitedThisSession) {
-        // 새 방문자 또는 브라우저 창을 새로 연 경우: 카운트 +1 증가
-        const storedToday = parseInt(localStorage.getItem(todayKey) || "0", 10);
-        const storedTotal = parseInt(localStorage.getItem(totalKey) || "0", 10);
-
-        currentToday = storedToday > 0 ? storedToday + 1 : 1;
-        currentTotal = storedTotal > 0 ? storedTotal + 1 : 1;
-
-        localStorage.setItem(todayKey, String(currentToday));
-        localStorage.setItem(totalKey, String(currentTotal));
-        sessionStorage.setItem(sessionKey, "true");
-      } else {
-        // 같은 세션(창)에서 새로고침만 한 경우: 기존 카운트 그대로 조회 (최소값 1 보장)
-        const storedToday = parseInt(localStorage.getItem(todayKey) || "0", 10);
-        const storedTotal = parseInt(localStorage.getItem(totalKey) || "0", 10);
-
-        currentToday = Math.max(1, storedToday);
-        currentTotal = Math.max(1, storedTotal);
-      }
-
-      setCounts({ today: currentToday, total: currentTotal });
+      hasVisited = !!sessionStorage.getItem("visited_session") || !!sessionStorage.getItem("has_visited");
     } catch {
-      // 브라우저 스토리지 차단/시크릿 모드 예외 시 기본값(1) 유지
+      hasVisited = false;
     }
+
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const totalIncUrl = "https://api.counterapi.dev/v1/och7905/portfolio-total/up";
+    const totalGetUrl = "https://api.counterapi.dev/v1/och7905/portfolio-total";
+    const todayIncUrl = `https://api.counterapi.dev/v1/och7905/portfolio-today-${dateStr}/up`;
+    const todayGetUrl = `https://api.counterapi.dev/v1/och7905/portfolio-today-${dateStr}`;
+
+    const totalTargetUrl = hasVisited ? totalGetUrl : totalIncUrl;
+    const todayTargetUrl = hasVisited ? todayGetUrl : todayIncUrl;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const fetchCounter = async (targetUrl: string, fallbackIncUrl: string) => {
+      try {
+        const res = await fetch(targetUrl, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+          cache: "no-store",
+          signal: controller.signal,
+        });
+
+        // 서버에 아직 해당 키가 생성되지 않은 상태에서 get 호출 시 404가 반환될 수 있으므로 자동 등록(up)
+        if (!res.ok && res.status === 404 && targetUrl !== fallbackIncUrl) {
+          const incRes = await fetch(fallbackIncUrl, {
+            method: "GET",
+            headers: { Accept: "application/json" },
+            cache: "no-store",
+            signal: controller.signal,
+          });
+          if (incRes.ok) {
+            const data = await incRes.json();
+            return typeof data?.count === "number" ? data.count : null;
+          }
+        }
+
+        if (!res.ok) return null;
+        const data = await res.json();
+        return typeof data?.count === "number" ? data.count : null;
+      } catch {
+        return null;
+      }
+    };
+
+    Promise.all([
+      fetchCounter(totalTargetUrl, totalIncUrl),
+      fetchCounter(todayTargetUrl, todayIncUrl),
+    ])
+      .then(([totalRes, todayRes]) => {
+        setCounts({
+          total: totalRes !== null ? totalRes : 1,
+          today: todayRes !== null ? todayRes : 1,
+        });
+        try {
+          sessionStorage.setItem("visited_session", "true");
+          sessionStorage.setItem("has_visited", "true");
+        } catch {}
+      })
+      .catch(() => {
+        setCounts((prev) => ({
+          total: prev.total ?? 1,
+          today: prev.today ?? 1,
+        }));
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
+      });
+
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
   return (
@@ -1137,7 +1255,7 @@ export function VisitorCounter() {
       <span className="inline-flex items-baseline gap-1">
         <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Today</span>
         <span className="text-black dark:text-zinc-100 font-semibold tabular-nums">
-          {counts.today.toLocaleString()}
+          {counts.today !== null ? counts.today.toLocaleString() : "-"}
         </span>
       </span>
 
@@ -1146,7 +1264,7 @@ export function VisitorCounter() {
       <span className="inline-flex items-baseline gap-1">
         <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">Total</span>
         <span className="text-black dark:text-zinc-100 font-semibold tabular-nums">
-          {counts.total.toLocaleString()}
+          {counts.total !== null ? counts.total.toLocaleString() : "-"}
         </span>
       </span>
     </div>
@@ -1750,7 +1868,7 @@ export default function AcademicPortfolio() {
               </h2>
 
               <div className="space-y-2">
-                {data.experience.items.map((exp, idx) => (
+                {data.experience.items.map((exp: ExperienceItem, idx: number) => (
                   <div
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
@@ -1783,6 +1901,14 @@ export default function AcademicPortfolio() {
                             [{exp.lab}]
                           </span>
                         )}
+                        {exp.badges?.map((badge: string, bIdx: number) => (
+                          <span
+                            key={bIdx}
+                            className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono"
+                          >
+                            [{badge}]
+                          </span>
+                        ))}
                       </div>
                       <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                         {exp.description}
