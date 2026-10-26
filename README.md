@@ -59,14 +59,14 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 - `public/profile.jpg` 및 `src/assets/profile.jpg`에 개인 사진을 저장.
 - Vite의 `import.meta.env.BASE_URL`을 동적으로 해석하는 `getAssetUrl` 헬퍼 함수와 `onError` 상대 경로 폴백을 통해, GitHub Pages 서브 디렉터리 배포 환경에서도 404 이미지 깨짐 없이 즉각 렌더링.
 
-### 9. 📊 최신 CounterAPI v2 연동 방문자 카운터 (`VisitorCounter`)
+### 9. 📊 Supabase DB 기반 실시간 방문자 카운터 (`VisitorCounter`)
 - Lucide React의 `Users` 아이콘과 초록색 라이브 펄스(Pulse) 점을 배치한 직관적인 알약형(Capsule) 배지 UI: `[ 👥 🟢 Visitors · Today {todayCount} · Total {totalCount} ]`.
-- 서비스 종료된 구형 v1 대신 공식 최신 **CounterAPI v2**(`https://counterapi.dev/v2/...`)를 연동하여 Today(당일) 및 Total(누적) 카운터를 전역에서 실시간 통합 관리.
-- v2 엔드포인트:
-  - Total: `https://counterapi.dev/v2/och7905-portfolio/total/up` (조회: `/total`)
-  - Today: `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}/up` (조회: `/today-${dateStr}`)
-- `sessionStorage`의 `visited_session`을 기반으로 첫 방문 시에만 1 증가(`/up`)시키고, F5 새로고침 시에는 단순 조회(GET)만 수행하여 수치 왜곡을 원천 방지.
-- 미등록 키 404 자동 감지 및 생성 재시도, v2 응답 유연한 파싱, 로딩 중 `-` 표시 및 타임아웃(6초) 예외 처리를 통해 항상 부드럽고 안정적으로 렌더링.
+- 공식 `@supabase/supabase-js` 클라이언트를 연동하여 클라우드 PostgreSQL(`site_visitors` 테이블)에 방문자 수를 안전하게 보존하고 전 기기 간 실시간 동기화.
+- 스키마: `site_visitors (id text PK, count bigint)`
+  - `id = 'total'`: 전체 누적 방문자
+  - `id = 'YYYY-MM-DD'`: 당일 방문자 (예: `2026-10-26`)
+- `sessionStorage`의 `visited_session`을 기반으로 첫 방문 시에만 +1 `upsert`를 수행하고, 새로고침 시에는 `select` 조회만 수행하여 수치 왜곡을 원천 방지.
+- Supabase Realtime 채널(`postgres_changes`)을 통해 다른 기기에서 방문 발생 시 새로고침 없이 즉시 수치가 동기화.
 - 마우스 오버 시 `title="사이트 방문자 수 (Today / Total Views)"` 툴팁 노출.
 
 ### 10. 🎨 전 섹션 헤더 강제 로즈 스타일 & 통일된 아이콘

@@ -59,23 +59,24 @@
   </footer>
   ```
 
-### 2.4 최신 CounterAPI v2 연동 방문자 카운터 (`VisitorCounter`)
-- **설계 의도**: 서비스 종료된 구형 v1(410 Deprecated) 대신 공식 최신 **CounterAPI v2**(`https://counterapi.dev/v2/...`)를 연동하여 기기별 숫자 불일치를 해결하고 전역 통합 실시간 수치를 집계합니다.
+### 2.4 Supabase DB 기반 실시간 방문자 카운터 (`VisitorCounter`)
+- **설계 의도**: 외부 불안정 오픈 API 대신 설치된 공식 `@supabase/supabase-js` 클라이언트를 활용하여 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)와 연동. PC, 스마트폰 등 모든 기기 간 방문자 수(Today / Total)를 영구 보존하고 실시간 동기화합니다.
+- **환경변수 분리**:
+  - `import.meta.env.VITE_SUPABASE_URL` 및 `import.meta.env.VITE_SUPABASE_ANON_KEY`를 통해 `.env`에서 키를 로드하며, `.gitignore`에 `.env`를 포함하여 Git 유출을 원천 방지합니다. 배포 환경을 위한 fallback 로직도 함께 완비.
+- **DB 테이블 스키마**:
+  - 테이블명: `site_visitors`
+  - 컬럼: `id` (text, PK), `count` (bigint)
+    - `id = 'total'`: 전체 누적 방문자
+    - `id = 'YYYY-MM-DD'`: 오늘 날짜 방문자 (예: `2026-10-26`)
 - **동작 메커니즘 (세션 기반 1회 집계 & 중복 증가 방지)**:
   - 세션 판별 기준: `sessionStorage.getItem('visited_session')`
-  - v2 엔드포인트:
-    - Total 증가: `https://counterapi.dev/v2/och7905-portfolio/total/up`
-    - Total 조회: `https://counterapi.dev/v2/och7905-portfolio/total`
-    - Today 증가: `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}/up`
-    - Today 조회: `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}`
   - **첫 방문일 경우 (새 창 / 새 세션)**:
-    - Total 및 Today 카운터 증가(`/up`) API를 병렬 호출(`Promise.all`).
-    - 증가된 숫자를 각각 `counts.total`, `counts.today` state에 바인딩하고 `sessionStorage.setItem('visited_session', 'true')` 기록.
+    - `site_visitors` 테이블에서 `['total', todayKey]` 행을 조회한 후 각각 +1 증가된 수치로 `upsert`.
+    - `sessionStorage.setItem('visited_session', 'true')` 설정.
   - **세션 내 재방문 / 새로고침일 경우**:
-    - Total 및 Today 단순 조회(GET) API를 호출하여 새로고침 남발로 인한 무한 증가 방지.
-  - **응답 파싱 및 예외 안전성**:
-    - v2 응답 JSON(`res.data.count`, `res.data.up_count`, `res.data`, `res.count`)의 유연한 파싱 지원.
-    - 미등록 키 조회 시 404 자동 감지 및 `/up` 재시도 초기화 로직 탑재, 6초 타임아웃 AbortController 및 상세 콘솔 에러 로깅.
+    - `select` 조회만 수행하여 현재 수치를 가져오고 중복 카운트 증가 방지.
+  - **기기간 실시간 동기화 (Supabase Realtime Channel)**:
+    - `postgres_changes` 웹소켓 채널을 구독하여 다른 기기에서 방문 카운트가 올라갈 때 현재 화면에서도 새로고침 없이 즉각 실시간 업데이트.
 - **UI 디자인**:
   - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 커스텀 배지 스타일:
     `[ 👥 🟢 Visitors · Today {todayCount} · Total {totalCount} ]`
@@ -142,6 +143,9 @@
 ├── tailwind.config.js            # darkMode: "class" 테마 설정
 ├── vite.config.ts                # Vite 설정 (base: './' 상대 경로 배포 대응)
 ├── package.json                  # 프로젝트 의존성 및 실행 스크립트 ("build": "vite build")
+├── .gitignore                    # Git 버전 관리 제외 목록 (.env, node_modules, dist 등)
+├── .env                          # Supabase 로컬 환경변수 (Git 제외 대상)
+├── .env.example                  # 환경변수 템플릿 예시
 ├── CONTEXT.md                    # [본 문서] 프로젝트 인수인계 및 설계 맥락 문서
 └── README.md                     # 프로젝트 사용자 및 배포 안내서
 ```

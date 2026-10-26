@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 import {
   Mail,
   FileText,
@@ -1145,8 +1146,18 @@ export function PrintableCV({
 }
 
 // ============================================================================
-// 4. 방문자 통계 컴포넌트: VisitorCounter (CounterAPI v2 글로벌 Today & Total 집계)
+// 4. 방문자 통계 컴포넌트: VisitorCounter (Supabase DB 기반 Today & Total 집계)
 // ============================================================================
+const SUPABASE_URL: string =
+  (import.meta as any)?.env?.VITE_SUPABASE_URL ||
+  "https://nuphdgddhchhohxzxath.supabase.co";
+
+const SUPABASE_ANON_KEY: string =
+  (import.meta as any)?.env?.VITE_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51cGhkZ2RkaGNoaG9oeHp4YXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMTg1NzMsImV4cCI6MjEwODU5NDU3M30.rQQN-f3gViuHtQ4xMyEYSzjuwutbRT0vqbWy1xy6iHY";
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 export function VisitorCounter() {
   const [counts, setCounts] = useState<{ today: number | null; total: number | null }>({
     today: null,
@@ -1156,105 +1167,105 @@ export function VisitorCounter() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const todayKey = new Date().toISOString().slice(0, 10);
     let hasVisited = false;
     try {
-      hasVisited = !!sessionStorage.getItem("visited_session");
+      hasVisited = !!sessionStorage.getItem("visited_session") || !!sessionStorage.getItem("visited");
     } catch {
       hasVisited = false;
     }
 
-    const dateStr = new Date().toISOString().slice(0, 10);
-    const totalIncUrl = "https://counterapi.dev/v2/och7905-portfolio/total/up";
-    const totalGetUrl = "https://counterapi.dev/v2/och7905-portfolio/total";
-    const todayIncUrl = `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}/up`;
-    const todayGetUrl = `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}`;
-
-    const totalTargetUrl = hasVisited ? totalGetUrl : totalIncUrl;
-    const todayTargetUrl = hasVisited ? todayGetUrl : todayIncUrl;
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-    const parseCountValue = (json: any): number | null => {
-      if (typeof json === "number" && !isNaN(json)) return json;
-      if (typeof json?.count === "number" && !isNaN(json.count)) return json.count;
-      if (typeof json?.data === "number" && !isNaN(json.data)) return json.data;
-      if (typeof json?.data?.count === "number" && !isNaN(json.data.count)) return json.data.count;
-      if (typeof json?.data?.up_count === "number" && !isNaN(json.data.up_count)) return json.data.up_count;
-      if (typeof json?.value === "number" && !isNaN(json.value)) return json.value;
-      return null;
-    };
-
-    const fetchCounterV2 = async (targetUrl: string, fallbackIncUrl: string) => {
+    const syncVisitors = async () => {
       try {
-        const res = await fetch(targetUrl, {
-          method: "GET",
-          headers: { Accept: "application/json" },
-          cache: "no-store",
-          signal: controller.signal,
-        });
+        // 1. 현재 total 및 todayKey 데이터 조회
+        const { data, error } = await supabase
+          .from("site_visitors")
+          .select("id, count")
+          .in("id", ["total", todayKey]);
 
-        // 404 발생 시(서버에 아직 키가 등록되지 않은 상태에서 get 호출 시) up 호출로 자동 초기화
-        if (res.status === 404 && targetUrl !== fallbackIncUrl) {
-          console.warn(`[VisitorCounter] 404 from ${targetUrl}, attempting auto-creation via up...`);
-          const incRes = await fetch(fallbackIncUrl, {
-            method: "GET",
-            headers: { Accept: "application/json" },
-            cache: "no-store",
-            signal: controller.signal,
-          });
-          if (incRes.ok) {
-            const incJson = await incRes.json();
-            return parseCountValue(incJson);
+        if (error) {
+          console.error("[VisitorCounter] Supabase select error:", error.message);
+          setCounts({ today: 1, total: 1 });
+          return;
+        }
+
+        const totalRow = data?.find((r) => r.id === "total");
+        const todayRow = data?.find((r) => r.id === todayKey);
+
+        const currentTotal = totalRow?.count ? Number(totalRow.count) : 0;
+        const currentToday = todayRow?.count ? Number(todayRow.count) : 0;
+
+        if (!hasVisited) {
+          // 첫 방문: 카운트 +1 증가 후 upsert
+          const nextTotal = currentTotal + 1;
+          const nextToday = currentToday + 1;
+
+          const { error: upsertErr } = await supabase.from("site_visitors").upsert([
+            { id: "total", count: nextTotal },
+            { id: todayKey, count: nextToday },
+          ]);
+
+          if (upsertErr) {
+            console.error("[VisitorCounter] Supabase upsert error:", upsertErr.message);
           }
-          console.error(`[VisitorCounter] Auto-creation failed with status: ${incRes.status}`);
-          return null;
-        }
 
-        if (!res.ok) {
-          console.error(`[VisitorCounter] HTTP error ${res.status} (${res.statusText}) from ${targetUrl}`);
-          return null;
-        }
-
-        const data = await res.json();
-        return parseCountValue(data);
-      } catch (err: any) {
-        if (err?.name !== "AbortError") {
-          console.error(`[VisitorCounter] Network error fetching ${targetUrl}:`, err);
-        }
-        return null;
-      }
-    };
-
-    Promise.all([
-      fetchCounterV2(totalTargetUrl, totalIncUrl),
-      fetchCounterV2(todayTargetUrl, todayIncUrl),
-    ])
-      .then(([totalRes, todayRes]) => {
-        setCounts({
-          total: totalRes !== null ? totalRes : 1,
-          today: todayRes !== null ? todayRes : 1,
-        });
-        if (!hasVisited && (totalRes !== null || todayRes !== null)) {
           try {
             sessionStorage.setItem("visited_session", "true");
+            sessionStorage.setItem("visited", "true");
           } catch {}
+
+          setCounts({ total: nextTotal, today: nextToday });
+        } else {
+          // 동일 세션 재방문 / 새로고침: 단순 조회 수치 유지
+          setCounts({
+            total: Math.max(1, currentTotal),
+            today: Math.max(1, currentToday),
+          });
         }
-      })
-      .catch((err) => {
-        console.error("[VisitorCounter] Unexpected error in counter aggregation:", err);
+      } catch (err: any) {
+        console.error("[VisitorCounter] Unexpected Supabase error:", err?.message || err);
         setCounts((prev) => ({
           total: prev.total ?? 1,
           today: prev.today ?? 1,
         }));
-      })
-      .finally(() => {
-        clearTimeout(timeoutId);
-      });
+      }
+    };
+
+    syncVisitors();
+
+    // 2. 기기 간 실시간 동기화 (Supabase Realtime Channel)
+    let channel: any = null;
+    try {
+      channel = supabase
+        .channel("site_visitors_realtime")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "site_visitors" },
+          (payload) => {
+            const row = payload.new as { id?: string; count?: number | string };
+            if (row && typeof row.id === "string") {
+              const val = Number(row.count);
+              if (!isNaN(val)) {
+                if (row.id === "total") {
+                  setCounts((prev) => ({ ...prev, total: val }));
+                } else if (row.id === todayKey) {
+                  setCounts((prev) => ({ ...prev, today: val }));
+                }
+              }
+            }
+          }
+        )
+        .subscribe();
+    } catch (e) {
+      console.warn("[VisitorCounter] Realtime subscription init notice:", e);
+    }
 
     return () => {
-      clearTimeout(timeoutId);
-      controller.abort();
+      if (channel) {
+        try {
+          supabase.removeChannel(channel);
+        } catch {}
+      }
     };
   }, []);
 
