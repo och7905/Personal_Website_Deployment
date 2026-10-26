@@ -16,6 +16,8 @@ import {
   ExternalLink,
   Users,
   User,
+  Menu,
+  X,
 } from "lucide-react";
 
 // ============================================================================
@@ -1159,6 +1161,7 @@ export default function AcademicPortfolio() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
   const [mounted, setMounted] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   // 현재 선택된 언어의 데이터
   const data = portfolioDataByLang[language];
@@ -1266,6 +1269,25 @@ export default function AcademicPortfolio() {
     };
   }, [language]);
 
+  // 5) 모바일 드로어 열림 시 body 스크롤 방지 및 ESC 키 닫기 이벤트 바인딩
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMobileNavOpen(false);
+      }
+    };
+    if (isMobileNavOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isMobileNavOpen]);
+
   // 6) 메뉴 클릭 시 즉각적인 하이라이트 반영 및 부드러운 스크롤
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -1332,6 +1354,117 @@ export default function AcademicPortfolio() {
       <div
         className={`${isDarkMode ? "dark bg-[#111215] text-white" : "bg-white text-black"} min-h-screen font-sans transition-colors duration-300 print:hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-rose-950/60 dark:selection:text-rose-200 antialiased`}
       >
+        {/* 모바일 햄버거 메뉴 토글 버튼 (lg 미만 화면 우측 상단 고정) */}
+        <button
+          type="button"
+          onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+          className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-all cursor-pointer flex items-center justify-center"
+          aria-label={isMobileNavOpen ? "메뉴 닫기" : "메뉴 열기"}
+          aria-expanded={isMobileNavOpen}
+        >
+          {isMobileNavOpen ? <X className="w-5 h-5 text-rose-500" /> : <Menu className="w-5 h-5" />}
+        </button>
+
+        {/* 모바일 네비게이션 드로어 오버레이 & 패널 */}
+        <div
+          className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+            isMobileNavOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          {/* 반투명 딤 배경 */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsMobileNavOpen(false)}
+            aria-hidden="true"
+          ></div>
+
+          {/* 우측 슬라이드 드로어 패널 */}
+          <aside
+            className={`absolute top-0 right-0 h-full w-[280px] max-w-[80vw] bg-white dark:bg-[#15161a] border-l border-zinc-200 dark:border-zinc-800 p-6 pt-16 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out ${
+              isMobileNavOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+            aria-label="Mobile Navigation"
+          >
+            <div className="space-y-6">
+              {/* 드로어 상단: 헤더 레이블 */}
+              <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                <span className="text-xs font-bold tracking-widest text-zinc-500 dark:text-zinc-400 uppercase">
+                  {data.ui.navTitle}
+                </span>
+                <span className="text-[11px] font-mono text-rose-600 dark:text-rose-400 font-semibold">
+                  INDEX
+                </span>
+              </div>
+
+              {/* 목차 리스트 */}
+              <nav>
+                <ul className="space-y-1.5">
+                  {data.navigation.map((item) => {
+                    const isActive = activeSection === item.id;
+                    return (
+                      <li key={item.id}>
+                        <a
+                          href={`#${item.id}`}
+                          onClick={(e) => {
+                            scrollToSection(e, item.id);
+                            setIsMobileNavOpen(false);
+                          }}
+                          className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                            isActive
+                              ? "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 translate-x-1"
+                              : "text-zinc-800 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
+                          }`}
+                        >
+                          <span>{item.label}</span>
+                          <span
+                            className={`h-2 w-2 rounded-full transition-all ${
+                              isActive
+                                ? "bg-rose-700 dark:bg-rose-400 scale-125"
+                                : "opacity-0 group-hover:opacity-100 bg-zinc-400 dark:bg-zinc-600"
+                            }`}
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
+
+            {/* 드로어 하단: 테마 모드 & CV 바로가기 편의 제공 */}
+            <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-3">
+              <button
+                type="button"
+                onClick={toggleDarkMode}
+                className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                aria-label="Toggle Dark Mode"
+              >
+                <div className="flex items-center gap-2">
+                  {isDarkMode ? (
+                    <Sun className="w-4 h-4 text-amber-400 shrink-0" />
+                  ) : (
+                    <Moon className="w-4 h-4 text-zinc-600 shrink-0" />
+                  )}
+                  <span>{isDarkMode ? data.ui.lightMode : data.ui.darkMode}</span>
+                </div>
+                <span className="text-[10px] text-zinc-400 font-mono">Toggle</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  handleDownloadCV();
+                  setIsMobileNavOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border-2 border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-all shadow-sm"
+                aria-label="Download CV"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>{data.ui.cvButton} PDF</span>
+              </button>
+            </div>
+          </aside>
+        </div>
       <div className="max-w-6xl mx-auto px-6 py-10 md:py-16 lg:py-20">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-20">
           
