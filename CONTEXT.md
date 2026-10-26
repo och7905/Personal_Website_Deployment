@@ -87,6 +87,9 @@
 
 ```text
 개인홈페이지/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml            # GitHub Pages 자동 빌드 & 배포 워크플로우 (Actions)
 ├── public/
 │   └── profile.jpg               # 개인 프로필 사진 (모든 언어에서 사용)
 ├── src/
@@ -99,6 +102,7 @@
 ├── index.html                    # FOUC 방지 인라인 스크립트 및 타이틀 메타태그
 ├── index.css                     # Tailwind CSS 디렉티브 (@tailwind base, components, utilities)
 ├── tailwind.config.js            # darkMode: "class" 테마 설정
+├── vite.config.ts                # Vite 설정 (base: './' 상대 경로 배포 대응)
 ├── package.json                  # 프로젝트 의존성 및 실행 스크립트
 ├── CONTEXT.md                    # [본 문서] 프로젝트 인수인계 및 설계 맥락 문서
 └── README.md                     # 프로젝트 사용자 및 배포 안내서

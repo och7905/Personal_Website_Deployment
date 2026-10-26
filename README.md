@@ -72,6 +72,9 @@ React, TypeScript, Tailwind CSS, Lucide React를 기반으로 제작된 **학술
 
 ```
 개인홈페이지/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Pages 자동 배포 워크플로우 (Actions)
 ├── public/
 │   └── profile.jpg          # 메인 프로필 사진
 ├── src/
@@ -84,6 +87,7 @@ React, TypeScript, Tailwind CSS, Lucide React를 기반으로 제작된 **학술
 ├── index.html               # FOUC 방지 인라인 스크립트 및 메타데이터
 ├── index.css                # Tailwind 지시자 및 글로벌 스타일
 ├── tailwind.config.js       # darkMode: "class" 테마 설정
+├── vite.config.ts           # Vite 설정 (base: './' 상대 경로 배포 대응)
 ├── package.json             # 프로젝트 종속성 및 스크립트
 ├── CONTEXT.md               # 프로젝트 설계 맥락 및 인수인계 문서
 └── README.md                # 포트폴리오 가이드 및 문서
