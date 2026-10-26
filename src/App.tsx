@@ -1148,10 +1148,10 @@ export function PrintableCV({
 // 4. 방문자 통계 컴포넌트: VisitorCounter (Supabase DB 기반 Today & Total 집계)
 // ============================================================================
 const SUPABASE_URL: string =
-  (import.meta as any)?.env?.VITE_SUPABASE_URL || "";
+  import.meta.env.VITE_SUPABASE_URL || "";
 
 const SUPABASE_ANON_KEY: string =
-  (import.meta as any)?.env?.VITE_SUPABASE_ANON_KEY || "";
+  import.meta.env.VITE_SUPABASE_ANON_KEY || "";
 
 export const supabase =
   SUPABASE_URL && SUPABASE_ANON_KEY
