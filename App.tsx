@@ -13,7 +13,6 @@ import {
   Award,
   Trophy,
   Code2,
-  Globe,
   ExternalLink,
   Users,
   User,
@@ -1149,14 +1148,15 @@ export function PrintableCV({
 // 4. 방문자 통계 컴포넌트: VisitorCounter (Supabase DB 기반 Today & Total 집계)
 // ============================================================================
 const SUPABASE_URL: string =
-  (import.meta as any)?.env?.VITE_SUPABASE_URL ||
-  "https://nuphdgddhchhohxzxath.supabase.co";
+  (import.meta as any)?.env?.VITE_SUPABASE_URL || "";
 
 const SUPABASE_ANON_KEY: string =
-  (import.meta as any)?.env?.VITE_SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51cGhkZ2RkaGNoaG9oeHp4YXRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwMTg1NzMsImV4cCI6MjEwODU5NDU3M30.rQQN-f3gViuHtQ4xMyEYSzjuwutbRT0vqbWy1xy6iHY";
+  (import.meta as any)?.env?.VITE_SUPABASE_ANON_KEY || "";
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase =
+  SUPABASE_URL && SUPABASE_ANON_KEY
+    ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
 
 export function VisitorCounter() {
   const [counts, setCounts] = useState<{ today: number | null; total: number | null }>({
@@ -1166,6 +1166,13 @@ export function VisitorCounter() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const client = supabase;
+    if (!client) {
+      console.warn("[VisitorCounter] Supabase 환경변수가 설정되지 않아 기본 카운트를 표시합니다.");
+      setCounts({ today: 1, total: 1 });
+      return;
+    }
 
     const todayKey = new Date().toISOString().slice(0, 10);
     let hasVisited = false;
@@ -1178,7 +1185,7 @@ export function VisitorCounter() {
     const syncVisitors = async () => {
       try {
         // 1. 현재 total 및 todayKey 데이터 조회
-        const { data, error } = await supabase
+        const { data, error } = await client
           .from("site_visitors")
           .select("id, count")
           .in("id", ["total", todayKey]);
@@ -1200,7 +1207,7 @@ export function VisitorCounter() {
           const nextTotal = currentTotal + 1;
           const nextToday = currentToday + 1;
 
-          const { error: upsertErr } = await supabase.from("site_visitors").upsert([
+          const { error: upsertErr } = await client.from("site_visitors").upsert([
             { id: "total", count: nextTotal },
             { id: todayKey, count: nextToday },
           ]);
@@ -1236,7 +1243,7 @@ export function VisitorCounter() {
     // 2. 기기 간 실시간 동기화 (Supabase Realtime Channel)
     let channel: any = null;
     try {
-      channel = supabase
+      channel = client
         .channel("site_visitors_realtime")
         .on(
           "postgres_changes",
@@ -1263,7 +1270,7 @@ export function VisitorCounter() {
     return () => {
       if (channel) {
         try {
-          supabase.removeChannel(channel);
+          client.removeChannel(channel);
         } catch {}
       }
     };
@@ -1311,7 +1318,6 @@ export default function AcademicPortfolio() {
   const [language, setLanguage] = useState<Language>("ko");
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
-  const [mounted, setMounted] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   // 현재 선택된 언어의 데이터
@@ -1319,8 +1325,6 @@ export default function AcademicPortfolio() {
 
   // 1) 테마 및 언어 로컬스토리지 초기화
   useEffect(() => {
-    setMounted(true);
-
     // 언어 복원
     const savedLang = localStorage.getItem("academic-portfolio-lang") as Language | null;
     if (savedLang && (savedLang === "ko" || savedLang === "ja" || savedLang === "en")) {
