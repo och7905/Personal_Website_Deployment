@@ -59,22 +59,25 @@
   </footer>
   ```
 
-### 2.4 글로벌 API 연동 방문자 카운터 (`VisitorCounter`)
-- **설계 의도**: `localStorage` 사용 시 발생하는 PC와 모바일 간의 숫자 불일치를 원천 해결하고, 전 세계 모든 접속자가 하나의 통합된 실시간 수치를 공유하도록 오픈 CounterAPI를 연동하여 Today(당일) 및 Total(누적) 방문자 수를 집계합니다.
+### 2.4 최신 CounterAPI v2 연동 방문자 카운터 (`VisitorCounter`)
+- **설계 의도**: 서비스 종료된 구형 v1(410 Deprecated) 대신 공식 최신 **CounterAPI v2**(`https://counterapi.dev/v2/...`)를 연동하여 기기별 숫자 불일치를 해결하고 전역 통합 실시간 수치를 집계합니다.
 - **동작 메커니즘 (세션 기반 1회 집계 & 중복 증가 방지)**:
   - 세션 판별 기준: `sessionStorage.getItem('visited_session')`
-  - 고유 키 분리:
-    - 당일 방문 키: `och7905 / portfolio-today-${dateStr}` (예: `portfolio-today-2026-10-26`)
-    - 전체 누적 키: `och7905 / portfolio-total`
+  - v2 엔드포인트:
+    - Total 증가: `https://counterapi.dev/v2/och7905-portfolio/total/up`
+    - Total 조회: `https://counterapi.dev/v2/och7905-portfolio/total`
+    - Today 증가: `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}/up`
+    - Today 조회: `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}`
   - **첫 방문일 경우 (새 창 / 새 세션)**:
     - Total 및 Today 카운터 증가(`/up`) API를 병렬 호출(`Promise.all`).
     - 증가된 숫자를 각각 `counts.total`, `counts.today` state에 바인딩하고 `sessionStorage.setItem('visited_session', 'true')` 기록.
   - **세션 내 재방문 / 새로고침일 경우**:
     - Total 및 Today 단순 조회(GET) API를 호출하여 새로고침 남발로 인한 무한 증가 방지.
-  - **로딩 및 예외 처리**:
-    - 데이터 로딩 중에는 `-` 표시, 네트워크 장애 또는 404/타임아웃(5초) 시 기본값(1)으로 안전하게 폴백.
+  - **응답 파싱 및 예외 안전성**:
+    - v2 응답 JSON(`res.data.count`, `res.data.up_count`, `res.data`, `res.count`)의 유연한 파싱 지원.
+    - 미등록 키 조회 시 404 자동 감지 및 `/up` 재시도 초기화 로직 탑재, 6초 타임아웃 AbortController 및 상세 콘솔 에러 로깅.
 - **UI 디자인**:
-  - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 커스텀 배지 스타일 복구:
+  - `lucide-react`의 `Users` 아이콘과 초록색 활성 펄스(Pulse) 점이 포함된 커스텀 배지 스타일:
     `[ 👥 🟢 Visitors · Today {todayCount} · Total {totalCount} ]`
   - 접근성 툴팁: `title="사이트 방문자 수 (Today / Total Views)"`
 
@@ -104,12 +107,12 @@
 
 ### 2.10 경력 항목 정렬 및 이력 배지 시스템 (`ExperienceItem`)
 - `ExperienceItem` 인터페이스(`badges?: string[]`)를 통해 직무·보직 배지를 기존 랩 배지와 일관된 로즈 알약 배지(`bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 font-mono text-[11px]`) 스타일로 다중 렌더링 지원.
-- 모든 경력 항목은 엄격한 최신 역연대순(**2026 -> 2024 -> 2023 -> 2022**)으로 정렬:
+- 모든 경력 항목은 엄격한 최신 역연대순(**2026 -> 2024 -> 2023–2024 -> 2022**)으로 정렬:
   1. `2026 – 현재`: 일영 (GDGoC 대전대학교 챕터) [GDGoC]
   2. `2026`: 대전대학교 SW중심대학사업단 (공식 링크 연동 ↗)
   3. `2026`: 대전대학교 교수학습개발원 (CTL) (공식 링크 연동 ↗)
   4. `2024 – 현재`: AIONE 연구실 [AIONE Lab] (공식 링크 연동 ↗)
-  5. `2023`: 병장 만기전역 (1291기) @ 대한민국 해병대 (ROKMC) [유격전 조교] [무선통신병] (공식 링크 연동 ↗)
+  5. `2023 – 2024`: 병장 만기전역 (1291기) @ 대한민국 해병대 (ROKMC) [유격전 조교] [무선통신병] (공식 링크 연동 ↗)
   6. `2022`: 대전대학교 HRC 봉사단 [디지털 격차 해소] [사회공헌] (공식 링크 연동 ↗)
 - 3개 국어(KO / JA / EN) 및 A4 학술 CV(`PrintableCV`)에 통일된 개발자 톤앤매너로 탑재되어 있습니다.
 

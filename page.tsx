@@ -231,7 +231,7 @@ export const portfolioDataByLang = {
             "멀티모달 비디오-투-오디오(Video-to-Audio) 생성 모델 연구 주도, 연구실 운영 총괄 및 데이터 전처리 파이프라인 구축.",
         },
         {
-          period: "2023",
+          period: "2023 – 2024",
           role: "병장 만기전역 (1291기)",
           institution: "대한민국 해병대 (ROKMC)",
           url: "https://www.rokmc.mil.kr:10005/index.do",
@@ -470,7 +470,7 @@ export const portfolioDataByLang = {
             "マルチモーダル Video-to-Audio 生成モデル研究の主導、研究室運営管理およびデータ前処理パイプラインの構築。",
         },
         {
-          period: "2023",
+          period: "2023 – 2024",
           role: "兵長 満期除隊（第1291期）",
           institution: "大韓民国海兵隊 (ROKMC)",
           url: "https://www.rokmc.mil.kr:10005/index.do",
@@ -708,7 +708,7 @@ export const portfolioDataByLang = {
             "Leading research on multimodal video-to-audio generation models, managing lab operations, and constructing data preprocessing pipelines.",
         },
         {
-          period: "2023",
+          period: "2023 – 2024",
           role: "Sergeant (Honorably Discharged, 1291st Class)",
           institution: "Republic of Korea Marine Corps (ROKMC)",
           url: "https://www.rokmc.mil.kr:10005/index.do",
@@ -1145,7 +1145,7 @@ export function PrintableCV({
 }
 
 // ============================================================================
-// 4. 방문자 통계 컴포넌트: VisitorCounter (글로벌 API 연동 Today & Total 세션 집계)
+// 4. 방문자 통계 컴포넌트: VisitorCounter (CounterAPI v2 글로벌 Today & Total 집계)
 // ============================================================================
 export function VisitorCounter() {
   const [counts, setCounts] = useState<{ today: number | null; total: number | null }>({
@@ -1158,24 +1158,34 @@ export function VisitorCounter() {
 
     let hasVisited = false;
     try {
-      hasVisited = !!sessionStorage.getItem("visited_session") || !!sessionStorage.getItem("has_visited");
+      hasVisited = !!sessionStorage.getItem("visited_session");
     } catch {
       hasVisited = false;
     }
 
     const dateStr = new Date().toISOString().slice(0, 10);
-    const totalIncUrl = "https://api.counterapi.dev/v1/och7905/portfolio-total/up";
-    const totalGetUrl = "https://api.counterapi.dev/v1/och7905/portfolio-total";
-    const todayIncUrl = `https://api.counterapi.dev/v1/och7905/portfolio-today-${dateStr}/up`;
-    const todayGetUrl = `https://api.counterapi.dev/v1/och7905/portfolio-today-${dateStr}`;
+    const totalIncUrl = "https://counterapi.dev/v2/och7905-portfolio/total/up";
+    const totalGetUrl = "https://counterapi.dev/v2/och7905-portfolio/total";
+    const todayIncUrl = `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}/up`;
+    const todayGetUrl = `https://counterapi.dev/v2/och7905-portfolio/today-${dateStr}`;
 
     const totalTargetUrl = hasVisited ? totalGetUrl : totalIncUrl;
     const todayTargetUrl = hasVisited ? todayGetUrl : todayIncUrl;
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
 
-    const fetchCounter = async (targetUrl: string, fallbackIncUrl: string) => {
+    const parseCountValue = (json: any): number | null => {
+      if (typeof json === "number" && !isNaN(json)) return json;
+      if (typeof json?.count === "number" && !isNaN(json.count)) return json.count;
+      if (typeof json?.data === "number" && !isNaN(json.data)) return json.data;
+      if (typeof json?.data?.count === "number" && !isNaN(json.data.count)) return json.data.count;
+      if (typeof json?.data?.up_count === "number" && !isNaN(json.data.up_count)) return json.data.up_count;
+      if (typeof json?.value === "number" && !isNaN(json.value)) return json.value;
+      return null;
+    };
+
+    const fetchCounterV2 = async (targetUrl: string, fallbackIncUrl: string) => {
       try {
         const res = await fetch(targetUrl, {
           method: "GET",
@@ -1184,8 +1194,9 @@ export function VisitorCounter() {
           signal: controller.signal,
         });
 
-        // 서버에 아직 해당 키가 생성되지 않은 상태에서 get 호출 시 404가 반환될 수 있으므로 자동 등록(up)
-        if (!res.ok && res.status === 404 && targetUrl !== fallbackIncUrl) {
+        // 404 발생 시(서버에 아직 키가 등록되지 않은 상태에서 get 호출 시) up 호출로 자동 초기화
+        if (res.status === 404 && targetUrl !== fallbackIncUrl) {
+          console.warn(`[VisitorCounter] 404 from ${targetUrl}, attempting auto-creation via up...`);
           const incRes = await fetch(fallbackIncUrl, {
             method: "GET",
             headers: { Accept: "application/json" },
@@ -1193,34 +1204,45 @@ export function VisitorCounter() {
             signal: controller.signal,
           });
           if (incRes.ok) {
-            const data = await incRes.json();
-            return typeof data?.count === "number" ? data.count : null;
+            const incJson = await incRes.json();
+            return parseCountValue(incJson);
           }
+          console.error(`[VisitorCounter] Auto-creation failed with status: ${incRes.status}`);
+          return null;
         }
 
-        if (!res.ok) return null;
+        if (!res.ok) {
+          console.error(`[VisitorCounter] HTTP error ${res.status} (${res.statusText}) from ${targetUrl}`);
+          return null;
+        }
+
         const data = await res.json();
-        return typeof data?.count === "number" ? data.count : null;
-      } catch {
+        return parseCountValue(data);
+      } catch (err: any) {
+        if (err?.name !== "AbortError") {
+          console.error(`[VisitorCounter] Network error fetching ${targetUrl}:`, err);
+        }
         return null;
       }
     };
 
     Promise.all([
-      fetchCounter(totalTargetUrl, totalIncUrl),
-      fetchCounter(todayTargetUrl, todayIncUrl),
+      fetchCounterV2(totalTargetUrl, totalIncUrl),
+      fetchCounterV2(todayTargetUrl, todayIncUrl),
     ])
       .then(([totalRes, todayRes]) => {
         setCounts({
           total: totalRes !== null ? totalRes : 1,
           today: todayRes !== null ? todayRes : 1,
         });
-        try {
-          sessionStorage.setItem("visited_session", "true");
-          sessionStorage.setItem("has_visited", "true");
-        } catch {}
+        if (!hasVisited && (totalRes !== null || todayRes !== null)) {
+          try {
+            sessionStorage.setItem("visited_session", "true");
+          } catch {}
+        }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("[VisitorCounter] Unexpected error in counter aggregation:", err);
         setCounts((prev) => ({
           total: prev.total ?? 1,
           today: prev.today ?? 1,
