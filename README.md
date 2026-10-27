@@ -86,6 +86,13 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 - 7개 섹션 목차 탐색, 현재 활성 섹션(`activeSection`) 실시간 로즈 하이라이트, 스무스 스크롤 이동 및 탭 즉시 자동 닫힘.
 - 드로어 하단에 [다크/라이트 모드 토글] 및 [CV PDF 인쇄/다운로드] 바로가기 지원, `Escape` 키 닫기 및 바디 스크롤 잠금 적용.
 
+### 12. 🌐 벡터 파비콘(Favicon) & Google Analytics 4 (GA4) 연동
+- **전용 벡터 파비콘 (`public/favicon.svg`)**:
+  - 다크 배경(`#111215`)과 로즈 학사모(`#f43f5e`)가 결합된 고화질 SVG 파비콘 적용.
+  - `index.html` 내 `<link rel="icon" type="image/svg+xml" href="./favicon.svg" />` 상대 경로를 통해 GitHub Pages 서브디렉터리 배포 환경에서도 404 에러 없이 즉각 로드.
+- **Google Analytics 4 (GA4)**:
+  - `index.html` 내에 공식 `gtag.js` (`G-3TMQEBP4XV`) 추적 태그가 연동되어 전 세계 방문자 통계, 유입 경로, 세션 분석을 지원.
+
 ---
 
 ## 📁 프로젝트 구조
@@ -96,6 +103,7 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 │   └── workflows/
 │       └── deploy.yml       # GitHub Pages 자동 배포 워크플로우 (GitHub Actions)
 ├── public/
+│   ├── favicon.svg          # 포트폴리오 테마 전용 벡터 파비콘
 │   └── profile.jpg          # 메인 프로필 사진
 ├── src/
 │   ├── assets/
@@ -107,11 +115,14 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 │   └── page.tsx             # Next.js App Router 호환 파일 (src/App.tsx와 100% 동기화)
 ├── App.tsx                  # 루트 호환 파일 (src/App.tsx와 100% 동기화)
 ├── page.tsx                 # 루트 호환 파일 (src/App.tsx와 100% 동기화)
-├── index.html               # FOUC 방지 인라인 스크립트 및 메타데이터
+├── index.html               # GA4 태그, 파비콘, FOUC 방지 인라인 스크립트 및 메타데이터
 ├── index.css                # Tailwind 지시자 및 글로벌 스타일
 ├── tailwind.config.js       # darkMode: "class" 테마 설정
 ├── vite.config.ts           # Vite 설정 (base: './' 상대 경로 배포 대응)
 ├── package.json             # 프로젝트 종속성 및 스크립트 ("build": "vite build")
+├── .gitignore               # Git 버전 관리 제외 목록 (.env, node_modules, dist 등)
+├── .env                     # Supabase 로컬 환경변수 (Git 제외 대상)
+├── .env.example             # 환경변수 템플릿 예시
 ├── CONTEXT.md               # 프로젝트 설계 맥락 및 인수인계 문서
 └── README.md                # 포트폴리오 사용자 및 배포 안내서
 ```
@@ -155,7 +166,10 @@ npm run build
 2. 상단 메뉴의 **Settings** 탭을 클릭합니다.
 3. 좌측 사이드바의 **Pages** 메뉴로 이동합니다.
 4. **Build and deployment** 섹션의 **Source** 드롭다운 메뉴에서 **`GitHub Actions`**를 선택합니다.
-5. 로컬에서 변경 사항을 커밋하고 `main` 브랜치에 **Push**하면, GitHub Actions가 자동으로 Node.js 20 환경에서 프로젝트를 빌드하고 `dist/` 폴더를 GitHub Pages로 배포합니다.
+5. 좌측 사이드바의 **Secrets and variables** → **Actions** 메뉴로 이동하여 **Variables** 탭을 클릭하고, 아래 2개 환경변수를 등록합니다:
+   - `VITE_SUPABASE_URL`: 본인의 Supabase 프로젝트 URL (예: `https://xxxx.supabase.co`)
+   - `VITE_SUPABASE_ANON_KEY`: 본인의 Supabase anon 공개 키
+6. 로컬에서 변경 사항을 커밋하고 `main` 브랜치에 **Push**하면, GitHub Actions가 자동으로 Node.js 20 환경에서 프로젝트를 빌드하고 `dist/` 폴더를 GitHub Pages로 배포합니다.
 
 ---
 
@@ -217,13 +231,37 @@ experience: {
   sectionTitle: "03. Experience",
   items: [
     {
+      period: "2026 – 현재",
+      role: "멤버 / 개발자 (7기)",
+      institution: "일영 (GDGoC 대전대학교 챕터)",
+      lab: "GDGoC",
+      location: "대전",
+      description: "개발자 스터디 세션, 협업 소프트웨어 엔지니어링 프로젝트 및 기술 지식 공유 세미나 참여.",
+    },
+    {
+      period: "2026 – 현재",
+      role: "스터디원 (1기)",
+      institution: "공동 (CS 전공 역량 및 직무 스터디)",
+      badges: ["CS 기초 스터디", "데이터 자격증"],
+      location: "대전",
+      description: "컴퓨터공학 전공 필기 대비 CS 핵심 과목 복습 및 데이터 직무 자격증 취득을 위한 정기 기술 스터디 진행.",
+    },
+    {
+      period: "2026",
+      role: "공식 학생 서포터즈 (2기)",
+      institution: "대전대학교 SW중심대학사업단",
+      location: "대전",
+      url: "https://www.dju.ac.kr/sw/main.do",
+      description: "소프트웨어 사업단 주요 성과 홍보 카드뉴스 및 기술 블로그 제작, 학술 교류 행사 기획 및 운영.",
+    },
+    {
       period: "2024 – 현재",
-      role: "학생 랩장 & 학부 연구생",
+      role: "학생 랩장 (3기) & 학부 연구생",
       institution: "AIONE 연구실",
       lab: "AIONE Lab",
       location: "대전",
-      url: "https://sites.google.com/view/aionelab/education?authuser=0", // 외부 링크
-      description: "멀티모달 비디오-투-오디오 생성 모델 연구 주도 및 데이터 파이프라인 구축.",
+      url: "https://sites.google.com/view/aionelab/education?authuser=0",
+      description: "멀티모달 비디오-투-오디오 생성 모델 연구 주도, 연구실 운영 총괄 및 데이터 전처리 파이프라인 구축.",
     },
     ...
   ],
@@ -247,8 +285,12 @@ publications: {
 ```
 *작성자의 이름(오창현 / Changhyeon Oh)은 저자 목록에서 자동으로 볼드 밑줄 처리됩니다.*
 
-### 5. 방문자 카운터 스토리지 관리 (`VisitorCounter`)
-`src/App.tsx` 내 `portfolio_visited`(세션 키)와 `visitor_today_${YYYY-MM-DD}`, `visitor_total`(로컬 키)을 통해 브라우저 스토리지를 관리하며, 클릭 이벤트 없이 세션 단위로 안전하게 카운트가 관리됩니다.
+### 5. 방문자 카운터 및 데이터베이스 연동 (`VisitorCounter`)
+- 공식 `@supabase/supabase-js` 라이브러리를 통해 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)에 방문자 통계를 보존합니다:
+  - `id = 'total'`: 전체 누적 방문자 수
+  - `id = 'YYYY-MM-DD'`: 당일 방문자 수 (예: `2026-10-27`)
+- 브라우저의 `sessionStorage`(`visited_session`)를 확인하여 **창을 처음 연 세션 첫 방문 시에만 +1 upsert**하고, 세션 내 새로고침 시에는 `select` 조회만 수행하여 수치 왜곡을 원천 차단합니다.
+- Supabase Realtime 채널(`postgres_changes`)을 구독하여 스마트폰, PC 등 다른 기기에서 방문이 발생해도 실시간으로 수치가 동기화됩니다.
 
 ---
 
@@ -256,13 +298,15 @@ publications: {
 
 | 분류 | 기술 스택 | 적용 목적 |
 | :--- | :--- | :--- |
-| **Framework** | React 18, TypeScript | 컴포넌트 모듈화, 엄격한 타입 안정성 |
+| **Framework** | React 18, TypeScript | 컴포넌트 모듈화, 엄격한 정적 타입 안정성 |
 | **Styling** | Tailwind CSS | 유틸리티 퍼스트 기반 일관된 디자인 시스템 및 다크모드(`darkMode: "class"`) |
 | **Icons** | Lucide React | 정밀하고 가벼운 벡터 아이콘 시스템 |
 | **Build Tool** | Vite 6 | 초고속 HMR 및 상대 경로(`base: './'`) 번들링 |
-| **Print / PDF** | Native CSS Print Styles (`@media print`) | 별도 라이브러리 없이 표준 브라우저 인쇄를 통한 고화질 벡터 PDF 출력 |
-| **Analytics** | Pure Browser Storage (`localStorage` / `sessionStorage`) | 외부 API 의존 없이 콘솔 에러가 발생하지 않는 정직한 세션 기반 방문자 집계 |
-| **CI / CD** | GitHub Actions | `main` 푸시 시 자동 빌드 및 GitHub Pages 배포 |
+| **Print / PDF** | Native CSS Print Styles (`@media print`) | 별도 외부 라이브러리 없이 표준 브라우저 인쇄를 통한 고화질 벡터 PDF 출력 |
+| **Database & Realtime** | Supabase (`@supabase/supabase-js`) | 클라우드 PostgreSQL(`site_visitors`) 기반 전 기기 실시간 동기화 방문자 카운팅 |
+| **Analytics** | Google Analytics 4 (GA4) | `gtag.js` (`G-3TMQEBP4XV`)를 통한 실시간 트래픽 및 웹 사용자 유입 분석 |
+| **Storage** | `localStorage` / `sessionStorage` | 테마/언어 설정 영구 보존 및 세션 중복 카운트 방지 |
+| **CI / CD** | GitHub Actions | `main` 푸시 시 Node.js 20 환경에서 자동 빌드 및 GitHub Pages 배포 |
 
 ---
 
@@ -278,7 +322,7 @@ publications: {
 깨지지 않습니다. `src/App.tsx`의 `getAssetUrl` 함수가 `import.meta.env.BASE_URL`을 동적으로 반영하고, 이미지 태그에 `onError` 폴백이 적용되어 있어 `https://username.github.io/repo-name/` 환경에서도 프로필 사진이 완벽하게 로드됩니다.
 
 ### Q4. 방문자 수는 새로고침할 때마다 계속 올라가나요?
-아닙니다. 브라우저의 `sessionStorage`에 세션 키(`portfolio_visited`)를 기록하여, 브라우저 창을 새로 연 최초 방문 시에만 카운트를 증가시키고 이후 단순 새로고침 시에는 기존 저장된 수치만 조회하므로 수치 왜곡이 발생하지 않습니다.
+아닙니다. 브라우저의 `sessionStorage`에 세션 키(`visited_session`)를 기록하여, 브라우저 창을 새로 연 최초 방문 시에만 Supabase DB에 +1 upsert를 수행하고 이후 단순 새로고침 시에는 DB에서 현재 수치만 읽어오므로 수치 왜곡이 발생하지 않습니다.
 
 ---
 

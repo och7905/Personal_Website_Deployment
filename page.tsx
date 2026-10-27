@@ -203,6 +203,15 @@ export const portfolioDataByLang = {
             "개발자 스터디 세션, 협업 소프트웨어 엔지니어링 프로젝트 및 기술 지식 공유 세미나 참여.",
         },
         {
+          period: "2026 – 현재",
+          role: "스터디원 (1기)",
+          institution: "공동 (CS 전공 역량 및 직무 스터디)",
+          badges: ["CS 기초 스터디", "데이터 자격증"],
+          location: "대전",
+          description:
+            "컴퓨터공학 전공 필기 대비 CS 핵심 과목(자료구조, 알고리즘, 데이터베이스 등) 복습 및 데이터 직무 자격증 취득을 위한 정기 기술 스터디 진행.",
+        },
+        {
           period: "2026",
           role: "공식 학생 서포터즈 (2기)",
           institution: "대전대학교 SW중심대학사업단",
@@ -442,6 +451,15 @@ export const portfolioDataByLang = {
             "開発者勉強会、協業ソフトウェアエンジニアリングプロジェクト、技術知見共有セミナーへの参加。",
         },
         {
+          period: "2026 – 現在",
+          role: "スタディメンバー (1期)",
+          institution: "共同 (CS専攻コア & 職務スタディ)",
+          badges: ["CS基礎スタディ", "データ資格"],
+          location: "大田、韓国",
+          description:
+            "コンピュータ工学専攻筆記試験に向けたCSコア科目（データ構造、アルゴリズム、DB等）の復習およびデータ職務資格取得のための定期技術勉強会に参加。",
+        },
+        {
           period: "2026",
           role: "公式学生サポーターズ (2期)",
           institution: "大田大学校 SW中心大学事業団",
@@ -678,6 +696,15 @@ export const portfolioDataByLang = {
           location: "Daejeon, Korea",
           description:
             "Participating in developer study sessions, collaborative software engineering projects, and technical knowledge-sharing seminars.",
+        },
+        {
+          period: "2026 – Present",
+          role: "Study Member (1st Cohort)",
+          institution: "Gong-Dong (CS Core & Career Study)",
+          badges: ["CS Fundamentals", "Data Certs"],
+          location: "Daejeon, Korea",
+          description:
+            "Participating in regular technical study sessions reviewing core CS fundamentals (data structures, algorithms, databases) and preparing for professional data certifications.",
         },
         {
           period: "2026",

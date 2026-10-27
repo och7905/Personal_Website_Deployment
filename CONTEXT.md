@@ -17,8 +17,10 @@
   - **Build & Dev**: Vite 6 (`base: './'`)
   - **Styling**: Tailwind CSS 3 (`darkMode: "class"`), PostCSS, Autoprefixer
   - **Icons**: Lucide React (`User`, `GraduationCap`, `Briefcase`, `BookOpen`, `Award`, `Trophy`, `Code2`, `Users`, `Menu`, `X`, `FileText`, `Mail`, `ExternalLink` 등)
-  - **Storage**: 브라우저 표준 `localStorage` & `sessionStorage` (순수 클라이언트 기반)
-  - **CI / CD**: GitHub Actions (`.github/workflows/deploy.yml` -> GitHub Pages 자동 배포)
+  - **Database & Realtime**: Supabase (`@supabase/supabase-js`, PostgreSQL `site_visitors` 테이블 & Realtime WebSocket)
+  - **Analytics**: Google Analytics 4 (GA4 `G-3TMQEBP4XV`), Supabase DB 기반 실시간 Today/Total 카운터
+  - **Storage**: 브라우저 표준 `localStorage` (다크모드/언어 설정) & `sessionStorage` (방문자 세션 중복 방지)
+  - **CI / CD**: GitHub Actions (`.github/workflows/deploy.yml` -> GitHub Pages 자동 배포, Repository Variables 연동)
 - **버전 관리 및 워크플로우**:
   - 도구: Git & GitHub Desktop
   - **`main` 브랜치**: 배포(Production)용 브랜치 (푸시 시 GitHub Actions 트리거)
@@ -61,13 +63,16 @@
 
 ### 2.4 Supabase DB 기반 실시간 방문자 카운터 (`VisitorCounter`)
 - **설계 의도**: 외부 불안정 오픈 API 대신 설치된 공식 `@supabase/supabase-js` 클라이언트를 활용하여 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)와 연동. PC, 스마트폰 등 모든 기기 간 방문자 수(Today / Total)를 영구 보존하고 실시간 동기화합니다.
-- **환경변수 분리**:
-  - `import.meta.env.VITE_SUPABASE_URL` 및 `import.meta.env.VITE_SUPABASE_ANON_KEY`를 통해 `.env`에서 키를 로드하며, `.gitignore`에 `.env`를 포함하여 Git 유출을 원천 방지합니다. 배포 환경을 위한 fallback 로직도 함께 완비.
+- **환경변수 분리 및 Vite 빌드 타임 정적 치환**:
+  - `import.meta.env.VITE_SUPABASE_URL` 및 `import.meta.env.VITE_SUPABASE_ANON_KEY` 표준 구문을 사용하여 Vite 번들러가 빌드 타임에 안전하게 치환하도록 구성.
+  - 소스 코드 내 하드코딩 키 0% 유지. 실제 키는 `.env`에서 관리하며 `.gitignore`로 원격 저장소 노출을 원천 방지.
+  - GitHub Actions 빌드 시 저장소 환경변수(`${{ vars.VITE_SUPABASE_URL }}`, `${{ vars.VITE_SUPABASE_ANON_KEY }}`)를 통해 자동 주입.
+  - 환경변수 미설정 시에도 사이트가 멈추거나 깨지지 않고 기본값 1을 유지하도록 null-safe 방어 로직 구현.
 - **DB 테이블 스키마**:
   - 테이블명: `site_visitors`
   - 컬럼: `id` (text, PK), `count` (bigint)
     - `id = 'total'`: 전체 누적 방문자
-    - `id = 'YYYY-MM-DD'`: 오늘 날짜 방문자 (예: `2026-10-26`)
+    - `id = 'YYYY-MM-DD'`: 오늘 날짜 방문자 (예: `2026-10-27`)
 - **동작 메커니즘 (세션 기반 1회 집계 & 중복 증가 방지)**:
   - 세션 판별 기준: `sessionStorage.getItem('visited_session')`
   - **첫 방문일 경우 (새 창 / 새 세션)**:
@@ -109,13 +114,21 @@
 ### 2.10 경력 항목 정렬 및 이력 배지 시스템 (`ExperienceItem`)
 - `ExperienceItem` 인터페이스(`badges?: string[]`)를 통해 직무·보직 배지를 기존 랩 배지와 일관된 로즈 알약 배지(`bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 font-mono text-[11px]`) 스타일로 다중 렌더링 지원.
 - 모든 경력 항목은 엄격한 최신 역연대순(**2026 -> 2024 -> 2023–2024 -> 2022**)으로 정렬:
-  1. `2026 – 현재`: 일영 (GDGoC 대전대학교 챕터) [GDGoC]
-  2. `2026`: 대전대학교 SW중심대학사업단 (공식 링크 연동 ↗)
-  3. `2026`: 대전대학교 교수학습개발원 (CTL) (공식 링크 연동 ↗)
-  4. `2024 – 현재`: AIONE 연구실 [AIONE Lab] (공식 링크 연동 ↗)
-  5. `2023 – 2024`: 병장 만기전역 (1291기) @ 대한민국 해병대 (ROKMC) [유격전 조교] [무선통신병] (공식 링크 연동 ↗)
-  6. `2022`: 대전대학교 HRC 봉사단 [디지털 격차 해소] [사회공헌] (공식 링크 연동 ↗)
+  1. `2026 – 현재`: 일영 (GDGoC 대전대학교 챕터) - 멤버 / 개발자 (7기) [GDGoC]
+  2. `2026 – 현재`: 공동 (CS 전공 역량 및 직무 스터디) - 스터디원 (1기) [CS 기초 스터디] [데이터 자격증]
+  3. `2026`: 대전대학교 SW중심대학사업단 - 공식 학생 서포터즈 (2기) (공식 링크 연동 ↗)
+  4. `2026`: 대전대학교 교수학습개발원 (CTL) - 피어 튜터 (전공기초 레벨업 튜터링 - 이산수학) (공식 링크 연동 ↗)
+  5. `2024 – 현재`: AIONE 연구실 - 학생 랩장 (3기) & 학부 연구생 [AIONE Lab] (공식 링크 연동 ↗)
+  6. `2023 – 2024`: 병장 만기전역 (1291기) @ 대한민국 해병대 (ROKMC) [유격전 조교] [무선통신병] (공식 링크 연동 ↗)
+  7. `2022`: 대전대학교 HRC 봉사단 - 봉사단원 [디지털 격차 해소] [사회공헌] (공식 링크 연동 ↗)
 - 3개 국어(KO / JA / EN) 및 A4 학술 CV(`PrintableCV`)에 통일된 개발자 톤앤매너로 탑재되어 있습니다.
+
+### 2.11 파비콘(Favicon) 및 웹 로그 분석(Google Analytics 4)
+- **전용 벡터 파비콘 (`public/favicon.svg`)**:
+  - 다크 배경(`#111215`)과 로즈 학사모 심볼(`#f43f5e`)을 조합한 고화질 SVG 파비콘 적용.
+  - `index.html` 내 `<link rel="icon" type="image/svg+xml" href="./favicon.svg" />` 상대 경로를 지정하여, GitHub Pages 서브디렉터리 환경에서도 브라우저가 도메인 루트의 `/favicon.ico`를 잘못 찾아 404를 내는 현상을 완벽 차단.
+- **Google Analytics 4 (GA4)**:
+  - `index.html`의 `<head>` 태그 최상단에 공식 `gtag.js` (`G-3TMQEBP4XV`) 추적 스크립트가 연동되어 전 세계 방문자 트래픽 및 페이지뷰 분석 지원.
 
 ---
 
@@ -127,6 +140,7 @@
 │   └── workflows/
 │       └── deploy.yml            # GitHub Pages 자동 빌드 & 배포 워크플로우 (GitHub Actions)
 ├── public/
+│   ├── favicon.svg               # 포트폴리오 테마 전용 벡터 파비콘
 │   └── profile.jpg               # 개인 프로필 사진 (정적 서빙)
 ├── src/
 │   ├── assets/
