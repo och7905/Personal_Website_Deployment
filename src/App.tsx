@@ -215,6 +215,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "공식 학생 서포터즈 (2기)",
           institution: "대전대학교 SW중심대학사업단",
+          badges: ["SW 홍보", "콘텐츠 기획"],
           location: "대전",
           url: "https://www.dju.ac.kr/sw/main.do",
           description:
@@ -224,6 +225,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "피어 튜터 (전공기초 레벨업 튜터링 - 이산수학)",
           institution: "대전대학교 교수학습개발원 (CTL)",
+          badges: ["전공 멘토링", "이산수학"],
           location: "대전",
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
@@ -463,6 +465,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "公式学生サポーターズ (2期)",
           institution: "大田大学校 SW中心大学事業団",
+          badges: ["SW広報", "コンテンツ企画"],
           location: "大田、韓国",
           url: "https://www.dju.ac.kr/sw/main.do",
           description:
@@ -472,6 +475,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "ピアチューター（専攻基礎レベルアップチュータリング - 離散数学）",
           institution: "大田大学校 教授学習開発院（CTL）",
+          badges: ["専攻メンター", "離散数学"],
           location: "大田、韓国",
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
@@ -710,6 +714,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "Official Student Supporter (2nd Cohort)",
           institution: "SW University Project Group, Daejeon University",
+          badges: ["SW PR", "Content Planning"],
           location: "Daejeon, Korea",
           url: "https://www.dju.ac.kr/sw/main.do",
           description:
@@ -719,6 +724,7 @@ export const portfolioDataByLang = {
           period: "2026",
           role: "Peer Tutor (Major Foundational Level-Up Tutoring - Discrete Mathematics)",
           institution: "Center for Teaching and Learning, Daejeon University",
+          badges: ["Peer Tutoring", "Discrete Math"],
           location: "Daejeon, Korea",
           url: "https://www.dju.ac.kr/einnovation/main.do",
           description:
