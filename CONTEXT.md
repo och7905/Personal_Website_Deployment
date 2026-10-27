@@ -141,7 +141,9 @@
 │       └── deploy.yml            # GitHub Pages 자동 빌드 & 배포 워크플로우 (GitHub Actions)
 ├── public/
 │   ├── favicon.svg               # 포트폴리오 테마 전용 벡터 파비콘
-│   └── profile.jpg               # 개인 프로필 사진 (정적 서빙)
+│   ├── profile.jpg               # 개인 프로필 사진 (정적 서빙)
+│   ├── robots.txt                # 검색 엔진 로봇 수집 규칙 및 sitemap 위치 안내
+│   └── sitemap.xml               # 검색 엔진 인덱싱용 사이트맵
 ├── src/
 │   ├── assets/
 │   │   └── profile.jpg           # 번들링 참조용 프로필 이미지

@@ -104,7 +104,9 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
 │       └── deploy.yml       # GitHub Pages 자동 배포 워크플로우 (GitHub Actions)
 ├── public/
 │   ├── favicon.svg          # 포트폴리오 테마 전용 벡터 파비콘
-│   └── profile.jpg          # 메인 프로필 사진
+│   ├── profile.jpg          # 메인 프로필 사진
+│   ├── robots.txt           # 검색 엔진 크롤러 수집 가이드
+│   └── sitemap.xml          # 검색 엔진 인덱싱 사이트맵
 ├── src/
 │   ├── assets/
 │   │   └── profile.jpg      # 번들링용 프로필 이미지 복사본

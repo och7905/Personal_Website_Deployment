@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://och7905.github.io/Personal_Website_Deployment/sitemap.xml
