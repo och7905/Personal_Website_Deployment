@@ -289,7 +289,7 @@ publications: {
 - 공식 `@supabase/supabase-js` 라이브러리를 통해 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)에 방문자 통계를 보존합니다:
   - `id = 'total'`: 전체 누적 방문자 수
   - `id = 'YYYY-MM-DD'`: 당일 방문자 수 (예: `2026-10-27`)
-- 브라우저의 `sessionStorage`(`visited_session`)를 확인하여 **창을 처음 연 세션 첫 방문 시에만 +1 upsert**하고, 세션 내 새로고침 시에는 `select` 조회만 수행하여 수치 왜곡을 원천 차단합니다.
+- 브라우저의 `localStorage`(`portfolio_last_visit_date`)를 확인하여 **당일 첫 방문 시에만 +1 upsert 및 오늘 날짜 기록**을 수행하고, 당일 재방문이나 새로고침 시에는 `select` 조회만 수행하여 수치 왜곡을 원천 차단합니다.
 - Supabase Realtime 채널(`postgres_changes`)을 구독하여 스마트폰, PC 등 다른 기기에서 방문이 발생해도 실시간으로 수치가 동기화됩니다.
 
 ---
@@ -322,7 +322,7 @@ publications: {
 깨지지 않습니다. `src/App.tsx`의 `getAssetUrl` 함수가 `import.meta.env.BASE_URL`을 동적으로 반영하고, 이미지 태그에 `onError` 폴백이 적용되어 있어 `https://username.github.io/repo-name/` 환경에서도 프로필 사진이 완벽하게 로드됩니다.
 
 ### Q4. 방문자 수는 새로고침할 때마다 계속 올라가나요?
-아닙니다. 브라우저의 `sessionStorage`에 세션 키(`visited_session`)를 기록하여, 브라우저 창을 새로 연 최초 방문 시에만 Supabase DB에 +1 upsert를 수행하고 이후 단순 새로고침 시에는 DB에서 현재 수치만 읽어오므로 수치 왜곡이 발생하지 않습니다.
+아닙니다. 브라우저의 `localStorage`에 방문 일자 키(`portfolio_last_visit_date`)를 저장하여, 오늘 처음 접속한 방문자일 때만 Supabase DB에 +1 upsert를 수행하고 이후 당일 재방문이나 단순 새로고침 시에는 DB에서 현재 수치만 읽어오므로 중복 카운트 및 수치 왜곡이 발생하지 않습니다.
 
 ---
 

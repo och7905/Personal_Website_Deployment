@@ -1208,11 +1208,12 @@ export function VisitorCounter() {
     }
 
     const todayKey = new Date().toISOString().slice(0, 10);
-    let hasVisited = false;
+    let alreadyVisitedToday = false;
     try {
-      hasVisited = !!sessionStorage.getItem("visited_session") || !!sessionStorage.getItem("visited");
+      const lastVisitDate = localStorage.getItem("portfolio_last_visit_date");
+      alreadyVisitedToday = lastVisitDate === todayKey;
     } catch {
-      hasVisited = false;
+      alreadyVisitedToday = false;
     }
 
     const syncVisitors = async () => {
@@ -1235,8 +1236,8 @@ export function VisitorCounter() {
         const currentTotal = totalRow?.count ? Number(totalRow.count) : 0;
         const currentToday = todayRow?.count ? Number(todayRow.count) : 0;
 
-        if (!hasVisited) {
-          // 첫 방문: 카운트 +1 증가 후 upsert
+        if (!alreadyVisitedToday) {
+          // 오늘 첫 방문: 카운트 +1 증가 후 upsert 및 당일 방문 일자 기록
           const nextTotal = currentTotal + 1;
           const nextToday = currentToday + 1;
 
@@ -1250,13 +1251,13 @@ export function VisitorCounter() {
           }
 
           try {
+            localStorage.setItem("portfolio_last_visit_date", todayKey);
             sessionStorage.setItem("visited_session", "true");
-            sessionStorage.setItem("visited", "true");
           } catch {}
 
           setCounts({ total: nextTotal, today: nextToday });
         } else {
-          // 동일 세션 재방문 / 새로고침: 단순 조회 수치 유지
+          // 오늘 이미 방문한 사용자: 단순 조회 수치 유지 (중복 증가 방지)
           setCounts({
             total: Math.max(1, currentTotal),
             today: Math.max(1, currentToday),

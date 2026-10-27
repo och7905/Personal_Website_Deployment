@@ -73,13 +73,13 @@
   - 컬럼: `id` (text, PK), `count` (bigint)
     - `id = 'total'`: 전체 누적 방문자
     - `id = 'YYYY-MM-DD'`: 오늘 날짜 방문자 (예: `2026-10-27`)
-- **동작 메커니즘 (세션 기반 1회 집계 & 중복 증가 방지)**:
-  - 세션 판별 기준: `sessionStorage.getItem('visited_session')`
-  - **첫 방문일 경우 (새 창 / 새 세션)**:
+- **동작 메커니즘 (당일 1회 집계 & 중복 증가 방지)**:
+  - 당일 방문 판별 기준: `localStorage.getItem('portfolio_last_visit_date') === todayKey`
+  - **오늘 처음 방문한 사용자일 경우**:
     - `site_visitors` 테이블에서 `['total', todayKey]` 행을 조회한 후 각각 +1 증가된 수치로 `upsert`.
-    - `sessionStorage.setItem('visited_session', 'true')` 설정.
-  - **세션 내 재방문 / 새로고침일 경우**:
-    - `select` 조회만 수행하여 현재 수치를 가져오고 중복 카운트 증가 방지.
+    - `localStorage.setItem('portfolio_last_visit_date', todayKey)` 저장.
+  - **오늘 이미 방문한 사용자일 경우 (동일 날짜 재방문 / 새로고침)**:
+    - 카운트 증가 없이 `select` 조회만 수행하여 현재 화면에 최신 수치를 표시.
   - **기기간 실시간 동기화 (Supabase Realtime Channel)**:
     - `postgres_changes` 웹소켓 채널을 구독하여 다른 기기에서 방문 카운트가 올라갈 때 현재 화면에서도 새로고침 없이 즉각 실시간 업데이트.
 - **UI 디자인**:
