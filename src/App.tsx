@@ -195,7 +195,7 @@ export const portfolioDataByLang = {
       items: [
         {
           period: "2026 – 현재",
-          role: "멤버 / 개발자",
+          role: "멤버 / 개발자 (7기)",
           institution: "일영 (GDGoC 대전대학교 챕터)",
           lab: "GDGoC",
           location: "대전",
@@ -204,7 +204,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2026",
-          role: "공식 학생 서포터즈",
+          role: "공식 학생 서포터즈 (2기)",
           institution: "대전대학교 SW중심대학사업단",
           location: "대전",
           url: "https://www.dju.ac.kr/sw/main.do",
@@ -222,7 +222,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2024 – 현재",
-          role: "학생 랩장 & 학부 연구생",
+          role: "학생 랩장 (3기) & 학부 연구생",
           institution: "AIONE 연구실",
           lab: "AIONE Lab",
           location: "대전",
@@ -434,7 +434,7 @@ export const portfolioDataByLang = {
       items: [
         {
           period: "2026 – 現在",
-          role: "メンバー / 開発者",
+          role: "メンバー / 開発者 (7期)",
           institution: "日迎（GDGoC 大田大学校チャプター）",
           lab: "GDGoC",
           location: "大田、韓国",
@@ -443,7 +443,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2026",
-          role: "公式学生サポーターズ",
+          role: "公式学生サポーターズ (2期)",
           institution: "大田大学校 SW中心大学事業団",
           location: "大田、韓国",
           url: "https://www.dju.ac.kr/sw/main.do",
@@ -461,7 +461,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2024 – 現在",
-          role: "学生リーダー & 学部研究員",
+          role: "学生リーダー (3期) & 学部研究員",
           institution: "AIONE 研究室",
           lab: "AIONE Lab",
           location: "大田、韓国",
@@ -672,7 +672,7 @@ export const portfolioDataByLang = {
       items: [
         {
           period: "2026 – Present",
-          role: "Member / Developer",
+          role: "Member / Developer (7th Cohort)",
           institution: "Il-Young (GDGoC Daejeon University Chapter)",
           lab: "GDGoC",
           location: "Daejeon, Korea",
@@ -681,7 +681,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2026",
-          role: "Official Student Supporter",
+          role: "Official Student Supporter (2nd Cohort)",
           institution: "SW University Project Group, Daejeon University",
           location: "Daejeon, Korea",
           url: "https://www.dju.ac.kr/sw/main.do",
@@ -699,7 +699,7 @@ export const portfolioDataByLang = {
         },
         {
           period: "2024 – Present",
-          role: "Student Lab Leader & Undergraduate Researcher",
+          role: "Student Lab Leader (3rd Cohort) & Undergraduate Researcher",
           institution: "AIONE Laboratory",
           lab: "AIONE Lab",
           location: "Daejeon, Korea",
