@@ -18,6 +18,7 @@ import {
   User,
   Menu,
   X,
+  ZoomIn,
 } from "lucide-react";
 
 // ============================================================================
@@ -108,8 +109,60 @@ export interface ExperienceItem {
   location: string;
   url?: string;
   lab?: string;
+  certNo?: string;
   badges?: string[];
+  docLink?: {
+    label: string;
+    url: string;
+  };
   description: string;
+}
+
+export interface FeaturedAwardMedia {
+  src: string;
+  caption: string;
+  alt: string;
+}
+
+export interface FeaturedAwardLink {
+  label: string;
+  url: string;
+  isExternal?: boolean;
+  disabled?: boolean;
+}
+
+export interface FeaturedAward {
+  badge: string;
+  year: string;
+  title: string;
+  titleSub?: string;
+  issuer: string;
+  roleSummary: string;
+  media: FeaturedAwardMedia[];
+  links: FeaturedAwardLink[];
+}
+
+export interface HonorItem {
+  year: string;
+  title: string;
+  issuer: string;
+  description?: string;
+}
+
+export interface CompetitionActionLink {
+  label: string;
+  url: string;
+  isExternal?: boolean;
+}
+
+export interface CompetitionItem {
+  year: string;
+  title: string;
+  award: string;
+  organizer: string;
+  description?: string;
+  isGrandPrize?: boolean;
+  actionLinks?: CompetitionActionLink[];
 }
 
 export const getAssetUrl = (path: string): string => {
@@ -222,6 +275,26 @@ export const portfolioDataByLang = {
             "소프트웨어 사업단 주요 성과 홍보 카드뉴스 및 기술 블로그 제작, 학술 교류 행사 기획 및 운영.",
         },
         {
+          period: "2026. 06. 29. – 07. 03.",
+          role: "제5회 CO-Week Academy 첨단분야 집중 교육과정 수료",
+          institution: "교육부 · 한국연구재단(NRF) 및 첨단분야 혁신융합대학 사업단 협의회",
+          certNo: "제 2026-2795호",
+          location: "대한민국",
+          badges: [
+            "Amazon Bedrock RAG 챗봇",
+            "LLM 보안 & Jailbreaking 취약점 분석",
+            "AI-IoT 스마트 센서",
+            "결측 데이터 처리 분석",
+            "차세대 통신 트렌드",
+          ],
+          docLink: {
+            label: "공식 수료증 사본 (PDF)",
+            url: "/docs/coss_certificate.pdf",
+          },
+          description:
+            "교육부 및 한국연구재단이 주관하는 첨단분야 혁신융합대학(COSS) 집중 교육과정 이수 (총 15개 강좌 / 총 1,350분, 22.5시간 수강 완료). AI, 빅데이터, 보안, 차세대 네트워크 등 신기술 트랙 전반을 학습하며 최신 인공지능 및 시스템 인프라 직무 역량 강화. (수료증 발급: 2026. 07. 08.)",
+        },
+        {
           period: "2026",
           role: "피어 튜터 (전공기초 레벨업 튜터링 - 이산수학)",
           institution: "대전대학교 교수학습개발원 (CTL)",
@@ -277,6 +350,13 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
+          year: "2026. 10.",
+          title: "소셜벤처 해커톤 대상 수상 포상 (100만 원 상당 부상 수혜)",
+          issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
+          description:
+            "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 전체 1위(대상) 선정에 따른 100만 원 상당 공식 부상 수혜.",
+        },
+        {
           year: "2026",
           title: "SW중심대학사업단 공식 서포터즈 장학금",
           issuer: "대전대학교 SW중심대학사업단",
@@ -307,6 +387,49 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
+      featured: {
+        badge: "GRAND PRIZE (대상 · 1위)",
+        year: "2026. 10.",
+        title: "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 대상",
+        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+        issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
+        roleSummary:
+          "지역사회 당면 과제를 해결하기 위한 혁신 기술 기반 소셜벤처 솔루션 개발. 시스템 기술 아키텍처 설계 및 구현을 총괄 주도하여 참가팀 중 전체 1위(대상) 수상.",
+        media: [
+          {
+            src: "/images/hackathon_grandprize_panel.jpg",
+            caption: "대상 판넬 시상식",
+            alt: "2026 소셜벤처 해커톤 대상 판넬 단독 시상식 사진",
+          },
+          {
+            src: "/images/hackathon_group.jpg",
+            caption: "2026 혁신적 소셜벤처 해커톤 현장",
+            alt: "2026 혁신적 소셜벤처 해커톤 전체 참가자 단체 사진",
+          },
+        ],
+        links: [
+          {
+            label: "뉴스1 보도기사",
+            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+            isExternal: true,
+          },
+          {
+            label: "한국대학신문",
+            url: "https://news.unn.net/news/articleView.html?idxno=599809",
+            isExternal: true,
+          },
+          {
+            label: "충남일보",
+            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+            isExternal: true,
+          },
+          {
+            label: "상장 PDF 열람 (준비 중)",
+            url: "#",
+            disabled: true,
+          },
+        ],
+      },
       items: [
         {
           year: "2026",
@@ -331,14 +454,6 @@ export const portfolioDataByLang = {
           organizer: "Korea Electronics Technology Institute (KETI) / IoT Forum",
           description:
             "Built intelligent services leveraging the Mobius open-source standard IoT platform and data processing modules.",
-        },
-        {
-          year: "2026",
-          title: "2026 Social Venture Innovation Hackathon for Regional Problem Solving",
-          award: "Participant",
-          organizer: "Daejeon University & Regional Partner Agencies",
-          description:
-            "Ideated and prototyped IT-driven sustainable social venture solutions addressing key local community challenges.",
         },
         {
           year: "2025",
@@ -472,6 +587,26 @@ export const portfolioDataByLang = {
             "学部SW成果の広報カードニュースおよび技術ブログ制作、学術交流イベントの企画・運営。",
         },
         {
+          period: "2026. 06. 29. – 07. 03.",
+          role: "第5回 CO-Week Academy 先端分野集中教育課程 修了",
+          institution: "教育部・韓国研究財団(NRF)および先端分野革新融合大学事業団協議会",
+          certNo: "第 2026-2795号",
+          location: "大韓民国",
+          badges: [
+            "Amazon Bedrock RAG チャットボット",
+            "LLM セキュリティ & Jailbreaking 脆弱性分析",
+            "AI-IoT スマートセンサー",
+            "欠損データ処理・分析",
+            "次世代通信トレンド",
+          ],
+          docLink: {
+            label: "公式修了証（PDF）",
+            url: "/docs/coss_certificate.pdf",
+          },
+          description:
+            "教育部および韓国研究財団が主催する先端分野革新融合大学(COSS)集中教育課程を修了（計15講座 / 計1,350分、22.5時間受講完了）。AI、ビッグデータ、セキュリティ、次世代ネットワーク等の新技術トラック全般を学習し、最新のAIおよびシステムインフラ実務能力を強化。（修了証発行: 2026. 07. 08.）",
+        },
+        {
           period: "2026",
           role: "ピアチューター（専攻基礎レベルアップチュータリング - 離散数学）",
           institution: "大田大学校 教授学習開発院（CTL）",
@@ -527,6 +662,13 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
+          year: "2026. 10.",
+          title: "ソーシャルベンチャーハッカソン 大賞受賞副賞（100万ウォン相当副賞受給）",
+          issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
+          description:
+            "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 全体1位（大賞）受賞に伴う100万ウォン相当の公式副賞受給。",
+        },
+        {
           year: "2026",
           title: "SW事業団公式サポーターズ奨学金",
           issuer: "大田大学校 SW中心大学事業団",
@@ -556,6 +698,49 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
+      featured: {
+        badge: "GRAND PRIZE (大賞 · 1位)",
+        year: "2026. 10.",
+        title: "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 大賞 (1位)",
+        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+        issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
+        roleSummary:
+          "地域社会の当面課題を解決するための革新的技術基盤ソーシャルベンチャーソリューションを開発。システムアーキテクチャ設計および実装を総括主導し、参加チーム中全体1位（大賞）を受賞。",
+        media: [
+          {
+            src: "/images/hackathon_grandprize_panel.jpg",
+            caption: "大賞パネル授賞式",
+            alt: "大賞パネル単独授賞式の様子",
+          },
+          {
+            src: "/images/hackathon_group.jpg",
+            caption: "2026 革新的ソーシャルベンチャーハッカソン現場",
+            alt: "ハッカソン参加者全員による集合写真",
+          },
+        ],
+        links: [
+          {
+            label: "News1 報道記事",
+            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+            isExternal: true,
+          },
+          {
+            label: "韓国大学新聞",
+            url: "https://news.unn.net/news/articleView.html?idxno=599809",
+            isExternal: true,
+          },
+          {
+            label: "忠南日報",
+            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+            isExternal: true,
+          },
+          {
+            label: "公式賞状PDF閲覧（準備中）",
+            url: "#",
+            disabled: true,
+          },
+        ],
+      },
       items: [
         {
           year: "2026",
@@ -580,14 +765,6 @@ export const portfolioDataByLang = {
           organizer: "Korea Electronics Technology Institute (KETI) / IoT Forum",
           description:
             "Built intelligent services leveraging the Mobius open-source standard IoT platform and data processing modules.",
-        },
-        {
-          year: "2026",
-          title: "2026 Social Venture Innovation Hackathon for Regional Problem Solving",
-          award: "Participant",
-          organizer: "Daejeon University & Regional Partner Agencies",
-          description:
-            "Ideated and prototyped IT-driven sustainable social venture solutions addressing key local community challenges.",
         },
         {
           year: "2025",
@@ -721,6 +898,26 @@ export const portfolioDataByLang = {
             "Promoted departmental SW milestones by creating technical card news, blog write-ups, and organizing academic outreach initiatives.",
         },
         {
+          period: "2026. 06. 29. – 07. 03.",
+          role: "Completed the 5th CO-Week Academy (Convergence & Open Sharing System)",
+          institution: "Ministry of Education, NRF & COSS Council",
+          certNo: "Cert. No. 2026-2795",
+          location: "Republic of Korea",
+          badges: [
+            "Amazon Bedrock RAG Chatbot",
+            "LLM Security & Jailbreaking Vulnerability",
+            "AI-IoT Smart Sensors",
+            "Missing Data Imputation",
+            "Next-Gen Telecom Trends",
+          ],
+          docLink: {
+            label: "Official Certificate (PDF)",
+            url: "/docs/coss_certificate.pdf",
+          },
+          description:
+            "Completed the advanced intensive training program organized by the Ministry of Education and NRF (15 courses / 1,350 minutes, 22.5 hours total). Strengthened practical AI and infrastructure engineering capabilities across emerging tech tracks including AI, Big Data, Security, and Next-Gen Networks. (Issued: July 08, 2026)",
+        },
+        {
           period: "2026",
           role: "Peer Tutor (Major Foundational Level-Up Tutoring - Discrete Mathematics)",
           institution: "Center for Teaching and Learning, Daejeon University",
@@ -776,6 +973,13 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
+          year: "2026. 10.",
+          title: "Social Venture Hackathon Grand Prize Award (KRW 1M Equivalent Prize)",
+          issuer: "Daejeon Regional University-Industry Cooperation Council & Local Social Venture Support Agencies",
+          description:
+            "Awarded official prize equivalent to KRW 1,000,000 for winning 1st Place (Grand Prize) at the 2026 Regional Social Venture Innovation Hackathon.",
+        },
+        {
           year: "2026",
           title: "SW Project Group Official Supporter Scholarship",
           issuer: "SW University Project Group, Daejeon University",
@@ -807,6 +1011,49 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
+      featured: {
+        badge: "GRAND PRIZE (1st Place)",
+        year: "2026. 10.",
+        title: "Grand Prize (1st Place) - 2026 Regional Social Venture Innovation Hackathon",
+        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+        issuer: "Daejeon Regional University-Industry Cooperation Council & Local Social Venture Support Agencies",
+        roleSummary:
+          "Architected and engineered end-to-end IT-driven sustainable social venture solutions addressing regional community challenges. Spearheaded system architecture and technical implementation, winning 1st Place (Grand Prize).",
+        media: [
+          {
+            src: "/images/hackathon_grandprize_panel.jpg",
+            caption: "Grand Prize Award Ceremony",
+            alt: "Award ceremony holding the Grand Prize panel",
+          },
+          {
+            src: "/images/hackathon_group.jpg",
+            caption: "2026 Social Venture Hackathon Venue",
+            alt: "Group photo of hackathon participants and organizers",
+          },
+        ],
+        links: [
+          {
+            label: "News1 Press Article",
+            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+            isExternal: true,
+          },
+          {
+            label: "UNN Press Article",
+            url: "https://news.unn.net/news/articleView.html?idxno=599809",
+            isExternal: true,
+          },
+          {
+            label: "Chungnam Ilbo",
+            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+            isExternal: true,
+          },
+          {
+            label: "Official Certificate PDF (Coming Soon)",
+            url: "#",
+            disabled: true,
+          },
+        ],
+      },
       items: [
         {
           year: "2026",
@@ -831,14 +1078,6 @@ export const portfolioDataByLang = {
           organizer: "Korea Electronics Technology Institute (KETI) / IoT Forum",
           description:
             "Built intelligent services leveraging the Mobius open-source standard IoT platform and data processing modules.",
-        },
-        {
-          year: "2026",
-          title: "2026 Social Venture Innovation Hackathon for Regional Problem Solving",
-          award: "Participant",
-          organizer: "Daejeon University & Regional Partner Agencies",
-          description:
-            "Ideated and prototyped IT-driven sustainable social venture solutions addressing key local community challenges.",
         },
         {
           year: "2025",
@@ -1071,6 +1310,7 @@ export function PrintableCV({
                   <span className="text-[11px] font-bold text-black">{exp.role}</span>
                   <span className="text-[11px] font-semibold text-zinc-800">@ {exp.institution}</span>
                   {exp.lab && <span className="text-[10px] font-semibold text-zinc-700">[{exp.lab}]</span>}
+                  {exp.certNo && <span className="text-[10px] font-semibold text-zinc-700">[{exp.certNo}]</span>}
                   {exp.badges?.map((b: string, bIdx: number) => (
                     <span key={bIdx} className="text-[10px] font-semibold text-zinc-700">[{b}]</span>
                   ))}
@@ -1137,6 +1377,21 @@ export function PrintableCV({
           {sectionHeadings.competitions}
         </h2>
         <div className="space-y-2">
+          {data.competitions.featured && (
+            <div className="break-inside-avoid grid grid-cols-[105px_1fr] gap-2 items-baseline pb-2 mb-1 border-b border-zinc-200">
+              <span className="text-[10.5px] font-bold text-black tabular-nums">
+                {data.competitions.featured.year}
+              </span>
+              <div>
+                <div className="flex flex-wrap items-baseline gap-1.5">
+                  <span className="text-[11px] font-extrabold text-black">{data.competitions.featured.title}</span>
+                  <span className="text-[10px] font-bold text-black">[{data.competitions.featured.badge}]</span>
+                </div>
+                <p className="text-[10px] font-semibold text-zinc-700">{data.competitions.featured.issuer}</p>
+                <p className="text-[10px] text-zinc-800 mt-0.5 leading-snug">{data.competitions.featured.roleSummary}</p>
+              </div>
+            </div>
+          )}
           {data.competitions.items.map((comp, idx) => (
             <div key={idx} className="break-inside-avoid grid grid-cols-[105px_1fr] gap-2 items-baseline">
               <span className="text-[10.5px] font-semibold text-zinc-700 tabular-nums">
@@ -1353,9 +1608,29 @@ export default function AcademicPortfolio() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState<{
+    src: string;
+    caption: string;
+    alt: string;
+  } | null>(null);
 
   // 현재 선택된 언어의 데이터
   const data = portfolioDataByLang[language];
+
+  // ESC 키로 이미지 모달 닫기
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedMedia(null);
+      }
+    };
+    if (selectedMedia) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedMedia]);
 
   // 1) 테마 및 언어 로컬스토리지 초기화
   useEffect(() => {
@@ -1972,6 +2247,11 @@ export default function AcademicPortfolio() {
                             [{exp.lab}]
                           </span>
                         )}
+                        {exp.certNo && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-zinc-100 text-zinc-700 border border-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700 tracking-tight font-mono">
+                            {exp.certNo}
+                          </span>
+                        )}
                         {exp.badges?.map((badge: string, bIdx: number) => (
                           <span
                             key={bIdx}
@@ -1984,6 +2264,20 @@ export default function AcademicPortfolio() {
                       <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                         {exp.description}
                       </p>
+                      {exp.docLink && (
+                        <div className="pt-2 flex flex-wrap items-center gap-2">
+                          <a
+                            href={getAssetUrl(exp.docLink.url)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 !text-indigo-800 dark:!text-indigo-300 border border-indigo-200/90 dark:border-indigo-500/35 hover:border-indigo-400 dark:hover:border-indigo-500/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                          >
+                            <FileText className="w-3.5 h-3.5 !text-indigo-600 dark:!text-indigo-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
+                            <span>{exp.docLink.label}</span>
+                            <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -2089,6 +2383,115 @@ export default function AcademicPortfolio() {
                 <span>{data.competitions.sectionTitle}</span>
               </h2>
 
+              {/* -----------------------------------------------------------
+                  최우선 대회 하이라이트 (Featured Competition - 2026 소셜벤처 해커톤 대상)
+                  ----------------------------------------------------------- */}
+              {data.competitions.featured && (
+                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-amber-500/40 dark:border-amber-500/45 bg-gradient-to-br from-amber-500/[0.04] via-amber-500/[0.02] to-amber-500/[0.07] dark:from-amber-950/25 dark:via-zinc-900/95 dark:to-zinc-950 p-5 sm:p-7 shadow-xl shadow-amber-500/10 dark:shadow-[0_0_35px_rgba(245,158,11,0.08)] mb-6 transition-all duration-300">
+                  {/* 은은한 골드빛 글로우 데코레이션 */}
+                  <div className="absolute -top-16 -right-16 w-52 h-52 bg-amber-400/15 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+                  {/* 상단 뱃지 & 연도 */}
+                  <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 !text-amber-700 dark:!text-amber-300 border border-amber-500/35 shadow-xs tracking-wide">
+                      <Trophy className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400" />
+                      <span>{data.competitions.featured.badge}</span>
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold !text-amber-700/90 dark:!text-amber-400/90 tabular-nums font-mono">
+                      {data.competitions.featured.year}
+                    </span>
+                  </div>
+
+                  {/* 타이틀 및 발급 기관 */}
+                  <div className="space-y-1.5">
+                    <h3 className="text-base sm:text-xl font-extrabold !text-black dark:!text-white leading-snug tracking-tight">
+                      {data.competitions.featured.title}
+                    </h3>
+                    {data.competitions.featured.titleSub && (
+                      <p className="text-xs sm:text-sm font-semibold !text-zinc-600 dark:!text-zinc-400 leading-normal">
+                        {data.competitions.featured.titleSub}
+                      </p>
+                    )}
+                    <p className="text-xs sm:text-sm font-bold !text-zinc-800 dark:!text-zinc-300 flex items-center gap-1.5 pt-0.5">
+                      <Award className="w-4 h-4 !text-amber-600 dark:!text-amber-400 shrink-0" />
+                      <span>{data.ui.organizerLabel} {data.competitions.featured.issuer}</span>
+                    </p>
+                  </div>
+
+                  {/* 역할 및 기술 요약 */}
+                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-amber-50/70 dark:bg-zinc-800/60 border border-amber-500/20 dark:border-zinc-700/60">
+                    <p className="text-xs sm:text-sm !text-zinc-900 dark:!text-zinc-200 leading-relaxed font-normal">
+                      {data.competitions.featured.roleSummary}
+                    </p>
+                  </div>
+
+                  {/* 사진 및 미디어 갤러리 (2종 반응형 그리드) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-5">
+                    {data.competitions.featured.media.map((item, mIdx) => (
+                      <div
+                        key={mIdx}
+                        onClick={() => setSelectedMedia(item)}
+                        className="group/img relative rounded-xl overflow-hidden border border-amber-500/30 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-sm hover:shadow-md hover:border-amber-500/60 transition-all duration-200"
+                      >
+                        <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
+                          <img
+                            src={getAssetUrl(item.src)}
+                            alt={item.alt}
+                            className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                            loading="lazy"
+                          />
+                        </div>
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-xs font-semibold shadow-lg">
+                            <ZoomIn className="w-3.5 h-3.5 text-amber-400" />
+                            <span>클릭하여 원본 확대</span>
+                          </span>
+                        </div>
+                        {/* Caption Bar */}
+                        <div className="px-3 py-2 bg-white/95 dark:bg-zinc-900/95 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs">
+                          <span className="font-semibold !text-zinc-800 dark:!text-zinc-200 truncate">
+                            {item.caption}
+                          </span>
+                          <span className="text-[10px] !text-amber-600 dark:!text-amber-400 font-mono shrink-0 ml-2">
+                            원본 사진
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* 언론 보도자료 및 증빙 링크 칩 (4종) */}
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-5 pt-4 border-t border-amber-500/20 dark:border-zinc-800">
+                    {data.competitions.featured.links.map((link, lIdx) =>
+                      link.disabled ? (
+                        <button
+                          key={lIdx}
+                          disabled
+                          title="상장 PDF 준비 중입니다"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/50 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-75 select-none"
+                        >
+                          <FileText className="w-3.5 h-3.5 opacity-60" />
+                          <span>{link.label}</span>
+                        </button>
+                      ) : (
+                        <a
+                          key={lIdx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 hover:bg-amber-500/20 !text-amber-800 dark:!text-amber-300 border border-amber-500/30 hover:border-amber-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                        >
+                          <span>{link.label}</span>
+                          <ExternalLink className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
+                        </a>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* 일반 참가 대회 목록 */}
               <div className="space-y-2">
                 {data.competitions.items.map((comp, idx) => (
                   <div
@@ -2169,6 +2572,56 @@ export default function AcademicPortfolio() {
         2. 인쇄 / PDF 저장 전용 표준 학술 & Tech CV 템플릿 (A4 표준 규격)
         ================================================================= */}
     <PrintableCV data={data} socials={commonSocials} language={language} />
+
+    {/* =================================================================
+        3. 수상 현장 사진 원본 확대 모달 (Lightbox Modal)
+        ================================================================= */}
+    {selectedMedia && (
+      <div
+        role="dialog"
+        aria-modal="true"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+        onClick={() => setSelectedMedia(null)}
+      >
+        <div
+          className="relative max-w-4xl w-full max-h-[92vh] flex flex-col items-center bg-zinc-950/95 border border-zinc-700/80 rounded-2xl overflow-hidden shadow-2xl p-3 sm:p-4"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 상단 헤더 & 닫기 버튼 */}
+          <div className="w-full flex items-center justify-between pb-2.5 px-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2 min-w-0 pr-4">
+              <Trophy className="w-4 h-4 !text-amber-400 shrink-0" />
+              <span className="text-sm font-bold text-zinc-100 truncate">
+                {selectedMedia.caption}
+              </span>
+            </div>
+            <button
+              onClick={() => setSelectedMedia(null)}
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors shrink-0"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* 원본 이미지 */}
+          <div className="w-full flex items-center justify-center overflow-auto py-3">
+            <img
+              src={getAssetUrl(selectedMedia.src)}
+              alt={selectedMedia.alt}
+              className="max-w-full max-h-[72vh] object-contain rounded-lg shadow-xl"
+            />
+          </div>
+
+          {/* 하단 캡션 안내 */}
+          <div className="w-full text-center pt-2 px-2 border-t border-zinc-800/80">
+            <p className="text-xs text-zinc-400 font-medium">
+              {selectedMedia.alt} · ESC 키 또는 바깥 영역 클릭 시 닫기
+            </p>
+          </div>
+        </div>
+      </div>
+    )}
   </>
   );
 }
