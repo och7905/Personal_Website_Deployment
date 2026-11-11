@@ -251,6 +251,10 @@ experience: {
     {
       period: "2026",
       role: "공식 학생 서포터즈 (2기)",
+      docLink: {
+        label: "활동 자료 및 제작 콘텐츠 (Google Drive)",
+        url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+      },
       institution: "대전대학교 SW중심대학사업단",
       location: "대전",
       url: "https://www.dju.ac.kr/sw/main.do",

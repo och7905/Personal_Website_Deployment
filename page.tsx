@@ -267,6 +267,10 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "공식 학생 서포터즈 (2기)",
+          docLink: {
+            label: "활동 자료 및 제작 콘텐츠 (Google Drive)",
+            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+          },
           institution: "대전대학교 SW중심대학사업단",
           badges: ["SW 홍보", "콘텐츠 기획"],
           location: "대전",
@@ -579,6 +583,10 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "公式学生サポーターズ (2期)",
+          docLink: {
+            label: "活動資料・制作コンテンツ（Google Drive）",
+            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+          },
           institution: "大田大学校 SW中心大学事業団",
           badges: ["SW広報", "コンテンツ企画"],
           location: "大田、韓国",
@@ -890,6 +898,10 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "Official Student Supporter (2nd Cohort)",
+          docLink: {
+            label: "Activity Materials & Content Archive (Google Drive)",
+            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+          },
           institution: "SW University Project Group, Daejeon University",
           badges: ["SW PR", "Content Planning"],
           location: "Daejeon, Korea",
