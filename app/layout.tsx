@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: "AI & 소프트웨어 개발자 오창현의 연구 및 포트폴리오 웹사이트입니다.",
     images: ["https://och7905.github.io/Personal_Website_Deployment/profile.jpg"],
   },
+  other: {
+    "pofol-verify": "pofol-verify-d19368f927182e93",
+  },
 };
 
 export default function RootLayout({
