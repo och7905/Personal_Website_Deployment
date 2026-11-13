@@ -428,9 +428,9 @@ export const portfolioDataByLang = {
             isExternal: true,
           },
           {
-            label: "상장 PDF 열람 (준비 중)",
-            url: "#",
-            disabled: true,
+            label: "공식 상장 사본 (PDF)",
+            url: "/docs/hackathon_grandprize_cert.pdf",
+            isExternal: true,
           },
         ],
       },
@@ -743,9 +743,9 @@ export const portfolioDataByLang = {
             isExternal: true,
           },
           {
-            label: "公式賞状PDF閲覧（準備中）",
-            url: "#",
-            disabled: true,
+            label: "公式賞状（PDF）",
+            url: "/docs/hackathon_grandprize_cert.pdf",
+            isExternal: true,
           },
         ],
       },
@@ -1060,9 +1060,9 @@ export const portfolioDataByLang = {
             isExternal: true,
           },
           {
-            label: "Official Certificate PDF (Coming Soon)",
-            url: "#",
-            disabled: true,
+            label: "Official Certificate (PDF)",
+            url: "/docs/hackathon_grandprize_cert.pdf",
+            isExternal: true,
           },
         ],
       },
@@ -2489,11 +2489,12 @@ export default function AcademicPortfolio() {
                       ) : (
                         <a
                           key={lIdx}
-                          href={link.url}
+                          href={getAssetUrl(link.url)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 hover:bg-amber-500/20 !text-amber-800 dark:!text-amber-300 border border-amber-500/30 hover:border-amber-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
                         >
+                          <FileText className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400 opacity-80" />
                           <span>{link.label}</span>
                           <ExternalLink className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
                         </a>
