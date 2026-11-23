@@ -147,10 +147,6 @@ export interface HonorItem {
   title: string;
   issuer: string;
   description?: string;
-  docLink?: {
-    label: string;
-    url: string;
-  };
 }
 
 export interface CompetitionActionLink {
@@ -368,10 +364,6 @@ export const portfolioDataByLang = {
           year: "2026",
           title: "SW중심대학사업단 공식 서포터즈 장학금",
           issuer: "대전대학교 SW중심대학사업단",
-          docLink: {
-            label: "서포터즈 활동 및 장학 증빙자료 (Google Drive)",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
           description:
             "소프트웨어 대외 홍보 기획 및 기술 콘텐츠 발간 우수 기여 선정 (연속 학기).",
         },
@@ -688,10 +680,6 @@ export const portfolioDataByLang = {
           year: "2026",
           title: "SW事業団公式サポーターズ奨学金",
           issuer: "大田大学校 SW中心大学事業団",
-          docLink: {
-            label: "サポーターズ活動・奨学証明資料（Google Drive）",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
           description:
             "ソフトウェア対外広報の企画および技術コンテンツ発信における優秀な貢献（連続学期）。",
         },
@@ -1007,10 +995,6 @@ export const portfolioDataByLang = {
           year: "2026",
           title: "SW Project Group Official Supporter Scholarship",
           issuer: "SW University Project Group, Daejeon University",
-          docLink: {
-            label: "Supporter Activity & Scholarship Verification (Google Drive)",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
           description:
             "Awarded for exceptional contributions to software outreach planning and tech content publication (consecutive semesters).",
         },
@@ -2395,20 +2379,6 @@ export default function AcademicPortfolio() {
                         <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed font-normal">
                           {honor.description}
                         </p>
-                      )}
-                      {honor.docLink && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2">
-                          <a
-                            href={getAssetUrl(honor.docLink.url)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 !text-indigo-800 dark:!text-indigo-300 border border-indigo-200/90 dark:border-indigo-500/35 hover:border-indigo-400 dark:hover:border-indigo-500/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 group/chip"
-                          >
-                            <FileText className="w-3.5 h-3.5 !text-indigo-600 dark:!text-indigo-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
-                            <span>{honor.docLink.label}</span>
-                            <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
-                          </a>
-                        </div>
                       )}
                     </div>
                   </div>
