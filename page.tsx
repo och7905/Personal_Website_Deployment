@@ -115,6 +115,10 @@ export interface ExperienceItem {
     label: string;
     url: string;
   };
+  docLinks?: Array<{
+    label: string;
+    url: string;
+  }>;
   description: string;
 }
 
@@ -267,10 +271,16 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "공식 학생 서포터즈 (2기)",
-          docLink: {
-            label: "서포터즈 활동 및 증빙자료 (Google Drive)",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
+          docLinks: [
+            {
+              label: "서포터즈 임명장 (PDF)",
+              url: "/docs/Certificate_of_Appointment_SW_Supporters.pdf",
+            },
+            {
+              label: "활동 자료 및 제작 콘텐츠 (Google Drive)",
+              url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+            },
+          ],
           institution: "대전대학교 SW중심대학사업단",
           badges: ["SW 홍보", "콘텐츠 기획"],
           location: "대전",
@@ -583,10 +593,16 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "公式学生サポーターズ (2期)",
-          docLink: {
-            label: "サポーターズ活動・証明資料（Google Drive）",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
+          docLinks: [
+            {
+              label: "サポーターズ任命状（PDF）",
+              url: "/docs/Certificate_of_Appointment_SW_Supporters.pdf",
+            },
+            {
+              label: "活動資料・制作コンテンツ（Google Drive）",
+              url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+            },
+          ],
           institution: "大田大学校 SW中心大学事業団",
           badges: ["SW広報", "コンテンツ企画"],
           location: "大田、韓国",
@@ -898,10 +914,16 @@ export const portfolioDataByLang = {
         {
           period: "2026",
           role: "Official Student Supporter (2nd Cohort)",
-          docLink: {
-            label: "Supporter Activity & Verification Archive (Google Drive)",
-            url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
-          },
+          docLinks: [
+            {
+              label: "Certificate of Appointment (PDF)",
+              url: "/docs/Certificate_of_Appointment_SW_Supporters.pdf",
+            },
+            {
+              label: "Activity Materials & Content Archive (Google Drive)",
+              url: "https://drive.google.com/drive/folders/1lqPZsqlagNdbnluNHwHQs9nutEnVu3Ri?usp=drive_link",
+            },
+          ],
           institution: "SW University Project Group, Daejeon University",
           badges: ["SW PR", "Content Planning"],
           location: "Daejeon, Korea",
@@ -2276,18 +2298,21 @@ export default function AcademicPortfolio() {
                       <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                         {exp.description}
                       </p>
-                      {exp.docLink && (
+                      {(exp.docLinks || (exp.docLink ? [exp.docLink] : null)) && (
                         <div className="pt-2 flex flex-wrap items-center gap-2">
-                          <a
-                            href={getAssetUrl(exp.docLink.url)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 !text-indigo-800 dark:!text-indigo-300 border border-indigo-200/90 dark:border-indigo-500/35 hover:border-indigo-400 dark:hover:border-indigo-500/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 group/chip"
-                          >
-                            <FileText className="w-3.5 h-3.5 !text-indigo-600 dark:!text-indigo-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
-                            <span>{exp.docLink.label}</span>
-                            <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
-                          </a>
+                          {(exp.docLinks || (exp.docLink ? [exp.docLink] : [])).map((doc, dIdx) => (
+                            <a
+                              key={dIdx}
+                              href={getAssetUrl(doc.url)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 !text-indigo-800 dark:!text-indigo-300 border border-indigo-200/90 dark:border-indigo-500/35 hover:border-indigo-400 dark:hover:border-indigo-500/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                            >
+                              <FileText className="w-3.5 h-3.5 !text-indigo-600 dark:!text-indigo-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
+                              <span>{doc.label}</span>
+                              <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
+                            </a>
+                          ))}
                         </div>
                       )}
                     </div>
