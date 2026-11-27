@@ -26,6 +26,7 @@ import {
 // ============================================================================
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     className={className}
     viewBox="0 0 24 24"
     fill="none"
@@ -41,6 +42,7 @@ const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 const LinkedinIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     className={className}
     viewBox="0 0 24 24"
     fill="none"
@@ -57,6 +59,7 @@ const LinkedinIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     className={className}
     viewBox="0 0 24 24"
     fill="none"
@@ -73,6 +76,7 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 
 const BlogIcon = ({ className }: { className?: string }) => (
   <svg
+    aria-hidden="true"
     className={className}
     viewBox="0 0 24 24"
     fill="none"
@@ -1383,7 +1387,7 @@ export function PrintableCV({
             </p>
           </div>
           <div className="text-right text-[10px] space-y-0.5 text-zinc-800">
-            <p className="font-bold text-black uppercase tracking-wider">Curriculum Vitae</p>
+            <p className="font-bold text-black">Curriculum Vitae</p>
             <p className="text-zinc-600">Updated: {new Date().getFullYear()}</p>
           </div>
         </div>
@@ -1411,10 +1415,10 @@ export function PrintableCV({
           01. SUMMARY & RESEARCH INTERESTS
           ------------------------------------------------------------- */}
       <section className="mb-4 break-inside-avoid">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.summary}
         </h2>
-        <div className="space-y-1.5 text-zinc-900 text-[11px] leading-relaxed text-justify">
+        <div className="space-y-1.5 text-zinc-900 text-[11px] leading-relaxed text-left">
           {data.about.introParagraphs.map((para, idx) => (
             <p key={idx}>{para}</p>
           ))}
@@ -1425,7 +1429,7 @@ export function PrintableCV({
           02. EDUCATION
           ------------------------------------------------------------- */}
       <section className="mb-4">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.education}
         </h2>
         <div className="space-y-2">
@@ -1454,7 +1458,7 @@ export function PrintableCV({
           03. RESEARCH & LEADERSHIP EXPERIENCE
           ------------------------------------------------------------- */}
       <section className="mb-4">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.experience}
         </h2>
         <div className="space-y-2.5">
@@ -1485,7 +1489,7 @@ export function PrintableCV({
           ------------------------------------------------------------- */}
       {data.publications.items.length > 0 && (
         <section className="mb-4 break-inside-avoid">
-          <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+          <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
             {sectionHeadings.publications}
           </h2>
           <div className="space-y-2">
@@ -1504,7 +1508,7 @@ export function PrintableCV({
           05. SCHOLARSHIPS
           ------------------------------------------------------------- */}
       <section className="mb-4">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.honors}
         </h2>
         <div className="space-y-2">
@@ -1516,7 +1520,7 @@ export function PrintableCV({
               <div>
                 <div className="flex flex-wrap items-baseline gap-1.5">
                   <span className="text-[11px] font-bold text-black">{honor.title}</span>
-                  <span className="text-[10px] font-semibold text-zinc-700">— {honor.issuer}</span>
+                  <span className="text-[10px] font-semibold text-zinc-700">({honor.issuer})</span>
                 </div>
                 {honor.description && (
                   <p className="text-[10px] text-zinc-700 mt-0.5 leading-snug">{honor.description}</p>
@@ -1531,7 +1535,7 @@ export function PrintableCV({
           06. COMPETITIONS & HACKATHONS
           ------------------------------------------------------------- */}
       <section className="mb-4">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.competitions}
         </h2>
         <div className="space-y-2">
@@ -1574,7 +1578,7 @@ export function PrintableCV({
           07. TECHNICAL SKILLS
           ------------------------------------------------------------- */}
       <section className="mb-3 break-inside-avoid">
-        <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
+        <h2 className="text-[11px] font-bold text-black border-b border-black pb-0.5 mb-2">
           {sectionHeadings.skills}
         </h2>
         <div className="space-y-1 text-[10.5px]">
@@ -1725,13 +1729,13 @@ export function VisitorCounter() {
 
   return (
     <div
-      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200/60 dark:bg-zinc-900/70 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 shadow-sm transition-all select-none cursor-default"
+      className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200/60 dark:bg-zinc-900/70 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 shadow-xs transition-colors select-none cursor-default"
       title="사이트 방문자 수 (Today / Total Views)"
     >
       <div className="flex items-center gap-1.5">
         <Users className="w-3 h-3 text-zinc-500 dark:text-zinc-400 shrink-0" />
         <span className="relative flex h-1.5 w-1.5 shrink-0">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
         </span>
         <span className="font-semibold text-zinc-800 dark:text-zinc-200 tracking-tight">Visitors</span>
@@ -1957,7 +1961,7 @@ export default function AcademicPortfolio() {
                 ? (e) => scrollToSection(e, matched.url.slice(1))
                 : undefined
             }
-            className="inline-flex items-baseline gap-1 font-bold text-rose-700 dark:text-rose-300 bg-rose-500/10 dark:bg-rose-500/15 px-1.5 py-0.5 rounded-md border border-rose-500/20 hover:border-rose-500/50 hover:bg-rose-500/20 dark:hover:bg-rose-500/25 transition-all duration-200 cursor-pointer tracking-tight"
+            className="inline-flex items-baseline gap-1 font-bold text-rose-700 dark:text-rose-300 bg-rose-500/10 dark:bg-rose-500/15 px-1.5 py-0.5 rounded-md border border-rose-500/20 hover:border-rose-500/50 hover:bg-rose-500/20 dark:hover:bg-rose-500/25 transition-colors duration-200 cursor-pointer tracking-tight"
           >
             <span>{part}</span>
             {isExternal && (
@@ -1976,13 +1980,13 @@ export default function AcademicPortfolio() {
           1. 웹 브라우저 인터랙티브 화면 (인쇄 시 print:hidden 으로 숨김)
           ================================================================= */}
       <div
-        className={`${isDarkMode ? "dark bg-[#111215] text-white" : "bg-white text-black"} min-h-screen font-sans transition-colors duration-300 print:hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-rose-950/60 dark:selection:text-rose-200 antialiased`}
+        className={`${isDarkMode ? "dark bg-zinc-950 text-white" : "bg-white text-black"} min-h-screen font-sans transition-colors duration-300 print:hidden selection:bg-rose-100 selection:text-rose-900 dark:selection:bg-rose-950/60 dark:selection:text-rose-200 antialiased`}
       >
         {/* 모바일 햄버거 메뉴 토글 버튼 (lg 미만 화면 우측 상단 고정) */}
         <button
           type="button"
           onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-          className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-all cursor-pointer flex items-center justify-center focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
+          className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-colors cursor-pointer flex items-center justify-center focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
           aria-label={isMobileNavOpen ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={isMobileNavOpen}
           aria-controls="mobile-navigation"
@@ -1998,7 +2002,7 @@ export default function AcademicPortfolio() {
         >
           {/* 반투명 딤 배경 */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            className="absolute inset-0 bg-black/60 transition-opacity"
             onClick={() => setIsMobileNavOpen(false)}
             aria-hidden="true"
           ></div>
@@ -2008,7 +2012,7 @@ export default function AcademicPortfolio() {
             id="mobile-navigation"
             role="dialog"
             aria-modal="true"
-            className={`absolute top-0 right-0 h-full w-[280px] max-w-[80vw] bg-white dark:bg-[#15161a] border-l border-zinc-200 dark:border-zinc-800 p-6 pt-16 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out ${
+            className={`absolute top-0 right-0 h-full w-[280px] max-w-[80vw] bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800 p-6 pt-16 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out ${
               isMobileNavOpen ? "translate-x-0" : "translate-x-full"
             }`}
             aria-label="Mobile Navigation"
@@ -2016,10 +2020,10 @@ export default function AcademicPortfolio() {
             <div className="space-y-6">
               {/* 드로어 상단: 헤더 레이블 */}
               <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <span className="text-xs font-bold tracking-widest text-zinc-500 dark:text-zinc-400 uppercase">
+                <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
                   {data.ui.navTitle}
                 </span>
-                <span className="text-[11px] font-mono text-rose-600 dark:text-rose-400 font-semibold">
+                <span className="text-[11px] text-rose-600 dark:text-rose-400 font-bold">
                   INDEX
                 </span>
               </div>
@@ -2038,7 +2042,7 @@ export default function AcademicPortfolio() {
                             scrollToSection(e, item.id);
                             setIsMobileNavOpen(false);
                           }}
-                          className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                          className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold transition-colors ${
                             isActive
                               ? "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 translate-x-1"
                               : "text-zinc-800 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
@@ -2046,7 +2050,7 @@ export default function AcademicPortfolio() {
                         >
                           <span>{item.label}</span>
                           <span
-                            className={`h-2 w-2 rounded-full transition-all ${
+                            className={`h-2 w-2 rounded-full transition-opacity ${
                               isActive
                                 ? "bg-rose-700 dark:bg-rose-400 scale-125"
                                 : "opacity-0 group-hover:opacity-100 bg-zinc-400 dark:bg-zinc-600"
@@ -2084,7 +2088,7 @@ export default function AcademicPortfolio() {
                   handleDownloadCV();
                   setIsMobileNavOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border-2 border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-all shadow-sm"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold border-2 border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-colors shadow-sm"
                 aria-label="Download CV"
               >
                 <FileText className="w-3.5 h-3.5" />
@@ -2109,7 +2113,7 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("ko")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "ko"
                         ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
@@ -2122,7 +2126,7 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("ja")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "ja"
                         ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
@@ -2135,7 +2139,7 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("en")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "en"
                         ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
@@ -2154,7 +2158,7 @@ export default function AcademicPortfolio() {
                     alt={data.personal.name}
                     loading="eager"
                     decoding="async"
-                    className="w-full h-full object-cover grayscale-[5%] group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover grayscale-[5%] group-hover:grayscale-0 transition-opacity duration-300 "
                     onError={(e) => {
                       const target = e.currentTarget;
                       if (!target.dataset.fallbackTried) {
@@ -2171,7 +2175,7 @@ export default function AcademicPortfolio() {
                     <h1 className="text-3xl font-black tracking-tight text-black dark:text-white leading-tight">
                       {data.personal.name}
                     </h1>
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 mt-0.5">
                       {data.personal.nameSub}
                     </span>
                   </div>
@@ -2216,7 +2220,7 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={handleDownloadCV}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide border border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-all duration-200 shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold border border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white active:opacity-85 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                     title={language === "ko" ? "CV PDF 다운로드 / 인쇄" : language === "ja" ? "CV PDFダウンロード / 印刷" : "Download / Print CV (PDF)"}
                     aria-label="Download CV"
                   >
@@ -2227,7 +2231,7 @@ export default function AcademicPortfolio() {
 
                 {/* 데스크톱 세로 네비게이션 메뉴 */}
                 <nav className="hidden lg:block pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full text-left">
-                  <p className="text-[10px] font-bold tracking-widest text-zinc-900 dark:text-zinc-400 uppercase mb-3">
+                  <p className="text-[10px] font-bold text-zinc-900 dark:text-zinc-400 mb-3">
                     {data.ui.navTitle}
                   </p>
                   <ul className="space-y-1 w-full">
@@ -2239,7 +2243,7 @@ export default function AcademicPortfolio() {
                             href={`#${item.id}`}
                             aria-current={isActive ? "true" : undefined}
                             onClick={(e) => scrollToSection(e, item.id)}
-                            className={`group flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                            className={`group flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
                               isActive
                                 ? "text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 translate-x-1"
                                 : "text-zinc-800 dark:text-zinc-400 hover:text-rose-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
@@ -2247,7 +2251,7 @@ export default function AcademicPortfolio() {
                           >
                             <span>{item.label}</span>
                             <span
-                              className={`h-1.5 w-1.5 rounded-full transition-all ${
+                              className={`h-1.5 w-1.5 rounded-full transition-opacity ${
                                 isActive
                                   ? "bg-rose-700 dark:bg-rose-400 scale-125"
                                   : "opacity-0 group-hover:opacity-100 bg-zinc-600 dark:bg-zinc-400"
@@ -2300,7 +2304,7 @@ export default function AcademicPortfolio() {
                 01. ABOUT ME
                 --------------------------------------------------------------- */}
             <section id="about" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <User className="w-3.5 h-3.5" />
                 <span>{data.about.sectionTitle}</span>
               </h2>
@@ -2325,7 +2329,7 @@ export default function AcademicPortfolio() {
                 02. EDUCATION
                 --------------------------------------------------------------- */}
             <section id="education" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <GraduationCap className="w-3.5 h-3.5" />
                 <span>{data.education.sectionTitle}</span>
               </h2>
@@ -2334,7 +2338,7 @@ export default function AcademicPortfolio() {
                 {data.education.items.map((edu, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-colors duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {edu.period}
@@ -2378,7 +2382,7 @@ export default function AcademicPortfolio() {
                 03. EXPERIENCE
                 --------------------------------------------------------------- */}
             <section id="experience" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>{data.experience.sectionTitle}</span>
               </h2>
@@ -2387,7 +2391,7 @@ export default function AcademicPortfolio() {
                 {data.experience.items.map((exp: ExperienceItem, idx: number) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-colors duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {exp.period}
@@ -2442,7 +2446,7 @@ export default function AcademicPortfolio() {
                               href={getAssetUrl(doc.url)}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-colors duration-200 hover:-translate-y-0.5 group/chip"
                             >
                               <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
                               <span>{doc.label}</span>
@@ -2461,7 +2465,7 @@ export default function AcademicPortfolio() {
                 04. PUBLICATIONS
                 --------------------------------------------------------------- */}
             <section id="publications" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>{data.publications.sectionTitle}</span>
               </h2>
@@ -2471,7 +2475,7 @@ export default function AcademicPortfolio() {
                   {data.publications.items.map((paper, idx) => (
                     <div
                       key={idx}
-                      className="border-l-2 border-rose-500 dark:border-rose-500 pl-4 py-1.5 transition-all duration-200 hover:translate-x-0.5"
+                      className="border-l-2 border-rose-500 dark:border-rose-500 pl-4 py-1.5 transition-transform duration-200 hover:translate-x-0.5"
                     >
                       <h3 className="text-sm sm:text-base font-bold text-black dark:text-white leading-snug">
                         {paper.title}
@@ -2515,7 +2519,7 @@ export default function AcademicPortfolio() {
                 05. SCHOLARSHIPS
                 --------------------------------------------------------------- */}
             <section id="honors" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <Award className="w-3.5 h-3.5" />
                 <span>{data.honors.sectionTitle}</span>
               </h2>
@@ -2524,7 +2528,7 @@ export default function AcademicPortfolio() {
                 {data.honors.items.map((honor, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-colors duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {honor.year}
@@ -2559,7 +2563,7 @@ export default function AcademicPortfolio() {
                 06. COMPETITIONS
                 --------------------------------------------------------------- */}
             <section id="competitions" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-4 flex items-center gap-2">
                 <Trophy className="w-3.5 h-3.5" />
                 <span>{data.competitions.sectionTitle}</span>
               </h2>
@@ -2568,7 +2572,7 @@ export default function AcademicPortfolio() {
                 {data.competitions.items.map((comp, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-colors duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {comp.year}
@@ -2633,19 +2637,19 @@ export default function AcademicPortfolio() {
                                   setSelectedMedia(item);
                                 }
                               }}
-                              className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
+                              className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                             >
                               <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
                                 <img
                                   src={getAssetUrl(item.src)}
                                   alt={item.alt}
-                                  className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                                  className="w-full h-full object-cover object-center transition-opacity duration-300"
                                   loading="lazy"
                                 />
                               </div>
                               {/* Hover Overlay */}
                               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-xs font-semibold shadow-lg">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 text-white text-xs font-semibold shadow-lg">
                                   <ZoomIn className="w-3.5 h-3.5 text-zinc-100" />
                                   <span>클릭하여 원본 확대</span>
                                 </span>
@@ -2683,7 +2687,7 @@ export default function AcademicPortfolio() {
                                 href={getAssetUrl(link.url)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-colors duration-200 hover:-translate-y-0.5 group/chip"
                               >
                                 <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
                                 <span>{link.label}</span>
@@ -2703,7 +2707,7 @@ export default function AcademicPortfolio() {
                 07. SKILLS
                 --------------------------------------------------------------- */}
             <section id="skills" className="scroll-mt-24">
-              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-6 flex items-center gap-2">
+              <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold mb-6 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5" />
                 <span>{data.skills.sectionTitle}</span>
               </h2>
@@ -2711,14 +2715,14 @@ export default function AcademicPortfolio() {
               <div className="space-y-5">
                 {data.skills.groups.map((skillGroup, idx) => (
                   <div key={idx} className="space-y-2">
-                    <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                    <h3 className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
                       {skillGroup.category}
                     </h3>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {skillGroup.items.map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-zinc-100 border border-zinc-200 text-zinc-900 hover:border-zinc-300 hover:text-black dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-100 dark:hover:border-zinc-700 dark:hover:text-white transition-all shadow-xs cursor-default"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-zinc-100 border border-zinc-200 text-zinc-900 hover:border-zinc-300 hover:text-black dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-100 dark:hover:border-zinc-700 dark:hover:text-white transition-colors shadow-xs cursor-default"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
                           <span>{skill}</span>
@@ -2755,11 +2759,11 @@ export default function AcademicPortfolio() {
       <div
         role="dialog"
         aria-modal="true"
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 animate-in fade-in duration-200"
         onClick={() => setSelectedMedia(null)}
       >
         <div
-          className="relative max-w-4xl w-full max-h-[92vh] flex flex-col items-center bg-zinc-950/95 border border-zinc-700/80 rounded-2xl overflow-hidden shadow-2xl p-3 sm:p-4"
+          className="relative max-w-4xl w-full max-h-[92vh] flex flex-col items-center bg-zinc-950/95 border border-zinc-700/80 rounded-2xl overflow-hidden p-3 sm:p-4"
           onClick={(e) => e.stopPropagation()}
         >
           {/* 상단 헤더 & 닫기 버튼 */}

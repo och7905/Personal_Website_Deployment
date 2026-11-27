@@ -139,3 +139,20 @@ Foundations:
 3. **미디어 로딩 및 방어적 레이아웃 (Media & Defensive Layout)**:
    - 히어로 프로필 이미지에 `loading="eager"`, `decoding="async"`를 적용하여 LCP(Largest Contentful Paint) 렌더링 최적화 및 로딩 실패 시 Fallback 아바타 보존.
    - 모든 타임라인 일자 스팬에 `break-keep`, `tabular-nums`를 강제하여 글자나 숫자가 줄바꿈되어 잘리는 현상 방지.
+
+## 9. Hallmark Design & Quality Audit (Hallmark Floor Standards)
+
+1. **전이 속성 명시 (Floor Gate 10a)**:
+   - `transition-all` 전면 퇴출: 모든 인터랙티브 컴포넌트(버튼, 링크, 카드, 칩, 오버레이)에 `transition-colors`, `transition-opacity`, `transition-transform` 등 실제 변경되는 속성만을 명시적으로 선언하여 렌더링 부하 및 예기치 않은 레이아웃 리플로우(Layout Reflow)를 영구 차단.
+2. **수평 스크롤 방어 및 뷰포트 클리핑 (Floor Gate 34)**:
+   - `index.css` 및 `index.html` 내 `html`, `body`에 `overflow-x: clip`을 선언하여 모바일 및 협소 뷰포트에서의 가로 스크롤 버그를 원천 차단.
+3. **접근성 및 보조 기술 표준화 (Floor Gates 27 & 33)**:
+   - 외부 소셜 아이콘 및 장식용 인라인 SVG에 `aria-hidden="true"`를 부여하여 스크린 리더 소음 방지.
+   - `animate-ping` 등 동적 애니메이션에 `motion-safe:` 프리픽스를 적용하여 `prefers-reduced-motion` 환경 완벽 준수.
+4. **인쇄 및 카피 문장 부호 정제 (Floor Gate 19)**:
+   - 인쇄용 이력서 내 전각 대시(`—`)를 정규 괄호 `()` 구문으로 치환하여 활자 뭉침 및 리버 현상 해결.
+5. **소형 활자 트래킹 캡스 퇴출 (Floor Gate 67 & Rule 9)**:
+   - 15px 이하의 작은 라벨, 뱃지, 목차 인덱스, 섹션 헤더에서 불필요하게 늘어진 대문자 자간(`uppercase tracking-*`)을 걷어내고, 본문 패밀리 기반의 담백하고 가독성 높은 노멀 케이스 타이포그래피로 마감.
+6. **Hallmark 스탬프 및 정적 분석 (Gates 15, 20 & Sloplint)**:
+   - 스타일시트 1열에 공인 스탬프 표기.
+   - `node <skill-dir>/scripts/sloplint.mjs` 검사 결과: **0 FAIL** 달성.

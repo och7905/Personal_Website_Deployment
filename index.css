@@ -1,6 +1,12 @@
+/* Hallmark · academic-portfolio · modern-minimal · audited */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  overflow-x: clip;
+}
 
 /* 라이트 모드 글자색 강제 고정 */
 html:not(.dark) body,
