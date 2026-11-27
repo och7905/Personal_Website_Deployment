@@ -226,7 +226,7 @@ export const portfolioDataByLang = {
       { id: "education", label: "학력" },
       { id: "experience", label: "경력 및 활동" },
       { id: "publications", label: "연구 논문" },
-      { id: "honors", label: "수상 및 장학" },
+      { id: "honors", label: "장학 내역" },
       { id: "competitions", label: "대회 및 해커톤" },
       { id: "skills", label: "기술 스택" },
     ],
@@ -371,32 +371,8 @@ export const portfolioDataByLang = {
       }>,
     },
     honors: {
-      sectionTitle: "05. Honors & Scholarships",
+      sectionTitle: "05. Scholarships",
       items: [
-        {
-          year: "2026. 11. 27.",
-          title: "2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지 우수상",
-          badge: "EXCELLENCE AWARD (우수상)",
-          issuer: "DSC 공유대학(대전형) · 우송대학교 앵커사업단",
-          description:
-            "생성형 AI 기술을 활용하여 지역 현안(소상공인·중소기업·고객 응대 등)을 해결하는 실전 AI 프로토타입 기획 및 개발. 짧은 프로젝트 기간 내 문제 정의부터 AI 워크플로우 구현 및 발표까지 성공적으로 완수하여 우수상 수상.",
-        },
-        {
-          year: "2026. 11. 26.",
-          title: "2026학년도 초중고대 연합 창업경진대회 (대학부) 최우수상 (대전대학교 총장상)",
-          badge: "EXCELLENCE AWARD (최우수상 · 총장상)",
-          issuer: "대전대학교 앵커사업단 · SW중심대학사업단",
-          description:
-            "창의적인 기술 창업 및 지역사회 연계 아이디어를 바탕으로 사업 모델 구체화 및 발표 평가(5분 발표·5분 질의응답)를 수행하여 대학부 최우수상(대전대학교 총장상) 수상.",
-        },
-        {
-          year: "2026. 10. 30.",
-          title: "소셜벤처 해커톤 대상 수상 포상 (100만 원 상당 부상 수혜)",
-          badge: "GRAND PRIZE (대상 · 1위)",
-          issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
-          description:
-            "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 전체 1위(대상) 선정에 따른 100만 원 상당 공식 부상 수혜.",
-        },
         {
           year: "2026",
           title: "SW중심대학사업단 공식 서포터즈 장학금",
@@ -610,7 +586,7 @@ export const portfolioDataByLang = {
       { id: "education", label: "学歴" },
       { id: "experience", label: "経歴" },
       { id: "publications", label: "論文" },
-      { id: "honors", label: "受賞・奨学金" },
+      { id: "honors", label: "奨学金" },
       { id: "competitions", label: "コンペティション" },
       { id: "skills", label: "スキル" },
     ],
@@ -755,32 +731,8 @@ export const portfolioDataByLang = {
       }>,
     },
     honors: {
-      sectionTitle: "05. Honors & Scholarships",
+      sectionTitle: "05. Scholarships",
       items: [
-        {
-          year: "2026. 11. 27.",
-          title: "2026 DSC共有大学（大田型）AI実践プロジェクトチャレンジ 優秀賞",
-          badge: "EXCELLENCE AWARD (優秀賞)",
-          issuer: "DSC共有大学（大田型）・又松大学校アンカー事業団",
-          description:
-            "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表までを完遂し、優秀賞を受賞。",
-        },
-        {
-          year: "2026. 11. 26.",
-          title: "2026年度 小・中・高・大学連合 創業アイデアコンテスト（大学部）最優秀賞（大田大学校総長賞）",
-          badge: "EXCELLENCE AWARD (最優秀賞 · 総長賞)",
-          issuer: "大田大学校アンカー事業団・SW中心大学事業団",
-          description:
-            "創意的な技術創業および地域社会連携アイデアに基づくビジネスモデルを企画・発表し、大学部最優秀賞（大田大学校総長賞）を受賞。",
-        },
-        {
-          year: "2026. 10. 30.",
-          title: "ソーシャルベンチャーハッカソン 大賞受賞副賞（100万ウォン相当副賞受給）",
-          badge: "GRAND PRIZE (大賞 · 1位)",
-          issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
-          description:
-            "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 全体1位（大賞）受賞に伴う100万ウォン相当の公式副賞受給。",
-        },
         {
           year: "2026",
           title: "SW事業団公式サポーターズ奨学金",
@@ -993,7 +945,7 @@ export const portfolioDataByLang = {
       { id: "education", label: "Education" },
       { id: "experience", label: "Experience" },
       { id: "publications", label: "Publications" },
-      { id: "honors", label: "Honors & Scholarships" },
+      { id: "honors", label: "Scholarships" },
       { id: "competitions", label: "Competitions" },
       { id: "skills", label: "Skills" },
     ],
@@ -1138,38 +1090,8 @@ export const portfolioDataByLang = {
       }>,
     },
     honors: {
-      sectionTitle: "05. Honors & Scholarships",
+      sectionTitle: "05. Scholarships",
       items: [
-        {
-          year: "2026. 11. 27.",
-          title:
-            "2026 DSC Shared University (Daejeon) AI Practical Project Challenge - Excellence Award",
-          badge: "EXCELLENCE AWARD",
-          issuer:
-            "DSC Shared University & Woosong Univ. Anchor Project Group",
-          description:
-            "Planned and developed a practical generative AI prototype solving local business and administrative challenges. Led end-to-end AI workflow implementation and presentation within a sprint schedule, winning the Excellence Award.",
-        },
-        {
-          year: "2026. 11. 26.",
-          title:
-            "2026 Joint Elementary, Secondary, and University Startup Competition (University Division) - Excellence Award (President's Award)",
-          badge: "EXCELLENCE AWARD (President's Award)",
-          issuer:
-            "Daejeon University Anchor Project Group & SW University Project Group",
-          description:
-            "Developed and pitched an innovative technology-driven startup model addressing regional and ICT challenges, winning the Excellence Award (Daejeon University President's Award) in the university division.",
-        },
-        {
-          year: "2026. 10. 30.",
-          title:
-            "Social Venture Hackathon Grand Prize Award (KRW 1M Equivalent Prize)",
-          badge: "GRAND PRIZE (1st Place)",
-          issuer:
-            "Daejeon Regional University-Industry Cooperation Consortium & Social Venture Support Agency",
-          description:
-            "Awarded official prize equivalent to KRW 1,000,000 for winning 1st place overall (Grand Prize) at the 2026 Social Venture Innovation Hackathon for Regional Problem Solving.",
-        },
         {
           year: "2026",
           title: "SW Project Group Official Supporter Scholarship",
@@ -1413,7 +1335,7 @@ export function PrintableCV({
       education: "학력 (Education)",
       experience: "연구 및 개발 활동 경력 (Research & Experience)",
       publications: "논문 및 학술 연구 성과 (Publications)",
-      honors: "수상 및 장학 수혜 (Honors & Scholarships)",
+      honors: "장학 수혜 내역 (Scholarships)",
       competitions: "경진대회 및 해커톤 (Competitions & Hackathons)",
       skills: "기술 역량 및 도구 (Technical Skills)",
     },
@@ -1422,7 +1344,7 @@ export function PrintableCV({
       education: "学歴 (Education)",
       experience: "研究・開発活動経歴 (Research & Experience)",
       publications: "論文・研究成果 (Publications)",
-      honors: "受賞・奨学金 (Honors & Scholarships)",
+      honors: "奨学金受給内訳 (Scholarships)",
       competitions: "コンペティション・ハッカソン (Competitions)",
       skills: "技術スタック・ツール (Technical Skills)",
     },
@@ -1431,7 +1353,7 @@ export function PrintableCV({
       education: "Education",
       experience: "Research & Development Experience",
       publications: "Publications",
-      honors: "Honors & Scholarships",
+      honors: "Scholarships",
       competitions: "Competitions & Hackathons",
       skills: "Technical Skills",
     },
@@ -1579,7 +1501,7 @@ export function PrintableCV({
       )}
 
       {/* -------------------------------------------------------------
-          05. HONORS & SCHOLARSHIPS
+          05. SCHOLARSHIPS
           ------------------------------------------------------------- */}
       <section className="mb-4">
         <h2 className="text-[11px] font-bold uppercase tracking-wider text-black border-b border-black pb-0.5 mb-2">
@@ -2577,7 +2499,7 @@ export default function AcademicPortfolio() {
             </section>
 
             {/* ---------------------------------------------------------------
-                05. HONORS & SCHOLARSHIPS
+                05. SCHOLARSHIPS
                 --------------------------------------------------------------- */}
             <section id="honors" className="scroll-mt-24">
               <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
