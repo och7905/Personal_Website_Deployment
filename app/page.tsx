@@ -2624,43 +2624,40 @@ export default function AcademicPortfolio() {
               </h2>
 
               {/* -----------------------------------------------------------
-                  최우선 대회 하이라이트 (Featured Competition - 2026 소셜벤처 해커톤 대상)
+                  2026 소셜벤처 해커톤 대상 (일반 대회 카드 테마 통일)
                   ----------------------------------------------------------- */}
               {data.competitions.featured && (
-                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-amber-500/40 dark:border-amber-500/45 bg-gradient-to-br from-amber-500/[0.04] via-amber-500/[0.02] to-amber-500/[0.07] dark:from-amber-950/25 dark:via-zinc-900/95 dark:to-zinc-950 p-5 sm:p-7 shadow-xl shadow-amber-500/10 dark:shadow-[0_0_35px_rgba(245,158,11,0.08)] mb-6 transition-all duration-300">
-                  {/* 은은한 골드빛 글로우 데코레이션 */}
-                  <div className="absolute -top-16 -right-16 w-52 h-52 bg-amber-400/15 dark:bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
+                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 sm:p-7 shadow-sm mb-6 transition-all duration-300">
                   {/* 상단 뱃지 & 연도 */}
                   <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 !text-amber-700 dark:!text-amber-300 border border-amber-500/35 shadow-xs tracking-wide">
-                      <Trophy className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
+                      <Trophy className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                       <span>{data.competitions.featured.badge}</span>
                     </span>
-                    <span className="text-xs sm:text-sm font-bold !text-amber-700/90 dark:!text-amber-400/90 tabular-nums font-mono">
+                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums font-mono">
                       {data.competitions.featured.year}
                     </span>
                   </div>
 
                   {/* 타이틀 및 발급 기관 */}
                   <div className="space-y-1.5">
-                    <h3 className="text-base sm:text-xl font-extrabold !text-black dark:!text-white leading-snug tracking-tight">
+                    <h3 className="text-base sm:text-xl font-extrabold text-black dark:text-white leading-snug tracking-tight">
                       {data.competitions.featured.title}
                     </h3>
                     {data.competitions.featured.titleSub && (
-                      <p className="text-xs sm:text-sm font-semibold !text-zinc-600 dark:!text-zinc-400 leading-normal">
+                      <p className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 leading-normal">
                         {data.competitions.featured.titleSub}
                       </p>
                     )}
-                    <p className="text-xs sm:text-sm font-bold !text-zinc-800 dark:!text-zinc-300 flex items-center gap-1.5 pt-0.5">
-                      <Award className="w-4 h-4 !text-amber-600 dark:!text-amber-400 shrink-0" />
+                    <p className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-300 flex items-center gap-1.5 pt-0.5">
+                      <Award className="w-4 h-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
                       <span>{data.ui.organizerLabel} {data.competitions.featured.issuer}</span>
                     </p>
                   </div>
 
                   {/* 역할 및 기술 요약 */}
-                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-amber-50/70 dark:bg-zinc-800/60 border border-amber-500/20 dark:border-zinc-700/60">
-                    <p className="text-xs sm:text-sm !text-zinc-900 dark:!text-zinc-200 leading-relaxed font-normal">
+                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-zinc-100/70 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
+                    <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed font-normal">
                       {data.competitions.featured.roleSummary}
                     </p>
                   </div>
@@ -2671,7 +2668,7 @@ export default function AcademicPortfolio() {
                       <div
                         key={mIdx}
                         onClick={() => setSelectedMedia(item)}
-                        className="group/img relative rounded-xl overflow-hidden border border-amber-500/30 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-sm hover:shadow-md hover:border-amber-500/60 transition-all duration-200"
+                        className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200"
                       >
                         <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
                           <img
@@ -2684,16 +2681,16 @@ export default function AcademicPortfolio() {
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-xs font-semibold shadow-lg">
-                            <ZoomIn className="w-3.5 h-3.5 text-amber-400" />
+                            <ZoomIn className="w-3.5 h-3.5 text-zinc-100" />
                             <span>클릭하여 원본 확대</span>
                           </span>
                         </div>
                         {/* Caption Bar */}
                         <div className="px-3 py-2 bg-white/95 dark:bg-zinc-900/95 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs">
-                          <span className="font-semibold !text-zinc-800 dark:!text-zinc-200 truncate">
+                          <span className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">
                             {item.caption}
                           </span>
-                          <span className="text-[10px] !text-amber-600 dark:!text-amber-400 font-mono shrink-0 ml-2">
+                          <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono shrink-0 ml-2">
                             원본 사진
                           </span>
                         </div>
@@ -2702,14 +2699,15 @@ export default function AcademicPortfolio() {
                   </div>
 
                   {/* 언론 보도자료 및 증빙 링크 칩 (4종) */}
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-5 pt-4 border-t border-amber-500/20 dark:border-zinc-800">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-5 pt-4 border-t border-zinc-200 dark:border-zinc-800">
                     {data.competitions.featured.links.map((link, lIdx) =>
                       link.disabled ? (
                         <button
                           key={lIdx}
+                          type="button"
                           disabled
                           title="상장 PDF 준비 중입니다"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/50 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-75 select-none"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/60 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-60 select-none"
                         >
                           <FileText className="w-3.5 h-3.5 opacity-60" />
                           <span>{link.label}</span>
@@ -2720,11 +2718,11 @@ export default function AcademicPortfolio() {
                           href={getAssetUrl(link.url)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/10 hover:bg-amber-500/20 !text-amber-800 dark:!text-amber-300 border border-amber-500/30 hover:border-amber-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 !text-sky-800 dark:!text-sky-300 border border-sky-500/30 hover:border-sky-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
                         >
-                          <FileText className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400 opacity-80" />
+                          <FileText className="w-3.5 h-3.5 !text-sky-600 dark:!text-sky-400 opacity-80" />
                           <span>{link.label}</span>
-                          <ExternalLink className="w-3.5 h-3.5 !text-amber-600 dark:!text-amber-400 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
+                          <ExternalLink className="w-3 h-3 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
                         </a>
                       )
                     )}
