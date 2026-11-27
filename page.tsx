@@ -19,7 +19,6 @@ import {
   Menu,
   X,
   ZoomIn,
-  Camera,
 } from "lucide-react";
 
 // ============================================================================
@@ -2140,7 +2139,6 @@ export default function AcademicPortfolio() {
                   )}
                   <span>{isDarkMode ? data.ui.lightMode : data.ui.darkMode}</span>
                 </div>
-                <span className="text-[10px] text-zinc-400 font-mono">Toggle</span>
               </button>
 
               <button
@@ -2501,9 +2499,9 @@ export default function AcademicPortfolio() {
                               href={getAssetUrl(doc.url)}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 !text-indigo-800 dark:!text-indigo-300 border border-indigo-200/90 dark:border-indigo-500/35 hover:border-indigo-400 dark:hover:border-indigo-500/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
                             >
-                              <FileText className="w-3.5 h-3.5 !text-indigo-600 dark:!text-indigo-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
+                              <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
                               <span>{doc.label}</span>
                               <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
                             </a>
@@ -2594,8 +2592,8 @@ export default function AcademicPortfolio() {
                           {honor.title}
                         </h3>
                         {honor.badge && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/15 !text-sky-700 dark:!text-sky-300 border border-sky-500/35 shadow-xs font-mono">
-                            <Award className="w-3 h-3 !text-sky-600 dark:!text-sky-400" />
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
+                            <Award className="w-3 h-3 text-rose-600 dark:text-rose-400" />
                             <span>{honor.badge}</span>
                           </span>
                         )}
@@ -2656,11 +2654,9 @@ export default function AcademicPortfolio() {
                   </div>
 
                   {/* 역할 및 기술 요약 */}
-                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-zinc-100/70 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/60">
-                    <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed font-normal">
-                      {data.competitions.featured.roleSummary}
-                    </p>
-                  </div>
+                  <p className="mt-3 text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed font-normal">
+                    {data.competitions.featured.roleSummary}
+                  </p>
 
                   {/* 사진 및 미디어 갤러리 (2종 반응형 그리드) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-5">
@@ -2698,31 +2694,29 @@ export default function AcademicPortfolio() {
                     ))}
                   </div>
 
-                  {/* 언론 보도자료 및 증빙 링크 칩 (4종) */}
+                  {/* 언론 보도자료 및 증빙 링크 칩 */}
                   <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-5 pt-4 border-t border-zinc-200 dark:border-zinc-800">
                     {data.competitions.featured.links.map((link, lIdx) =>
                       link.disabled ? (
-                        <button
+                        <span
                           key={lIdx}
-                          type="button"
-                          disabled
-                          title="상장 PDF 준비 중입니다"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/60 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-60 select-none"
+                          title="증빙 자료 준비 중입니다"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 dark:text-zinc-500 bg-zinc-100/70 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 select-none"
                         >
-                          <FileText className="w-3.5 h-3.5 opacity-60" />
+                          <FileText className="w-3.5 h-3.5 opacity-50" />
                           <span>{link.label}</span>
-                        </button>
+                        </span>
                       ) : (
                         <a
                           key={lIdx}
                           href={getAssetUrl(link.url)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 !text-sky-800 dark:!text-sky-300 border border-sky-500/30 hover:border-sky-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
                         >
-                          <FileText className="w-3.5 h-3.5 !text-sky-600 dark:!text-sky-400 opacity-80" />
+                          <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
                           <span>{link.label}</span>
-                          <ExternalLink className="w-3 h-3 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
+                          <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
                         </a>
                       )
                     )}
@@ -2758,53 +2752,30 @@ export default function AcademicPortfolio() {
                         </p>
                       )}
 
-                      {/* 현장 사진 플레이스홀더 박스 (추후 public/images/dsc_ai_challenge.jpg 업로드 시 활성화 가이드 포함) */}
-                      {comp.photoPlaceholder && (
-                        <div className="mt-2.5 p-3 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700/80 bg-zinc-50 dark:bg-zinc-800/40 text-xs text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-2 select-none">
-                          <Camera className="w-4 h-4 opacity-60" />
-                          <span>현장 사진 업데이트 예정 (이미지 등록 대기 중)</span>
-                          {/* 
-                            [사진 활성화 가이드]:
-                            추후 이미지 파일(예: /images/dsc_ai_challenge.jpg 또는 /images/joint_startup_award.jpg) 업로드 후,
-                            이 placeholder div 대신 아래 컴포넌트를 주석 해제하여 사용하시면 원본 모달 확대와 함께 바로 표시됩니다:
-                            
-                            <div 
-                              onClick={() => setSelectedMedia({ src: "/images/dsc_ai_challenge.jpg", caption: "2026 DSC AI 실전 프로젝트 챌린지 현장", alt: "2026 DSC AI 실전 프로젝트 챌린지 현장 사진" })}
-                              className="group/img mt-2.5 relative max-w-sm rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800 cursor-zoom-in shadow-xs hover:border-sky-500/60 transition-all"
-                            >
-                              <div className="aspect-[16/10] overflow-hidden">
-                                <img src={getAssetUrl("/images/dsc_ai_challenge.jpg")} alt="2026 DSC AI 실전 프로젝트 챌린지 현장" className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" />
-                              </div>
-                            </div>
-                          */}
-                        </div>
-                      )}
-
                       {/* 증빙 링크 칩 (공식 상장 사본 & 관련 보도기사) */}
                       {comp.links && comp.links.length > 0 && (
                         <div className="flex flex-wrap items-center gap-2 pt-2">
                           {comp.links.map((link, lIdx) =>
                             link.disabled ? (
-                              <button
+                              <span
                                 key={lIdx}
-                                type="button"
-                                disabled
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/60 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-60 select-none"
+                                title="증빙 자료 준비 중입니다"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 dark:text-zinc-500 bg-zinc-100/70 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 select-none"
                               >
-                                <FileText className="w-3.5 h-3.5 opacity-60" />
+                                <FileText className="w-3.5 h-3.5 opacity-50" />
                                 <span>{link.label}</span>
-                              </button>
+                              </span>
                             ) : (
                               <a
                                 key={lIdx}
                                 href={getAssetUrl(link.url)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 !text-sky-800 dark:!text-sky-300 border border-sky-500/30 hover:border-sky-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
                               >
-                                <FileText className="w-3.5 h-3.5 !text-sky-600 dark:!text-sky-400 opacity-80" />
+                                <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
                                 <span>{link.label}</span>
-                                <ExternalLink className="w-3 h-3 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
+                                <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
                               </a>
                             )
                           )}
@@ -2819,7 +2790,7 @@ export default function AcademicPortfolio() {
             {/* ---------------------------------------------------------------
                 07. SKILLS
                 --------------------------------------------------------------- */}
-            <section id="skills" className="scroll-mt-24 pb-32">
+            <section id="skills" className="scroll-mt-24">
               <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-6 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5" />
                 <span>{data.skills.sectionTitle}</span>
@@ -2882,7 +2853,7 @@ export default function AcademicPortfolio() {
           {/* 상단 헤더 & 닫기 버튼 */}
           <div className="w-full flex items-center justify-between pb-2.5 px-2 border-b border-zinc-800">
             <div className="flex items-center gap-2 min-w-0 pr-4">
-              <Trophy className="w-4 h-4 !text-amber-400 shrink-0" />
+              <Trophy className="w-4 h-4 text-rose-500 shrink-0" />
               <span className="text-sm font-bold text-zinc-100 truncate">
                 {selectedMedia.caption}
               </span>
