@@ -2050,7 +2050,7 @@ export default function AcademicPortfolio() {
         <button
           type="button"
           onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-          className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-all cursor-pointer flex items-center justify-center"
+          className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-all cursor-pointer flex items-center justify-center focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
           aria-label={isMobileNavOpen ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={isMobileNavOpen}
         >
@@ -2168,14 +2168,14 @@ export default function AcademicPortfolio() {
               <div className="space-y-6 w-full text-left flex flex-col items-start">
 
                 {/* 상단 컨트롤 바: 언어 선택 콤팩트 캡슐 버튼 (KO / JA / EN) */}
-                <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 shadow-sm">
+                <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 shadow-xs">
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("ko")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "ko"
-                        ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
+                        : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="한국어로 변경"
                   >
@@ -2184,10 +2184,10 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("ja")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "ja"
-                        ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
+                        : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="日本語に変更"
                   >
@@ -2196,10 +2196,10 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("en")}
-                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 ${
+                    className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none ${
                       language === "en"
-                        ? "bg-white dark:bg-zinc-900 text-rose-700 dark:text-rose-400 shadow-sm"
-                        : "text-zinc-900 dark:text-zinc-300 hover:text-rose-700 dark:hover:text-white hover:bg-white/60 dark:hover:bg-zinc-700/60"
+                        ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
+                        : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="Switch to English"
                   >
@@ -2208,7 +2208,7 @@ export default function AcademicPortfolio() {
                 </div>
 
                 {/* 프로필 이미지 (모서리 둥근 사각형, 좌측 정렬) */}
-                <div className="relative group w-36 h-36 rounded-2xl overflow-hidden ring-1 ring-zinc-300 dark:ring-zinc-700 shadow-md bg-zinc-100 dark:bg-zinc-800 shrink-0">
+                <div className="relative group w-36 h-36 rounded-2xl overflow-hidden ring-1 ring-zinc-200 dark:ring-zinc-800 shadow-md bg-zinc-100 dark:bg-zinc-800 shrink-0">
                   <img
                     src={getAssetUrl(data.personal.profileImage)}
                     alt={data.personal.name}
@@ -2263,7 +2263,7 @@ export default function AcademicPortfolio() {
                         rel={social.url.startsWith("http") ? "noopener noreferrer" : undefined}
                         aria-label={social.name}
                         title={social.label || social.name}
-                        className="p-2 rounded-xl text-black dark:text-zinc-300 hover:text-rose-700 dark:hover:text-rose-400 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors border border-zinc-300 dark:border-zinc-700 shadow-sm"
+                        className="p-2 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 bg-zinc-100 hover:bg-zinc-200/80 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 transition-colors border border-zinc-200 dark:border-zinc-800 shadow-xs focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                       >
                         <IconComponent className="w-4 h-4" />
                       </a>
@@ -2274,7 +2274,7 @@ export default function AcademicPortfolio() {
                   <button
                     type="button"
                     onClick={handleDownloadCV}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide border-2 border-rose-700 dark:border-rose-500 text-rose-700 dark:text-rose-400 hover:bg-rose-700 hover:text-white dark:hover:bg-rose-600 dark:hover:text-white transition-all duration-200 shadow-sm cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide border border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-all duration-200 shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                     title={language === "ko" ? "CV PDF 다운로드 / 인쇄" : language === "ja" ? "CV PDFダウンロード / 印刷" : "Download / Print CV (PDF)"}
                     aria-label="Download CV"
                   >
@@ -2324,7 +2324,7 @@ export default function AcademicPortfolio() {
                 <button
                   type="button"
                   onClick={toggleDarkMode}
-                  className="inline-flex items-center gap-2 text-xs font-bold p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-black dark:text-zinc-200"
+                  className="inline-flex items-center gap-2 text-xs font-bold p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                   aria-label="Toggle Dark Mode"
                   title={isDarkMode ? data.ui.lightMode : data.ui.darkMode}
                 >
@@ -2391,7 +2391,7 @@ export default function AcademicPortfolio() {
                 {data.education.items.map((edu, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {edu.period}
@@ -2444,7 +2444,7 @@ export default function AcademicPortfolio() {
                 {data.experience.items.map((exp: ExperienceItem, idx: number) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {exp.period}
@@ -2528,7 +2528,7 @@ export default function AcademicPortfolio() {
                   {data.publications.items.map((paper, idx) => (
                     <div
                       key={idx}
-                      className="border-l-4 border-rose-600 dark:border-rose-500 pl-4 py-1.5 transition-all duration-200 hover:translate-x-0.5"
+                      className="border-l-2 border-rose-500 dark:border-rose-500 pl-4 py-1.5 transition-all duration-200 hover:translate-x-0.5"
                     >
                       <h3 className="text-sm sm:text-base font-bold text-black dark:text-white leading-snug">
                         {paper.title}
@@ -2542,7 +2542,7 @@ export default function AcademicPortfolio() {
                           return (
                             <span key={aIdx}>
                               {isSelf ? (
-                                <span className="font-bold text-black dark:text-white underline underline-offset-2">
+                                <span className="font-bold text-black dark:text-white underline underline-offset-4 decoration-rose-500/60">
                                   {author}
                                 </span>
                               ) : (
@@ -2581,7 +2581,7 @@ export default function AcademicPortfolio() {
                 {data.honors.items.map((honor, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {honor.year}
@@ -2729,7 +2729,7 @@ export default function AcademicPortfolio() {
                 {data.competitions.items.map((comp, idx) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {comp.year}
@@ -2861,7 +2861,7 @@ export default function AcademicPortfolio() {
             </div>
             <button
               onClick={() => setSelectedMedia(null)}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors shrink-0"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors shrink-0 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
