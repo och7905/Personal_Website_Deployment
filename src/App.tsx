@@ -163,12 +163,14 @@ export interface CompetitionActionLink {
 export interface CompetitionItem {
   year: string;
   title: string;
+  titleSub?: string;
   award: string;
   organizer: string;
   description?: string;
   isGrandPrize?: boolean;
   actionLinks?: CompetitionActionLink[];
   photoPlaceholder?: boolean;
+  media?: FeaturedAwardMedia[];
   links?: Array<{
     label: string;
     url: string;
@@ -372,14 +374,7 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
-          year: "2026. 10.",
-          title: "소셜벤처 해커톤 대상 수상 포상 (100만 원 상당 부상 수혜)",
-          issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
-          description:
-            "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 전체 1위(대상) 선정에 따른 100만 원 상당 공식 부상 수혜.",
-        },
-        {
-          year: "2026. 11.",
+          year: "2026. 11. 27.",
           title: "2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지 우수상",
           badge: "EXCELLENCE AWARD (우수상)",
           issuer: "DSC 공유대학(대전형) · 우송대학교 앵커사업단",
@@ -387,12 +382,20 @@ export const portfolioDataByLang = {
             "생성형 AI 기술을 활용하여 지역 현안(소상공인·중소기업·고객 응대 등)을 해결하는 실전 AI 프로토타입 기획 및 개발. 짧은 프로젝트 기간 내 문제 정의부터 AI 워크플로우 구현 및 발표까지 성공적으로 완수하여 우수상 수상.",
         },
         {
-          year: "2026. 11.",
+          year: "2026. 11. 26.",
           title: "2026학년도 초중고대 연합 창업경진대회 (대학부) 최우수상 (대전대학교 총장상)",
           badge: "EXCELLENCE AWARD (최우수상 · 총장상)",
           issuer: "대전대학교 앵커사업단 · SW중심대학사업단",
           description:
             "창의적인 기술 창업 및 지역사회 연계 아이디어를 바탕으로 사업 모델 구체화 및 발표 평가(5분 발표·5분 질의응답)를 수행하여 대학부 최우수상(대전대학교 총장상) 수상.",
+        },
+        {
+          year: "2026. 10. 30.",
+          title: "소셜벤처 해커톤 대상 수상 포상 (100만 원 상당 부상 수혜)",
+          badge: "GRAND PRIZE (대상 · 1위)",
+          issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
+          description:
+            "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 전체 1위(대상) 선정에 따른 100만 원 상당 공식 부상 수혜.",
         },
         {
           year: "2026",
@@ -425,92 +428,91 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
-      featured: {
-        badge: "GRAND PRIZE (대상 · 1위)",
-        year: "2026. 10.",
-        title: "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 대상",
-        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
-        issuer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
-        roleSummary:
-          "지역사회 당면 과제를 해결하기 위한 혁신 기술 기반 소셜벤처 솔루션 개발. 시스템 기술 아키텍처 설계 및 구현을 총괄 주도하여 참가팀 중 전체 1위(대상) 수상.",
-        media: [
-          {
-            src: "/images/hackathon_grandprize_panel.jpg",
-            caption: "대상 판넬 시상식",
-            alt: "2026 소셜벤처 해커톤 대상 판넬 단독 시상식 사진",
-          },
-          {
-            src: "/images/hackathon_group.jpg",
-            caption: "2026 혁신적 소셜벤처 해커톤 현장",
-            alt: "2026 혁신적 소셜벤처 해커톤 전체 참가자 단체 사진",
-          },
-        ],
-        links: [
-          {
-            label: "뉴스1 보도기사",
-            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
-            isExternal: true,
-          },
-          {
-            label: "한국대학신문",
-            url: "https://news.unn.net/news/articleView.html?idxno=599809",
-            isExternal: true,
-          },
-          {
-            label: "충남일보",
-            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
-            isExternal: true,
-          },
-          {
-            label: "공식 상장 사본 (PDF)",
-            url: "/docs/hackathon_grandprize_cert.pdf",
-            isExternal: true,
-          },
-        ],
-      },
+      featured: null,
       items: [
         {
-          year: "2026",
+          year: "2026. 11. 27.",
           title: "2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지",
           award: "우수상",
           organizer: "DSC 공유대학 · 우송대학교 앵커사업단",
           description:
             "생성형 AI 기술을 활용하여 지역 현안(소상공인·중소기업·고객 응대 등)을 해결하는 실전 AI 프로토타입 기획 및 개발. 짧은 프로젝트 기간 내 문제 정의부터 AI 워크플로우 구현 및 발표까지 성공적으로 완수하여 우수상 수상.",
-          photoPlaceholder: true,
           links: [
             {
               label: "공식 상장 사본 (PDF 업로드 예정)",
-              url: "/docs/dsc_ai_challenge_certificate.pdf", // 추후 /docs/dsc_ai_challenge_certificate.pdf 연결
+              url: "/docs/dsc_ai_challenge_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "관련 보도기사 (업로드 예정)",
-              url: "#", // 추후 기사 URL 연결
+              url: "#",
               disabled: true,
               isExternal: true,
             },
           ],
         },
         {
-          year: "2026",
+          year: "2026. 11. 26.",
           title: "2026학년도 초중고대 연합 창업경진대회 (대학부)",
           award: "최우수상 (대전대학교 총장상)",
           organizer: "대전대학교 앵커사업단 · SW중심대학사업단",
           description:
             "창의적인 기술 창업 및 지역사회 연계 아이디어를 바탕으로 사업 모델 구체화 및 발표 평가(5분 발표·5분 질의응답)를 수행하여 대학부 최우수상(대전대학교 총장상) 수상.",
-          photoPlaceholder: true,
           links: [
             {
               label: "공식 상장 사본 (PDF 업로드 예정)",
-              url: "/docs/joint_startup_certificate.pdf", // 추후 /docs/joint_startup_certificate.pdf 연결
+              url: "/docs/joint_startup_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "관련 보도기사 (업로드 예정)",
-              url: "#", // 추후 기사 URL 연결
+              url: "#",
               disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026. 10. 30.",
+          title: "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 대상",
+          titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+          award: "GRAND PRIZE (대상 · 1위)",
+          organizer: "대전권 대학연합 산학협력협의체 및 지자체 소셜벤처 지원기관",
+          description:
+            "지역사회 당면 과제를 해결하기 위한 혁신 기술 기반 소셜벤처 솔루션 개발. 시스템 기술 아키텍처 설계 및 구현을 총괄 주도하여 참가팀 중 전체 1위(대상) 수상.",
+          media: [
+            {
+              src: "/images/hackathon_grandprize_panel.jpg",
+              caption: "대상 판넬 시상식",
+              alt: "2026 소셜벤처 해커톤 대상 판넬 단독 시상식 사진",
+            },
+            {
+              src: "/images/hackathon_group.jpg",
+              caption: "2026 혁신적 소셜벤처 해커톤 현장",
+              alt: "2026 혁신적 소셜벤처 해커톤 전체 참가자 단체 사진",
+            },
+          ],
+          links: [
+            {
+              label: "뉴스1 보도기사",
+              url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+              isExternal: true,
+            },
+            {
+              label: "한국대학신문",
+              url: "https://news.unn.net/news/articleView.html?idxno=599809",
+              isExternal: true,
+            },
+            {
+              label: "충남일보",
+              url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+              isExternal: true,
+            },
+            {
+              label: "공식 상장 사본 (PDF)",
+              url: "/docs/hackathon_grandprize_cert.pdf",
               isExternal: true,
             },
           ],
@@ -756,27 +758,28 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
-          year: "2026. 10.",
-          title: "ソーシャルベンチャーハッカソン 大賞受賞副賞（100万ウォン相当副賞受給）",
-          issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
-          description:
-            "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 全体1位（大賞）受賞に伴う100万ウォン相当の公式副賞受給。",
-        },
-        {
-          year: "2026. 11.",
+          year: "2026. 11. 27.",
           title: "2026 DSC共有大学（大田型）AI実践プロジェクトチャレンジ 優秀賞",
           badge: "EXCELLENCE AWARD (優秀賞)",
           issuer: "DSC共有大学（大田型）・又松大学校アンカー事業団",
           description:
-            "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表까지を完遂し、優秀賞を受賞。",
+            "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表までを完遂し、優秀賞を受賞。",
         },
         {
-          year: "2026. 11.",
+          year: "2026. 11. 26.",
           title: "2026年度 小・中・高・大学連合 創業アイデアコンテスト（大学部）最優秀賞（大田大学校総長賞）",
           badge: "EXCELLENCE AWARD (最優秀賞 · 総長賞)",
           issuer: "大田大学校アンカー事業団・SW中心大学事業団",
           description:
             "創意的な技術創業および地域社会連携アイデアに基づくビジネスモデルを企画・発表し、大学部最優秀賞（大田大学校総長賞）を受賞。",
+        },
+        {
+          year: "2026. 10. 30.",
+          title: "ソーシャルベンチャーハッカソン 大賞受賞副賞（100万ウォン相当副賞受給）",
+          badge: "GRAND PRIZE (大賞 · 1位)",
+          issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
+          description:
+            "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 全体1位（大賞）受賞に伴う100万ウォン相当の公式副賞受給。",
         },
         {
           year: "2026",
@@ -808,92 +811,91 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
-      featured: {
-        badge: "GRAND PRIZE (大賞 · 1位)",
-        year: "2026. 10.",
-        title: "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 大賞 (1位)",
-        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
-        issuer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
-        roleSummary:
-          "地域社会の当面課題を解決するための革新的技術基盤ソーシャルベンチャーソリューションを開発。システムアーキテクチャ設計および実装を総括主導し、参加チーム中全体1位（大賞）を受賞。",
-        media: [
-          {
-            src: "/images/hackathon_grandprize_panel.jpg",
-            caption: "大賞パネル授賞式",
-            alt: "大賞パネル単独授賞式の様子",
-          },
-          {
-            src: "/images/hackathon_group.jpg",
-            caption: "2026 革新的ソーシャルベンチャーハッカソン現場",
-            alt: "ハッカソン参加者全員による集合写真",
-          },
-        ],
-        links: [
-          {
-            label: "News1 報道記事",
-            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
-            isExternal: true,
-          },
-          {
-            label: "韓国大学新聞",
-            url: "https://news.unn.net/news/articleView.html?idxno=599809",
-            isExternal: true,
-          },
-          {
-            label: "忠南日報",
-            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
-            isExternal: true,
-          },
-          {
-            label: "公式賞状（PDF）",
-            url: "/docs/hackathon_grandprize_cert.pdf",
-            isExternal: true,
-          },
-        ],
-      },
+      featured: null,
       items: [
         {
-          year: "2026",
+          year: "2026. 11. 27.",
           title: "2026 DSC共有大学（大田型）AI実践プロジェクトチャレンジ",
           award: "優秀賞",
           organizer: "DSC共有大学・又松大学校アンカー事業団",
           description:
             "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表までを完遂し、優秀賞を受賞。",
-          photoPlaceholder: true,
           links: [
             {
               label: "公式賞状（PDFアップロード予定）",
-              url: "/docs/dsc_ai_challenge_certificate.pdf", // 今後 /docs/dsc_ai_challenge_certificate.pdf 接続
+              url: "/docs/dsc_ai_challenge_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "関連報道記事（公開予定）",
-              url: "#", // 今後記事URL接続
+              url: "#",
               disabled: true,
               isExternal: true,
             },
           ],
         },
         {
-          year: "2026",
+          year: "2026. 11. 26.",
           title: "2026年度 小・中・高・大学連合 創業アイデアコンテスト（大学部）",
           award: "最優秀賞（大田大学校総長賞）",
           organizer: "大田大学校アンカー事業団・SW中心大学事業団",
           description:
             "創意的な技術創業および地域社会連携アイデアに基づくビジネスモデルを企画・発表し、大学部最優秀賞（大田大学校総長賞）を受賞。",
-          photoPlaceholder: true,
           links: [
             {
               label: "公式賞状（PDFアップロード予定）",
-              url: "/docs/joint_startup_certificate.pdf", // 今後 /docs/joint_startup_certificate.pdf 接続
+              url: "/docs/joint_startup_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "関連報道記事（公開予定）",
-              url: "#", // 今後記事URL接続
+              url: "#",
               disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026. 10. 30.",
+          title: "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 大賞",
+          titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+          award: "GRAND PRIZE (大賞 · 1位)",
+          organizer: "大田圏大学連合産学協力協議体および自治体ソーシャルベンチャー支援機関",
+          description:
+            "地域社会の当面課題を解決するための革新的技術基盤ソーシャルベンチャーソリューションを開発。システムアーキテクチャ設計および実装を総括主導し、参加チーム中全体1位（大賞）を受賞。",
+          media: [
+            {
+              src: "/images/hackathon_grandprize_panel.jpg",
+              caption: "大賞パネル授賞式",
+              alt: "大賞パネル単独授賞式の様子",
+            },
+            {
+              src: "/images/hackathon_group.jpg",
+              caption: "2026 革新的ソーシャルベンチャーハッカソン現場",
+              alt: "ハッカソン参加者全員による集合写真",
+            },
+          ],
+          links: [
+            {
+              label: "News1 報道記事",
+              url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+              isExternal: true,
+            },
+            {
+              label: "韓国大学新聞",
+              url: "https://news.unn.net/news/articleView.html?idxno=599809",
+              isExternal: true,
+            },
+            {
+              label: "忠南日報",
+              url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+              isExternal: true,
+            },
+            {
+              label: "公式賞状（PDF）",
+              url: "/docs/hackathon_grandprize_cert.pdf",
               isExternal: true,
             },
           ],
@@ -1139,27 +1141,34 @@ export const portfolioDataByLang = {
       sectionTitle: "05. Honors & Scholarships",
       items: [
         {
-          year: "2026. 10.",
-          title: "Social Venture Hackathon Grand Prize Award (KRW 1M Equivalent Prize)",
-          issuer: "Daejeon Regional University-Industry Cooperation Council & Local Social Venture Support Agencies",
-          description:
-            "Awarded official prize equivalent to KRW 1,000,000 for winning 1st Place (Grand Prize) at the 2026 Regional Social Venture Innovation Hackathon.",
-        },
-        {
-          year: "2026. 11.",
-          title: "2026 DSC Shared University (Daejeon) AI Practical Project Challenge - Excellence Award",
+          year: "2026. 11. 27.",
+          title:
+            "2026 DSC Shared University (Daejeon) AI Practical Project Challenge - Excellence Award",
           badge: "EXCELLENCE AWARD",
-          issuer: "DSC Shared University & Woosong Univ. Anchor Project Group",
+          issuer:
+            "DSC Shared University & Woosong Univ. Anchor Project Group",
           description:
             "Planned and developed a practical generative AI prototype solving local business and administrative challenges. Led end-to-end AI workflow implementation and presentation within a sprint schedule, winning the Excellence Award.",
         },
         {
-          year: "2026. 11.",
-          title: "2026 Joint Elementary, Secondary, and University Startup Competition (University Division) - Excellence Award (President's Award)",
+          year: "2026. 11. 26.",
+          title:
+            "2026 Joint Elementary, Secondary, and University Startup Competition (University Division) - Excellence Award (President's Award)",
           badge: "EXCELLENCE AWARD (President's Award)",
-          issuer: "Daejeon University Anchor Project Group & SW University Project Group",
+          issuer:
+            "Daejeon University Anchor Project Group & SW University Project Group",
           description:
             "Developed and pitched an innovative technology-driven startup model addressing regional and ICT challenges, winning the Excellence Award (Daejeon University President's Award) in the university division.",
+        },
+        {
+          year: "2026. 10. 30.",
+          title:
+            "Social Venture Hackathon Grand Prize Award (KRW 1M Equivalent Prize)",
+          badge: "GRAND PRIZE (1st Place)",
+          issuer:
+            "Daejeon Regional University-Industry Cooperation Consortium & Social Venture Support Agency",
+          description:
+            "Awarded official prize equivalent to KRW 1,000,000 for winning 1st place overall (Grand Prize) at the 2026 Social Venture Innovation Hackathon for Regional Problem Solving.",
         },
         {
           year: "2026",
@@ -1193,92 +1202,91 @@ export const portfolioDataByLang = {
     },
     competitions: {
       sectionTitle: "06. Competitions",
-      featured: {
-        badge: "GRAND PRIZE (1st Place)",
-        year: "2026. 10.",
-        title: "Grand Prize (1st Place) - 2026 Regional Social Venture Innovation Hackathon",
-        titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
-        issuer: "Daejeon Regional University-Industry Cooperation Council & Local Social Venture Support Agencies",
-        roleSummary:
-          "Architected and engineered end-to-end IT-driven sustainable social venture solutions addressing regional community challenges. Spearheaded system architecture and technical implementation, winning 1st Place (Grand Prize).",
-        media: [
-          {
-            src: "/images/hackathon_grandprize_panel.jpg",
-            caption: "Grand Prize Award Ceremony",
-            alt: "Award ceremony holding the Grand Prize panel",
-          },
-          {
-            src: "/images/hackathon_group.jpg",
-            caption: "2026 Social Venture Hackathon Venue",
-            alt: "Group photo of hackathon participants and organizers",
-          },
-        ],
-        links: [
-          {
-            label: "News1 Press Article",
-            url: "https://n.news.naver.com/article/421/0009266197?sid=102",
-            isExternal: true,
-          },
-          {
-            label: "UNN Press Article",
-            url: "https://news.unn.net/news/articleView.html?idxno=599809",
-            isExternal: true,
-          },
-          {
-            label: "Chungnam Ilbo",
-            url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
-            isExternal: true,
-          },
-          {
-            label: "Official Certificate (PDF)",
-            url: "/docs/hackathon_grandprize_cert.pdf",
-            isExternal: true,
-          },
-        ],
-      },
+      featured: null,
       items: [
         {
-          year: "2026",
+          year: "2026. 11. 27.",
           title: "2026 DSC Shared University (Daejeon) AI Practical Project Challenge",
           award: "Excellence Award",
           organizer: "DSC Shared University & Woosong Univ. Anchor Project Group",
           description:
             "Planned and developed a practical generative AI prototype solving local business and administrative challenges. Led end-to-end AI workflow implementation and presentation within a sprint schedule, winning the Excellence Award.",
-          photoPlaceholder: true,
           links: [
             {
               label: "Official Certificate (PDF Coming Soon)",
-              url: "/docs/dsc_ai_challenge_certificate.pdf", // To be linked to /docs/dsc_ai_challenge_certificate.pdf
+              url: "/docs/dsc_ai_challenge_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "Press Article (Coming Soon)",
-              url: "#", // To be linked to press article URL
+              url: "#",
               disabled: true,
               isExternal: true,
             },
           ],
         },
         {
-          year: "2026",
+          year: "2026. 11. 26.",
           title: "2026 Joint Elementary, Secondary, and University Startup Competition (University Division)",
           award: "Excellence Award (President's Award)",
           organizer: "Daejeon University Anchor Project Group & SW University Project Group",
           description:
             "Developed and pitched an innovative technology-driven startup model addressing regional and ICT challenges, winning the Excellence Award (Daejeon University President's Award) in the university division.",
-          photoPlaceholder: true,
           links: [
             {
               label: "Official Certificate (PDF Coming Soon)",
-              url: "/docs/joint_startup_certificate.pdf", // To be linked to /docs/joint_startup_certificate.pdf
+              url: "/docs/joint_startup_certificate.pdf",
               disabled: true,
               isExternal: true,
             },
             {
               label: "Press Article (Coming Soon)",
-              url: "#", // To be linked to press article URL
+              url: "#",
               disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026. 10. 30.",
+          title: "Grand Prize (1st Place) - 2026 Regional Social Venture Innovation Hackathon",
+          titleSub: "2026 Social Venture Innovation Hackathon for Regional Problem Solving - Grand Prize",
+          award: "GRAND PRIZE (1st Place)",
+          organizer: "Daejeon Regional University-Industry Cooperation Council & Local Social Venture Support Agencies",
+          description:
+            "Architected and engineered end-to-end IT-driven sustainable social venture solutions addressing regional community challenges. Spearheaded system architecture and technical implementation, winning 1st Place (Grand Prize).",
+          media: [
+            {
+              src: "/images/hackathon_grandprize_panel.jpg",
+              caption: "Grand Prize Award Ceremony",
+              alt: "Award ceremony holding the Grand Prize panel",
+            },
+            {
+              src: "/images/hackathon_group.jpg",
+              caption: "2026 Social Venture Hackathon Venue",
+              alt: "Group photo of hackathon participants and organizers",
+            },
+          ],
+          links: [
+            {
+              label: "News1 Press Article",
+              url: "https://n.news.naver.com/article/421/0009266197?sid=102",
+              isExternal: true,
+            },
+            {
+              label: "UNN Press Article",
+              url: "https://news.unn.net/news/articleView.html?idxno=599809",
+              isExternal: true,
+            },
+            {
+              label: "Chungnam Ilbo",
+              url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=918410",
+              isExternal: true,
+            },
+            {
+              label: "Official Certificate (PDF)",
+              url: "/docs/hackathon_grandprize_cert.pdf",
               isExternal: true,
             },
           ],
@@ -2444,7 +2452,7 @@ export default function AcademicPortfolio() {
                 {data.experience.items.map((exp: ExperienceItem, idx: number) => (
                   <div
                     key={idx}
-                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
+                    className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
                     <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {exp.period}
@@ -2621,110 +2629,6 @@ export default function AcademicPortfolio() {
                 <span>{data.competitions.sectionTitle}</span>
               </h2>
 
-              {/* -----------------------------------------------------------
-                  2026 소셜벤처 해커톤 대상 (일반 대회 카드 테마 통일)
-                  ----------------------------------------------------------- */}
-              {data.competitions.featured && (
-                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 sm:p-7 shadow-sm mb-6 transition-all duration-300">
-                  {/* 상단 뱃지 & 연도 */}
-                  <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-rose-600 text-white dark:bg-rose-500 dark:text-white shadow-xs tracking-wide font-mono uppercase">
-                      <Trophy className="w-3.5 h-3.5 text-white" />
-                      <span>{data.competitions.featured.badge}</span>
-                    </span>
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums">
-                      {data.competitions.featured.year}
-                    </span>
-                  </div>
-
-                  {/* 타이틀 및 발급 기관 */}
-                  <div className="space-y-1.5">
-                    <h3 className="text-lg sm:text-2xl font-black text-black dark:text-white leading-tight tracking-tight">
-                      {data.competitions.featured.title}
-                    </h3>
-                    {data.competitions.featured.titleSub && (
-                      <p className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 leading-normal">
-                        {data.competitions.featured.titleSub}
-                      </p>
-                    )}
-                    <p className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-300 flex items-center gap-1.5 pt-0.5">
-                      <Award className="w-4 h-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
-                      <span>{data.ui.organizerLabel} {data.competitions.featured.issuer}</span>
-                    </p>
-                  </div>
-
-                  {/* 역할 및 기술 요약 */}
-                  <p className="mt-3 text-xs sm:text-sm text-zinc-800 dark:text-zinc-300 leading-relaxed font-normal">
-                    {data.competitions.featured.roleSummary}
-                  </p>
-
-                  {/* 사진 및 미디어 갤러리 (2종 반응형 그리드) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-5">
-                    {data.competitions.featured.media.map((item, mIdx) => (
-                      <div
-                        key={mIdx}
-                        onClick={() => setSelectedMedia(item)}
-                        className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200"
-                      >
-                        <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
-                          <img
-                            src={getAssetUrl(item.src)}
-                            alt={item.alt}
-                            className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out"
-                            loading="lazy"
-                          />
-                        </div>
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-xs font-semibold shadow-lg">
-                            <ZoomIn className="w-3.5 h-3.5 text-zinc-100" />
-                            <span>클릭하여 원본 확대</span>
-                          </span>
-                        </div>
-                        {/* Caption Bar */}
-                        <div className="px-3 py-2 bg-white/95 dark:bg-zinc-900/95 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs">
-                          <span className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                            {item.caption}
-                          </span>
-                          <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono shrink-0 ml-2">
-                            원본 사진
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* 언론 보도자료 및 증빙 링크 칩 */}
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mt-5 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                    {data.competitions.featured.links.map((link, lIdx) =>
-                      link.disabled ? (
-                        <span
-                          key={lIdx}
-                          title="증빙 자료 준비 중입니다"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 dark:text-zinc-500 bg-zinc-100/70 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 select-none"
-                        >
-                          <FileText className="w-3.5 h-3.5 opacity-50" />
-                          <span>{link.label}</span>
-                        </span>
-                      ) : (
-                        <a
-                          key={lIdx}
-                          href={getAssetUrl(link.url)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-800 dark:bg-zinc-800/70 dark:hover:bg-zinc-700/80 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/70 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
-                        >
-                          <FileText className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 opacity-80 group-hover/chip:opacity-100 transition-opacity" />
-                          <span>{link.label}</span>
-                          <ExternalLink className="w-3 h-3 opacity-60 group-hover/chip:opacity-100 transition-opacity" />
-                        </a>
-                      )
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* 일반 참가 대회 목록 */}
               <div className="space-y-2">
                 {data.competitions.items.map((comp, idx) => (
                   <div
@@ -2739,11 +2643,36 @@ export default function AcademicPortfolio() {
                         <h3 className="text-sm sm:text-base font-extrabold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {comp.title}
                         </h3>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300/80 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30 tracking-tight font-mono">
-                          <Trophy className="w-3 h-3 text-rose-600 dark:text-rose-400 shrink-0" />
-                          <span>{comp.award}</span>
-                        </span>
+                        {comp.award && (
+                          <span
+                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-tight font-mono ${
+                              comp.award.includes("GRAND PRIZE") ||
+                              comp.award.includes("대상") ||
+                              comp.award.includes("1위") ||
+                              comp.award.includes("1st")
+                                ? "bg-rose-600 text-white dark:bg-rose-500 dark:text-white shadow-xs"
+                                : "bg-rose-100 text-rose-800 border border-rose-300/80 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30"
+                            }`}
+                          >
+                            <Trophy
+                              className={`w-3 h-3 ${
+                                comp.award.includes("GRAND PRIZE") ||
+                                comp.award.includes("대상") ||
+                                comp.award.includes("1위") ||
+                                comp.award.includes("1st")
+                                  ? "text-white"
+                                  : "text-rose-600 dark:text-rose-400"
+                              } shrink-0`}
+                            />
+                            <span>{comp.award}</span>
+                          </span>
+                        )}
                       </div>
+                      {comp.titleSub && (
+                        <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 leading-normal">
+                          {comp.titleSub}
+                        </p>
+                      )}
                       <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-300">
                         {data.ui.organizerLabel} {comp.organizer}
                       </p>
@@ -2751,6 +2680,44 @@ export default function AcademicPortfolio() {
                         <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                           {comp.description}
                         </p>
+                      )}
+
+                      {/* 현장 사진 미디어 갤러리 */}
+                      {comp.media && comp.media.length > 0 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 mt-3 pt-1">
+                          {comp.media.map((item, mIdx) => (
+                            <div
+                              key={mIdx}
+                              onClick={() => setSelectedMedia(item)}
+                              className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200"
+                            >
+                              <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
+                                <img
+                                  src={getAssetUrl(item.src)}
+                                  alt={item.alt}
+                                  className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                                  loading="lazy"
+                                />
+                              </div>
+                              {/* Hover Overlay */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-sm text-white text-xs font-semibold shadow-lg">
+                                  <ZoomIn className="w-3.5 h-3.5 text-zinc-100" />
+                                  <span>클릭하여 원본 확대</span>
+                                </span>
+                              </div>
+                              {/* Caption Bar */}
+                              <div className="px-3 py-2 bg-white/95 dark:bg-zinc-900/95 border-t border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between text-xs">
+                                <span className="font-semibold text-zinc-800 dark:text-zinc-200 truncate" title={item.caption}>
+                                  {item.caption}
+                                </span>
+                                <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono shrink-0 ml-2">
+                                  원본 사진
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       )}
 
                       {/* 증빙 링크 칩 (공식 상장 사본 & 관련 보도기사) */}
