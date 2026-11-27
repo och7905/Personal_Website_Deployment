@@ -76,7 +76,7 @@ React 18, TypeScript, Tailwind CSS, Lucide React, Vite를 기반으로 제작된
   - `02. Education`: `<GraduationCap />`
   - `03. Experience`: `<Briefcase />`
   - `04. Publications`: `<BookOpen />`
-  - `05. Honors & Scholarships`: `<Award />`
+  - `05. Scholarships`: `<Award />`
   - `06. Competitions`: `<Trophy />`
   - `07. Technical Skills`: `<Code2 />`
 

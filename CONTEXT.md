@@ -1,6 +1,10 @@
 # 📋 Academic Portfolio Project Context & Handover (CONTEXT.md)
 
-이 문서는 **오창현(Changhyeon Oh)의 학술·엔지니어링 개인 포트폴리오 웹사이트** 프로젝트의 모든 설계 맥락, 구현 상세, 디자인 규칙, 아키텍처 결정을 기록한 **인수인계(Handover) 문서**입니다.  
+> **문서 상태**: 검증 완료 및 최신화됨 (Verified & Current)  
+> **최종 갱신일**: 2026-11-28  
+> **연계 문서**: [`PRODUCT.md`](file:///c:/Users/사용자/Desktop/개인%20홈페이지/Personal_Website_Deployment/PRODUCT.md) (제품 진실 및 품질 감사 표준)
+
+이 문서는 **오창현(Changhyeon Oh)의 학술·엔지니어링 개인 포트폴리오 웹사이트** 프로젝트의 모든 설계 맥락, 구현 상세, 디자인 규칙, 최신 수상 실적 및 아키텍처 결정을 기록한 **마스터 인수인계(Handover / Master Context) 문서**입니다.  
 다른 컴퓨터 환경이나 새로운 AI 대화 세션에서 본 프로젝트를 이어받아 개발할 때, 이 문서를 참조하면 100% 동일한 맥락과 톤앤매너를 유지하며 작업을 즉시 진행할 수 있습니다.
 
 ---
@@ -9,17 +13,18 @@
 
 - **프로젝트 명**: 학술 연구원 & 백엔드/AI 엔지니어 개인 포트폴리오 웹사이트 (`my-portfolio`)
 - **소유자**: 오창현 (Changhyeon Oh)
-  - 소속: 대전대학교 컴퓨터공학과 학부 재학 / AIONE 연구실 (학생 랩장 & 학부 연구생)
+  - 소속: 대전대학교 컴퓨터공학과 학부 재학 / AIONE 연구실 (학생 랩장 3기 & 학부 연구생)
   - 전문 분야: 백엔드 시스템 엔지니어링, 멀티모달 생성 모델, 대용량 데이터 파이프라인
   - 이메일: `och7905@naver.com`
+  - 배포 URL: `https://och7905.github.io/Personal_Website_Deployment/`
 - **핵심 기술 스택**:
   - **Core**: React 18, TypeScript 5
   - **Build & Dev**: Vite 6 (`base: './'`)
   - **Styling**: Tailwind CSS 3 (`darkMode: "class"`), PostCSS, Autoprefixer
-  - **Icons**: Lucide React (`User`, `GraduationCap`, `Briefcase`, `BookOpen`, `Award`, `Trophy`, `Code2`, `Users`, `Menu`, `X`, `FileText`, `Mail`, `ExternalLink` 등)
+  - **Icons**: Lucide React (`User`, `GraduationCap`, `Briefcase`, `BookOpen`, `Award`, `Trophy`, `Code2`, `Users`, `Menu`, `X`, `FileText`, `Mail`, `ExternalLink`, `Maximize2`, `ChevronRight`, `Sparkles` 등)
   - **Database & Realtime**: Supabase (`@supabase/supabase-js`, PostgreSQL `site_visitors` 테이블 & Realtime WebSocket)
   - **Analytics**: Google Analytics 4 (GA4 `G-3TMQEBP4XV`), Supabase DB 기반 실시간 Today/Total 카운터
-  - **Storage**: 브라우저 표준 `localStorage` (다크모드/언어 설정) & `sessionStorage` (방문자 세션 중복 방지)
+  - **Storage**: 브라우저 표준 `localStorage` (다크모드/언어 설정/일일 방문 기록) & `sessionStorage` (방문자 세션 중복 방지)
   - **CI / CD**: GitHub Actions (`.github/workflows/deploy.yml` -> GitHub Pages 자동 배포, Repository Variables 연동)
 - **버전 관리 및 워크플로우**:
   - 도구: Git & GitHub Desktop
@@ -36,7 +41,7 @@
 - **테마 토글**: 사이드바 하단 및 모바일 드로어 내부 버튼을 통해 다크 모드 ↔ 라이트 모드를 자유롭게 전환할 수 있으며 상태는 영구 보존됩니다.
 
 ### 2.2 섹션 헤더 강제 로즈 포인트 스타일 & 통일된 아이콘
-- **대상**: `01. About Me`, `02. Education`, `03. Experience`, `04. Publications`, `05. Honors & Scholarships`, `06. Competitions`, `07. Technical Skills` (7개 섹션 전체)
+- **대상**: `01. About Me`, `02. Education`, `03. Experience`, `04. Publications`, `05. Scholarships`, `06. Competitions`, `07. Technical Skills` (7개 섹션 전체)
 - **강제 적용 규칙**: 상위 컨테이너의 텍스트 색상 및 CSS 우선순위 간섭을 원천 차단하기 위해 Tailwind의 `!`(CSS `!important`) 접두사를 필수로 사용합니다:
   ```tsx
   <h2 className="text-xs !text-rose-500 dark:!text-rose-500 font-extrabold tracking-widest uppercase mb-4 flex items-center gap-2">
@@ -47,7 +52,7 @@
   - `02. Education`: `<GraduationCap />`
   - `03. Experience`: `<Briefcase />`
   - `04. Publications`: `<BookOpen />`
-  - `05. Honors & Scholarships`: `<Award />`
+  - `05. Scholarships`: `<Award />`
   - `06. Competitions`: `<Trophy />`
   - `07. Technical Skills`: `<Code2 />`
 
@@ -62,7 +67,7 @@
   ```
 
 ### 2.4 Supabase DB 기반 실시간 방문자 카운터 (`VisitorCounter`)
-- **설계 의도**: 외부 불안정 오픈 API 대신 설치된 공식 `@supabase/supabase-js` 클라이언트를 활용하여 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)와 연동. PC, 스마트폰 등 모든 기기 간 방문자 수(Today / Total)를 영구 보존하고 실시간 동기화합니다.
+- **설계 의도**: 외부 불안정 오픈 API 대신 공식 `@supabase/supabase-js` 클라이언트를 활용하여 클라우드 PostgreSQL 데이터베이스(`site_visitors` 테이블)와 연동. PC, 스마트폰 등 모든 기기 간 방문자 수(Today / Total)를 영구 보존하고 실시간 동기화합니다.
 - **환경변수 분리 및 Vite 빌드 타임 정적 치환**:
   - `import.meta.env.VITE_SUPABASE_URL` 및 `import.meta.env.VITE_SUPABASE_ANON_KEY` 표준 구문을 사용하여 Vite 번들러가 빌드 타임에 안전하게 치환하도록 구성.
   - 소스 코드 내 하드코딩 키 0% 유지. 실제 키는 `.env`에서 관리하며 `.gitignore`로 원격 저장소 노출을 원천 방지.
@@ -90,16 +95,18 @@
 ### 2.5 실시간 3개 국어 번역 스위처 (KO / JA / EN)
 - 사이드바 상단의 `[ KO ] [ JA ] [ EN ]` 버튼 클릭 시 페이지 새로고침 없이 즉각 전체 텍스트 전환.
 - 모든 다국어 데이터는 `src/App.tsx` 내의 `portfolioDataByLang` 객체(`ko`, `ja`, `en`)에 구조화되어 일원화 관리됨.
+- 현재 선택된 언어는 `localStorage`(`academic-portfolio-lang`)에 보존되어 재방문 시 자동 복원.
 
 ### 2.6 A4 표준 학술 CV 인쇄/PDF 다운로드 (`PrintableCV`)
 - 사이드바의 **[CV]** 버튼 또는 브라우저 인쇄(`Ctrl+P`, `window.print()`) 호출 시 동작.
 - 웹 전용 UI(사이드바, 내비게이션, 모바일 드로어, 테마 토글, 푸터 등)는 `print:hidden` 처리되고, A4 규격 흑백/고대비 학술 표준 양식인 `<PrintableCV />` 컴포넌트만 깨끗하게 출력됩니다.
 - `portfolioDataByLang`의 데이터가 갱신되면 별도 수정 없이 CV 출력물에도 실시간 자동 반영됩니다.
+- 인쇄 시 전각 대시 대신 정규 괄호 및 간결한 문장부호를 사용하여 글자 뭉침 및 리버 현상을 방지합니다.
 
 ### 2.7 카드형 호버 인터랙션 및 외부 링크 시각화
-- `Education`, `Experience`, `Honors`, `Competitions` 리스트 항목에 호버 시 부드러운 카드 강조 효과 적용:
+- `Education`, `Experience`, `Scholarships`, `Competitions` 리스트 항목에 호버 시 부드러운 카드 강조 효과 적용:
   ```tsx
-  className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 ..."
+  className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-colors duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 ..."
   ```
 - `Experience` 소속 기관명 옆에 외부 링크(`ExternalLink`) 아이콘 배치 및 호버 시 대각선 이동 애니메이션(`group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5`) 적용.
 
@@ -109,10 +116,11 @@
 ### 2.9 모바일 반응형 햄버거 메뉴 (Navigation Drawer)
 - 모바일(lg 미만) 환경에서 우측 상단 고정(`fixed top-4 right-4 z-50 lg:hidden`) 반투명 블러 토글 버튼(`Menu` ↔ `X`) 배치.
 - 탭 시 반투명 딤(dim) 배경과 함께 우측에서 매끄럽게 슬라이드되는 목차 드로어(`isMobileNavOpen`) 구현.
-- 7개 섹션 목차 실시간 스크롤 스파이 하이라이트, 부드러운 스크롤 이동 및 탭 즉시 자동 닫힘, 테마 토글/CV 바로가기, `Escape` 키 닫기 및 바디 스크롤 잠금 적용.
+- 7개 섹션 목차 실시간 스크롤 스파이 하이라이트(`aria-current="true"`), 부드러운 스크롤 이동 및 탭 즉시 자동 닫힘, 테마 토글/CV 바로가기, `Escape` 키 닫기 및 바디 스크롤 잠금(`document.body.style.overflow = "hidden"`) 적용.
 
-### 2.10 경력 항목 정렬 및 이력 배지 시스템 (`ExperienceItem`)
+### 2.10 경력 항목 정렬 및 일자 레이아웃 최적화 (`ExperienceItem`)
 - `ExperienceItem` 인터페이스(`badges?: string[]`)를 통해 직무·보직 배지를 기존 랩 배지와 일관된 로즈 알약 배지(`bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 font-mono text-[11px]`) 스타일로 다중 렌더링 지원.
+- 날짜 표시 영역에 `sm:grid-cols-[180px_1fr]` 및 `break-keep tabular-nums`를 적용하여 `2026. 06. 29. – 07. 03.` 같은 긴 일자가 줄바꿈되어 깨지는 현상을 방어.
 - 모든 경력 항목은 엄격한 최신 역연대순(**2026 -> 2024 -> 2023–2024 -> 2022**)으로 정렬:
   1. `2026 – 현재`: 일영 (GDGoC 대전대학교 챕터) - 멤버 / 개발자 (7기) [GDGoC]
   2. `2026 – 현재`: 공동 (CS 전공 역량 및 직무 스터디) - 스터디원 (1기) [CS 기초 스터디] [데이터 자격증]
@@ -129,6 +137,47 @@
   - `index.html` 내 `<link rel="icon" type="image/svg+xml" href="./favicon.svg" />` 상대 경로를 지정하여, GitHub Pages 서브디렉터리 환경에서도 브라우저가 도메인 루트의 `/favicon.ico`를 잘못 찾아 404를 내는 현상을 완벽 차단.
 - **Google Analytics 4 (GA4)**:
   - `index.html`의 `<head>` 태그 최상단에 공식 `gtag.js` (`G-3TMQEBP4XV`) 추적 스크립트가 연동되어 전 세계 방문자 트래픽 및 페이지뷰 분석 지원.
+
+### 2.12 장학 내역 단독 섹션화 및 정제 (`05. Scholarships`)
+- 기존 '05. Honors & Scholarships'에서 `06. Competitions`와 중복되던 대회 수상 3건을 완전 분리 및 삭제하여 **순수 장학금 수혜 내역 4건**만 엄선 유지:
+  1. `2026`: **SW중심대학사업단 공식 서포터즈 장학금** (대전대학교 SW중심대학사업단)
+  2. `2026`: **학습 피어 튜터링 우수 장학금** (대전대학교 교수학습개발원 CTL)
+  3. `2024 – 2026`: **컴퓨터공학과 학과 경쟁력 강화 장학금 (다수 수혜)** (대전대학교 컴퓨터공학과)
+  4. `2022 – 2026`: **국가장학금 및 교내 우수 성적 장학금** (한국장학재단 KOSAF / 대전대학교)
+- **명칭 동기화**:
+  - 섹션 제목: `05. Scholarships` (`ko`, `ja`, `en` 공통)
+  - 좌측 내비게이션 라벨: `ko`: `"장학 내역"`, `ja`: `"奨学金"`, `en`: `"Scholarships"`
+  - 인쇄용 CV 헤딩: `ko`: `"05. 장학 내역"`, `ja`: `"05. 奨学金"`, `en`: `"05. SCHOLARSHIPS"`
+
+### 2.13 최신 대회 수상 실적 및 증빙 링크/미디어 모달 (`06. Competitions`)
+- **최신순 정렬 원칙**: 2026년 11월 최신 수상 실적이 최상단에 오도록 엄격한 역연대순(Reverse Chronological Order)으로 3개 언어 동기화 완료:
+  1. `2026. 11. 27.`: **2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지 (우수상)** (DSC 공유대학 · 우송대학교 앵커사업단) [상장/기사 준비 칩]
+  2. `2026. 11. 26.`: **2026학년도 초중고대 연합 창업경진대회 대학부 (최우수상 · 대전대학교 총장상)** (대전대학교 앵커사업단 · SW중심대학사업단) [상장/기사 준비 칩]
+  3. `2026. 10. 30.`: **2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 대상 (GRAND PRIZE · 대상 1위)**  
+     - 현장 사진 2매 원본 모달 뷰어 연동 (`hackathon_grandprize_panel.jpg`, `hackathon_group.jpg`)
+     - 4개 공인 링크 칩 연동: 뉴스1 보도기사 ↗, 한국대학신문 ↗, 충남일보 ↗, 공식 상장 사본 (PDF) ↗
+  4. `2026`: **The 2nd COSS Intelligent IoT Hackathon (Participant)**
+  5. `2026`: **2026 CO-SHOW IoT & AI Convergence University Challenge (Participant)**
+  6. `2026`: **The 2nd IoT & AI Open Platform Challenge (Participant)**
+  7. `2025`: **The 1st COSS Intelligent IoT Hackathon (Participant)**
+- **카드 UI 일원화**: 특정 항목에 대한 과도한 네온/골드 글로우를 배제하고 절제된 카드형 호버 레이아웃으로 전체 항목의 스타일을 통일.
+- **현장 사진 모달 인터랙션**:
+  - 사진 썸네일에 `role="button"`, `tabIndex={0}`, `aria-label`, `onKeyDown(Enter/Space)` 부여로 마우스 없이 키보드만으로 모달 탐색 가능.
+  - 확대 모달 오픈 시 `document.body.style.overflow = "hidden"` 주입 및 `Escape` 키 감지로 닫기 지원.
+
+### 2.14 접근성, 안정성 및 품질 감사 표준 (Impeccable Harden & Hallmark Standards)
+- **전이 속성 구체화 (Floor Gate 10a)**:
+  - `transition-all`을 전면 퇴출하고 `transition-colors`, `transition-opacity`, `transition-transform` 등 실제 변경되는 속성만을 명시적으로 선언하여 예기치 않은 레이아웃 리플로우(Layout Reflow) 및 버벅임을 방지.
+- **수평 스크롤 방어 (Floor Gate 34)**:
+  - `index.css` 및 `index.html`에 `html, body { overflow-x: clip; }`를 적용하여 모바일 및 좁은 뷰포트에서 의도치 않은 가로 스크롤 버그를 원천 차단.
+- **웹 접근성 표준화 (Floor Gates 27 & 33)**:
+  - 외부 소셜 아이콘 및 장식용 인라인 SVG에 `aria-hidden="true"`를 부여하여 스크린 리더 소음 방지.
+  - 목차 내비게이션 링크에 현재 스크롤 위치를 나타내는 `aria-current="true"`를 동적으로 부여.
+  - 모바일 메뉴 버튼에 `aria-expanded`, `aria-controls`, `aria-label` 완비.
+  - 언어 선택 및 테마 토글 버튼에 `aria-pressed`, `aria-label` 완비.
+- **Hallmark 스탬프 및 정적 분석 (Gates 15, 20 & Sloplint)**:
+  - 스타일시트 상단에 `/* Hallmark · academic-portfolio · modern-minimal · audited */` 공인 스탬프 표기.
+  - 정적 품질 감사 스크립트(`sloplint.mjs`) 검사 결과: **0 FAIL** 무결점 통과.
 
 ---
 
@@ -148,13 +197,13 @@
 │   ├── assets/
 │   │   └── profile.jpg           # 번들링 참조용 프로필 이미지
 │   ├── App.tsx                   # 메인 포트폴리오 컴포넌트, 다국어 데이터, VisitorCounter, PrintableCV
-│   ├── index.css                 # Tailwind CSS 글로벌 스타일 (src 내부 모듈용)
+│   ├── index.css                 # Tailwind CSS 글로벌 스타일 (src 내부 모듈용, overflow-x: clip 포함)
 │   └── main.tsx                  # React 18 루트 렌더러
 ├── app/
 │   └── page.tsx                  # Next.js App Router 호환용 (src/App.tsx와 100% 동기화)
 ├── App.tsx                       # 루트 호환용 (src/App.tsx와 100% 동기화)
 ├── page.tsx                      # 루트 호환용 (src/App.tsx와 100% 동기화)
-├── index.html                    # FOUC 방지 인라인 스크립트 및 타이틀 메타태그
+├── index.html                    # FOUC 방지 스크립트, GA4, 메타태그, overflow-x: clip 스타일
 ├── index.css                     # Tailwind CSS 디렉티브 (@tailwind base, components, utilities)
 ├── tailwind.config.js            # darkMode: "class" 테마 설정
 ├── vite.config.ts                # Vite 설정 (base: './' 상대 경로 배포 대응)
@@ -162,7 +211,8 @@
 ├── .gitignore                    # Git 버전 관리 제외 목록 (.env, node_modules, dist 등)
 ├── .env                          # Supabase 로컬 환경변수 (Git 제외 대상)
 ├── .env.example                  # 환경변수 템플릿 예시
-├── CONTEXT.md                    # [본 문서] 프로젝트 인수인계 및 설계 맥락 문서
+├── PRODUCT.md                    # 제품 진실 및 Hallmark 품질 감사 기준서 (Product Truths & Audit)
+├── CONTEXT.md                    # [본 문서] 프로젝트 마스터 인수인계 및 설계 맥락 문서
 └── README.md                     # 프로젝트 사용자 및 배포 안내서
 ```
 
@@ -182,14 +232,15 @@
    - 고대비 다크 모드: 텍스트는 다크 모드 기준 `text-zinc-100` ~ `text-zinc-300`, 제목은 `text-white` 및 `!text-rose-500`을 준수하여 가독성을 보장합니다.
    - 섹션 제목(`<h2>`) 수정 시 `!text-rose-500 font-extrabold` 접두사를 절대 누락하지 않습니다.
    - 섹션 제목 앞 벡터 아이콘(`w-3.5 h-3.5`)의 통일성을 해치지 않습니다.
-3. **코드 출력 원칙**:
+   - `transition-all` 사용을 금지하고 반드시 구체적인 속성 전이(`transition-colors` 등)를 선언합니다.
+3. **증빙과 사실 중심의 Anti-Slop 원칙**:
+   - 모든 경력, 수상 내역, 장학 내역은 공식 문서와 링크에 기반하며, 증빙 없는 과장 수식어는 일절 배제합니다.
+4. **코드 출력 및 무결성 검증 원칙**:
    - 코드 스니펫이나 수정 사항을 전달할 때 생략(`// 기존 코드 유지...` 등) 없이 **바로 복사-붙여넣기가 가능한 완전한 코드**를 제공합니다.
-4. **무결성 검증 필수**:
-   - 코드 수정 후에는 모든 JSX 태그(`<div>`, `<section>`, `<span>` 등)의 열림/닫힘 균형이 완벽한지 확인합니다.
    - `src/App.tsx` 수정 시 루트 호환 파일들(`page.tsx`, `App.tsx`, `app/page.tsx`)을 함께 갱신하고 SHA-256 해시 일치를 확인합니다.
 5. **빌드 안정성 유지**:
    - `package.json`의 build 스크립트는 `"build": "vite build"`로 유지하여 CI 환경에서 불필요한 컴파일 중단을 방지합니다.
-   - `src/App.tsx` 내의 타입 정의(`EducationItem`, `ExperienceItem` 등)를 온전하게 보존합니다.
+   - `src/App.tsx` 내의 타입 정의(`EducationItem`, `ExperienceItem`, `HonorItem`, `CompetitionItem` 등)를 온전하게 보존합니다.
 
 ---
 
@@ -199,13 +250,13 @@
 
 ### 📌 새 세션 프롬프트 템플릿
 ```text
-@CONTEXT.md @src/App.tsx 파일의 맥락을 확인해줘. 
+@CONTEXT.md @PRODUCT.md @src/App.tsx 파일의 맥락을 확인해줘. 
 이전 작업을 이어서 진행하려고 해. [여기에 원하는 작업 지시]
 ```
 
 ### 💡 작업 시작 시 체크리스트
 - [ ] `git branch` 확인 (현재 `main` 또는 `test` 중 적절한 브랜치에 위치해 있는지)
-- [ ] `CONTEXT.md`의 아키텍처 및 디자인 규칙 재확인
+- [ ] `CONTEXT.md` 및 `PRODUCT.md`의 아키텍처 및 디자인 규칙 재확인
 - [ ] 작업 완료 후 `src/App.tsx`와 호환 파일(`page.tsx`, `App.tsx`, `app/page.tsx`) 4개 동기화 실행
-- [ ] 변경 사항이 있을 경우 `CONTEXT.md` 및 `README.md` 동기화 갱신
-- [ ] 로컬 테스트: `npm install` -> `npm run dev` (정상 작동 확인)
+- [ ] 변경 사항이 있을 경우 `CONTEXT.md`, `PRODUCT.md`, `README.md` 동기화 갱신
+- [ ] 로컬 테스트: `npm run build` (정상 빌드 확인)
