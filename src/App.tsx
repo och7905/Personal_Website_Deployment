@@ -19,6 +19,7 @@ import {
   Menu,
   X,
   ZoomIn,
+  Camera,
 } from "lucide-react";
 
 // ============================================================================
@@ -151,6 +152,7 @@ export interface HonorItem {
   title: string;
   issuer: string;
   description?: string;
+  badge?: string;
 }
 
 export interface CompetitionActionLink {
@@ -167,6 +169,13 @@ export interface CompetitionItem {
   description?: string;
   isGrandPrize?: boolean;
   actionLinks?: CompetitionActionLink[];
+  photoPlaceholder?: boolean;
+  links?: Array<{
+    label: string;
+    url: string;
+    disabled?: boolean;
+    isExternal?: boolean;
+  }>;
 }
 
 export const getAssetUrl = (path: string): string => {
@@ -371,6 +380,22 @@ export const portfolioDataByLang = {
             "2026년 지역사회 문제해결 혁신적 소셜벤처 해커톤 전체 1위(대상) 선정에 따른 100만 원 상당 공식 부상 수혜.",
         },
         {
+          year: "2026. 11.",
+          title: "2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지 우수상",
+          badge: "EXCELLENCE AWARD (우수상)",
+          issuer: "DSC 공유대학(대전형) · 우송대학교 앵커사업단",
+          description:
+            "생성형 AI 기술을 활용하여 지역 현안(소상공인·중소기업·고객 응대 등)을 해결하는 실전 AI 프로토타입 기획 및 개발. 짧은 프로젝트 기간 내 문제 정의부터 AI 워크플로우 구현 및 발표까지 성공적으로 완수하여 우수상 수상.",
+        },
+        {
+          year: "2026. 11.",
+          title: "2026학년도 초중고대 연합 창업경진대회 (대학부) 최우수상 (대전대학교 총장상)",
+          badge: "EXCELLENCE AWARD (최우수상 · 총장상)",
+          issuer: "대전대학교 앵커사업단 · SW중심대학사업단",
+          description:
+            "창의적인 기술 창업 및 지역사회 연계 아이디어를 바탕으로 사업 모델 구체화 및 발표 평가(5분 발표·5분 질의응답)를 수행하여 대학부 최우수상(대전대학교 총장상) 수상.",
+        },
+        {
           year: "2026",
           title: "SW중심대학사업단 공식 서포터즈 장학금",
           issuer: "대전대학교 SW중심대학사업단",
@@ -445,6 +470,52 @@ export const portfolioDataByLang = {
         ],
       },
       items: [
+        {
+          year: "2026",
+          title: "2026 DSC 공유대학(대전형) AI 실전 프로젝트 챌린지",
+          award: "우수상",
+          organizer: "DSC 공유대학 · 우송대학교 앵커사업단",
+          description:
+            "생성형 AI 기술을 활용하여 지역 현안(소상공인·중소기업·고객 응대 등)을 해결하는 실전 AI 프로토타입 기획 및 개발. 짧은 프로젝트 기간 내 문제 정의부터 AI 워크플로우 구현 및 발표까지 성공적으로 완수하여 우수상 수상.",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "공식 상장 사본 (PDF 업로드 예정)",
+              url: "/docs/dsc_ai_challenge_certificate.pdf", // 추후 /docs/dsc_ai_challenge_certificate.pdf 연결
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "관련 보도기사 (업로드 예정)",
+              url: "#", // 추후 기사 URL 연결
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026",
+          title: "2026학년도 초중고대 연합 창업경진대회 (대학부)",
+          award: "최우수상 (대전대학교 총장상)",
+          organizer: "대전대학교 앵커사업단 · SW중심대학사업단",
+          description:
+            "창의적인 기술 창업 및 지역사회 연계 아이디어를 바탕으로 사업 모델 구체화 및 발표 평가(5분 발표·5분 질의응답)를 수행하여 대학부 최우수상(대전대학교 총장상) 수상.",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "공식 상장 사본 (PDF 업로드 예정)",
+              url: "/docs/joint_startup_certificate.pdf", // 추후 /docs/joint_startup_certificate.pdf 연결
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "관련 보도기사 (업로드 예정)",
+              url: "#", // 추후 기사 URL 연결
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
         {
           year: "2026",
           title: "The 2nd COSS Intelligent IoT Hackathon (제2회 지능 IoT해커톤 경진대회)",
@@ -693,6 +764,22 @@ export const portfolioDataByLang = {
             "2026年 地域社会課題解決 革新的ソーシャルベンチャーハッカソン 全体1位（大賞）受賞に伴う100万ウォン相当の公式副賞受給。",
         },
         {
+          year: "2026. 11.",
+          title: "2026 DSC共有大学（大田型）AI実践プロジェクトチャレンジ 優秀賞",
+          badge: "EXCELLENCE AWARD (優秀賞)",
+          issuer: "DSC共有大学（大田型）・又松大学校アンカー事業団",
+          description:
+            "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表까지を完遂し、優秀賞を受賞。",
+        },
+        {
+          year: "2026. 11.",
+          title: "2026年度 小・中・高・大学連合 創業アイデアコンテスト（大学部）最優秀賞（大田大学校総長賞）",
+          badge: "EXCELLENCE AWARD (最優秀賞 · 総長賞)",
+          issuer: "大田大学校アンカー事業団・SW中心大学事業団",
+          description:
+            "創意的な技術創業および地域社会連携アイデアに基づくビジネスモデルを企画・発表し、大学部最優秀賞（大田大学校総長賞）を受賞。",
+        },
+        {
           year: "2026",
           title: "SW事業団公式サポーターズ奨学金",
           issuer: "大田大学校 SW中心大学事業団",
@@ -766,6 +853,52 @@ export const portfolioDataByLang = {
         ],
       },
       items: [
+        {
+          year: "2026",
+          title: "2026 DSC共有大学（大田型）AI実践プロジェクトチャレンジ",
+          award: "優秀賞",
+          organizer: "DSC共有大学・又松大学校アンカー事業団",
+          description:
+            "生成AIを活用して地域の課題解決を目指す実践型AIプロトタイプを企画・開発。短期間でAIワークフローの実装から発表までを完遂し、優秀賞を受賞。",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "公式賞状（PDFアップロード予定）",
+              url: "/docs/dsc_ai_challenge_certificate.pdf", // 今後 /docs/dsc_ai_challenge_certificate.pdf 接続
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "関連報道記事（公開予定）",
+              url: "#", // 今後記事URL接続
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026",
+          title: "2026年度 小・中・高・大学連合 創業アイデアコンテスト（大学部）",
+          award: "最優秀賞（大田大学校総長賞）",
+          organizer: "大田大学校アンカー事業団・SW中心大学事業団",
+          description:
+            "創意的な技術創業および地域社会連携アイデアに基づくビジネスモデルを企画・発表し、大学部最優秀賞（大田大学校総長賞）を受賞。",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "公式賞状（PDFアップロード予定）",
+              url: "/docs/joint_startup_certificate.pdf", // 今後 /docs/joint_startup_certificate.pdf 接続
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "関連報道記事（公開予定）",
+              url: "#", // 今後記事URL接続
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
         {
           year: "2026",
           title: "The 2nd COSS Intelligent IoT Hackathon (제2회 지능 IoT해커톤 경진대회)",
@@ -1014,6 +1147,22 @@ export const portfolioDataByLang = {
             "Awarded official prize equivalent to KRW 1,000,000 for winning 1st Place (Grand Prize) at the 2026 Regional Social Venture Innovation Hackathon.",
         },
         {
+          year: "2026. 11.",
+          title: "2026 DSC Shared University (Daejeon) AI Practical Project Challenge - Excellence Award",
+          badge: "EXCELLENCE AWARD",
+          issuer: "DSC Shared University & Woosong Univ. Anchor Project Group",
+          description:
+            "Planned and developed a practical generative AI prototype solving local business and administrative challenges. Led end-to-end AI workflow implementation and presentation within a sprint schedule, winning the Excellence Award.",
+        },
+        {
+          year: "2026. 11.",
+          title: "2026 Joint Elementary, Secondary, and University Startup Competition (University Division) - Excellence Award (President's Award)",
+          badge: "EXCELLENCE AWARD (President's Award)",
+          issuer: "Daejeon University Anchor Project Group & SW University Project Group",
+          description:
+            "Developed and pitched an innovative technology-driven startup model addressing regional and ICT challenges, winning the Excellence Award (Daejeon University President's Award) in the university division.",
+        },
+        {
           year: "2026",
           title: "SW Project Group Official Supporter Scholarship",
           issuer: "SW University Project Group, Daejeon University",
@@ -1089,6 +1238,52 @@ export const portfolioDataByLang = {
         ],
       },
       items: [
+        {
+          year: "2026",
+          title: "2026 DSC Shared University (Daejeon) AI Practical Project Challenge",
+          award: "Excellence Award",
+          organizer: "DSC Shared University & Woosong Univ. Anchor Project Group",
+          description:
+            "Planned and developed a practical generative AI prototype solving local business and administrative challenges. Led end-to-end AI workflow implementation and presentation within a sprint schedule, winning the Excellence Award.",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "Official Certificate (PDF Coming Soon)",
+              url: "/docs/dsc_ai_challenge_certificate.pdf", // To be linked to /docs/dsc_ai_challenge_certificate.pdf
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "Press Article (Coming Soon)",
+              url: "#", // To be linked to press article URL
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
+        {
+          year: "2026",
+          title: "2026 Joint Elementary, Secondary, and University Startup Competition (University Division)",
+          award: "Excellence Award (President's Award)",
+          organizer: "Daejeon University Anchor Project Group & SW University Project Group",
+          description:
+            "Developed and pitched an innovative technology-driven startup model addressing regional and ICT challenges, winning the Excellence Award (Daejeon University President's Award) in the university division.",
+          photoPlaceholder: true,
+          links: [
+            {
+              label: "Official Certificate (PDF Coming Soon)",
+              url: "/docs/joint_startup_certificate.pdf", // To be linked to /docs/joint_startup_certificate.pdf
+              disabled: true,
+              isExternal: true,
+            },
+            {
+              label: "Press Article (Coming Soon)",
+              url: "#", // To be linked to press article URL
+              disabled: true,
+              isExternal: true,
+            },
+          ],
+        },
         {
           year: "2026",
           title: "The 2nd COSS Intelligent IoT Hackathon (제2회 지능 IoT해커톤 경진대회)",
@@ -2394,9 +2589,17 @@ export default function AcademicPortfolio() {
                       {honor.year}
                     </span>
                     <div className="space-y-0.5">
-                      <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
-                        {honor.title}
-                      </h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                          {honor.title}
+                        </h3>
+                        {honor.badge && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/15 !text-sky-700 dark:!text-sky-300 border border-sky-500/35 shadow-xs font-mono">
+                            <Award className="w-3 h-3 !text-sky-600 dark:!text-sky-400" />
+                            <span>{honor.badge}</span>
+                          </span>
+                        )}
+                      </div>
                       <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-300">
                         {honor.issuer}
                       </p>
@@ -2555,6 +2758,59 @@ export default function AcademicPortfolio() {
                         <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-400 leading-relaxed pt-0.5 font-normal">
                           {comp.description}
                         </p>
+                      )}
+
+                      {/* 현장 사진 플레이스홀더 박스 (추후 public/images/dsc_ai_challenge.jpg 업로드 시 활성화 가이드 포함) */}
+                      {comp.photoPlaceholder && (
+                        <div className="mt-2.5 p-3 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700/80 bg-zinc-50 dark:bg-zinc-800/40 text-xs text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-2 select-none">
+                          <Camera className="w-4 h-4 opacity-60" />
+                          <span>현장 사진 업데이트 예정 (이미지 등록 대기 중)</span>
+                          {/* 
+                            [사진 활성화 가이드]:
+                            추후 이미지 파일(예: /images/dsc_ai_challenge.jpg 또는 /images/joint_startup_award.jpg) 업로드 후,
+                            이 placeholder div 대신 아래 컴포넌트를 주석 해제하여 사용하시면 원본 모달 확대와 함께 바로 표시됩니다:
+                            
+                            <div 
+                              onClick={() => setSelectedMedia({ src: "/images/dsc_ai_challenge.jpg", caption: "2026 DSC AI 실전 프로젝트 챌린지 현장", alt: "2026 DSC AI 실전 프로젝트 챌린지 현장 사진" })}
+                              className="group/img mt-2.5 relative max-w-sm rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800 cursor-zoom-in shadow-xs hover:border-sky-500/60 transition-all"
+                            >
+                              <div className="aspect-[16/10] overflow-hidden">
+                                <img src={getAssetUrl("/images/dsc_ai_challenge.jpg")} alt="2026 DSC AI 실전 프로젝트 챌린지 현장" className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" />
+                              </div>
+                            </div>
+                          */}
+                        </div>
+                      )}
+
+                      {/* 증빙 링크 칩 (공식 상장 사본 & 관련 보도기사) */}
+                      {comp.links && comp.links.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-2 pt-2">
+                          {comp.links.map((link, lIdx) =>
+                            link.disabled ? (
+                              <button
+                                key={lIdx}
+                                type="button"
+                                disabled
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/60 !text-zinc-400 dark:!text-zinc-500 border border-zinc-200 dark:border-zinc-700/60 cursor-not-allowed opacity-60 select-none"
+                              >
+                                <FileText className="w-3.5 h-3.5 opacity-60" />
+                                <span>{link.label}</span>
+                              </button>
+                            ) : (
+                              <a
+                                key={lIdx}
+                                href={getAssetUrl(link.url)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 !text-sky-800 dark:!text-sky-300 border border-sky-500/30 hover:border-sky-500/60 shadow-xs transition-all duration-200 hover:-translate-y-0.5 group/chip"
+                              >
+                                <FileText className="w-3.5 h-3.5 !text-sky-600 dark:!text-sky-400 opacity-80" />
+                                <span>{link.label}</span>
+                                <ExternalLink className="w-3 h-3 opacity-70 group-hover/chip:opacity-100 transition-opacity" />
+                              </a>
+                            )
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
