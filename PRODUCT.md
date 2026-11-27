@@ -126,3 +126,16 @@ Foundations:
    - 빌드 타임 주입 및 미설정 시 Fallback 방어 로직 상시 가동.
 4. **검색 엔진 최적화 (SEO) 및 메타데이터 무결성**:
    - `index.html` 및 `app/layout.tsx` 내 구글/네이버 소유권 확인 태그(`naver-site-verification`, `pofol-verify`), OpenGraph, JSON-LD 구조화 데이터(`WebSite`, `Person`), `robots.txt`, `sitemap.xml` 영구 유지.
+
+## 8. Hardening & Robustness Standards (Impeccable Harden)
+
+1. **상태 전환 및 모달 안정성 (State & Modal Stability)**:
+   - 수상 현장 사진 원본 확대 모달(`selectedMedia`) 및 모바일 내비게이션 드로어(`isMobileNavOpen`) 활성화 시 `document.body.style.overflow = "hidden"`을 주입하여 배경 스크롤을 원천 차단하고, 닫힐 때 원상태로 복원.
+   - 키보드 `Escape` 키 감지 리스너를 통해 모든 모달/오버레이가 즉시 안전하게 닫히도록 바인딩.
+2. **웹 접근성 및 키보드 내비게이션 (Accessibility & Keyboard Operability)**:
+   - 모든 인터랙티브 트리거(모바일 메뉴 버튼, 언어 선택 버튼, CV 다운로드, 다크모드 토글)에 구체적인 `aria-label`, `aria-expanded`, `aria-controls`, `aria-pressed` 명시.
+   - 수상 실적 현장 사진 썸네일에 `role="button"`, `tabIndex={0}`, `aria-label`, `onKeyDown(Enter / Space)`을 부여하여 마우스 없이 키보드만으로도 모달 탐색 가능.
+   - 목차 내비게이션 링크에 현재 스크롤 위치를 나타내는 `aria-current="true"`를 동적으로 부여하여 스크린 리더 친화성 극대화.
+3. **미디어 로딩 및 방어적 레이아웃 (Media & Defensive Layout)**:
+   - 히어로 프로필 이미지에 `loading="eager"`, `decoding="async"`를 적용하여 LCP(Largest Contentful Paint) 렌더링 최적화 및 로딩 실패 시 Fallback 아바타 보존.
+   - 모든 타임라인 일자 스팬에 `break-keep`, `tabular-nums`를 강제하여 글자나 숫자가 줄바꿈되어 잘리는 현상 방지.

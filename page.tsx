@@ -1775,7 +1775,7 @@ export default function AcademicPortfolio() {
   // 현재 선택된 언어의 데이터
   const data = portfolioDataByLang[language];
 
-  // ESC 키로 이미지 모달 닫기
+  // ESC 키로 이미지 모달 닫기 및 배경 스크롤 잠금 (Impeccable Harden)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -1784,9 +1784,11 @@ export default function AcademicPortfolio() {
     };
     if (selectedMedia) {
       window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [selectedMedia]);
 
@@ -1983,6 +1985,7 @@ export default function AcademicPortfolio() {
           className="fixed top-4 right-4 z-50 lg:hidden p-2.5 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg hover:border-rose-400 dark:hover:border-rose-500 transition-all cursor-pointer flex items-center justify-center focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
           aria-label={isMobileNavOpen ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={isMobileNavOpen}
+          aria-controls="mobile-navigation"
         >
           {isMobileNavOpen ? <X className="w-5 h-5 text-rose-500" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -2002,6 +2005,9 @@ export default function AcademicPortfolio() {
 
           {/* 우측 슬라이드 드로어 패널 */}
           <aside
+            id="mobile-navigation"
+            role="dialog"
+            aria-modal="true"
             className={`absolute top-0 right-0 h-full w-[280px] max-w-[80vw] bg-white dark:bg-[#15161a] border-l border-zinc-200 dark:border-zinc-800 p-6 pt-16 flex flex-col justify-between shadow-2xl transition-transform duration-300 ease-out ${
               isMobileNavOpen ? "translate-x-0" : "translate-x-full"
             }`}
@@ -2027,6 +2033,7 @@ export default function AcademicPortfolio() {
                       <li key={item.id}>
                         <a
                           href={`#${item.id}`}
+                          aria-current={isActive ? "true" : undefined}
                           onClick={(e) => {
                             scrollToSection(e, item.id);
                             setIsMobileNavOpen(false);
@@ -2098,7 +2105,7 @@ export default function AcademicPortfolio() {
               <div className="space-y-6 w-full text-left flex flex-col items-start">
 
                 {/* 상단 컨트롤 바: 언어 선택 콤팩트 캡슐 버튼 (KO / JA / EN) */}
-                <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 shadow-xs">
+                <div role="group" aria-label="Language selection" className="inline-flex items-center gap-1 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 shadow-xs">
                   <button
                     type="button"
                     onClick={() => handleLanguageChange("ko")}
@@ -2107,7 +2114,8 @@ export default function AcademicPortfolio() {
                         ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
-                    aria-label="한국어로 변경"
+                    aria-label="한국어로 변경 (Korean)"
+                    aria-pressed={language === "ko"}
                   >
                     KO
                   </button>
@@ -2119,7 +2127,8 @@ export default function AcademicPortfolio() {
                         ? "bg-white dark:bg-zinc-900 text-rose-600 dark:text-rose-400 shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
-                    aria-label="日本語に変更"
+                    aria-label="日本語に変更 (Japanese)"
+                    aria-pressed={language === "ja"}
                   >
                     JA
                   </button>
@@ -2132,6 +2141,7 @@ export default function AcademicPortfolio() {
                         : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/60 dark:hover:bg-zinc-700/60"
                     }`}
                     aria-label="Switch to English"
+                    aria-pressed={language === "en"}
                   >
                     EN
                   </button>
@@ -2142,6 +2152,8 @@ export default function AcademicPortfolio() {
                   <img
                     src={getAssetUrl(data.personal.profileImage)}
                     alt={data.personal.name}
+                    loading="eager"
+                    decoding="async"
                     className="w-full h-full object-cover grayscale-[5%] group-hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
                     onError={(e) => {
                       const target = e.currentTarget;
@@ -2225,6 +2237,7 @@ export default function AcademicPortfolio() {
                         <li key={item.id}>
                           <a
                             href={`#${item.id}`}
+                            aria-current={isActive ? "true" : undefined}
                             onClick={(e) => scrollToSection(e, item.id)}
                             className={`group flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                               isActive
@@ -2323,7 +2336,7 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {edu.period}
                     </span>
                     <div className="space-y-1">
@@ -2376,7 +2389,7 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {exp.period}
                     </span>
                     <div className="space-y-1">
@@ -2513,7 +2526,7 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {honor.year}
                     </span>
                     <div className="space-y-0.5">
@@ -2557,7 +2570,7 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60 border border-transparent hover:border-zinc-200/80 dark:hover:border-zinc-700/50 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight break-keep">
                       {comp.year}
                     </span>
                     <div className="space-y-1">
@@ -2610,8 +2623,17 @@ export default function AcademicPortfolio() {
                           {comp.media.map((item, mIdx) => (
                             <div
                               key={mIdx}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`${item.caption} - 원본 사진 확대 보기`}
                               onClick={() => setSelectedMedia(item)}
-                              className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200"
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault();
+                                  setSelectedMedia(item);
+                                }
+                              }}
+                              className="group/img relative rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-700/80 bg-zinc-100 dark:bg-zinc-800/80 cursor-zoom-in shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:outline-none"
                             >
                               <div className="aspect-[16/10] overflow-hidden bg-zinc-900/10">
                                 <img
