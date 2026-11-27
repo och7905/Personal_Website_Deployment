@@ -2025,7 +2025,7 @@ export default function AcademicPortfolio() {
                 ? (e) => scrollToSection(e, matched.url.slice(1))
                 : undefined
             }
-            className="inline-flex items-baseline gap-0.5 font-semibold text-zinc-950 dark:text-zinc-100 hover:text-rose-600 dark:hover:text-rose-400 hover:underline underline-offset-4 transition-all duration-200 cursor-pointer"
+            className="inline-flex items-baseline gap-1 font-bold text-rose-700 dark:text-rose-300 bg-rose-500/10 dark:bg-rose-500/15 px-1.5 py-0.5 rounded-md border border-rose-500/20 hover:border-rose-500/50 hover:bg-rose-500/20 dark:hover:bg-rose-500/25 transition-all duration-200 cursor-pointer tracking-tight"
           >
             <span>{part}</span>
             {isExternal && (
@@ -2226,25 +2226,25 @@ export default function AcademicPortfolio() {
                 {/* 이름 및 직책/소속 정보 (좌측 정렬, 명확한 위계, 고대비 색상 적용) */}
                 <div className="space-y-2 text-left w-full flex flex-col items-start">
                   <div className="flex flex-col items-start text-left">
-                    <h1 className="text-2xl font-extrabold tracking-tight text-black dark:text-white leading-tight">
+                    <h1 className="text-3xl font-black tracking-tight text-black dark:text-white leading-tight">
                       {data.personal.name}
                     </h1>
-                    <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-300 mt-0.5">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5">
                       {data.personal.nameSub}
                     </span>
                   </div>
 
-                  <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-300 leading-snug">
+                  <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100 leading-snug">
                     {data.personal.title}
                   </p>
-                  <p className="text-xs leading-relaxed text-zinc-900 dark:text-zinc-300 font-semibold">
+                  <p className="text-xs leading-relaxed text-zinc-700 dark:text-zinc-300 font-medium">
                     {data.personal.department}
                     <br />
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-300">
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-100">
                       {data.personal.affiliation}
                     </span>
                     {data.personal.lab && (
-                      <span className="text-rose-700 dark:text-rose-400 ml-1 font-bold">
+                      <span className="text-rose-600 dark:text-rose-400 ml-1 font-bold">
                         · {data.personal.lab}
                       </span>
                     )}
@@ -2393,12 +2393,12 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {edu.period}
                     </span>
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm sm:text-base font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                        <h3 className="text-sm sm:text-base font-extrabold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {edu.degree}
                         </h3>
                       </div>
@@ -2446,12 +2446,12 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {exp.period}
                     </span>
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm sm:text-base font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                        <h3 className="text-sm sm:text-base font-extrabold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {exp.role}
                         </h3>
                         {exp.url ? (
@@ -2583,16 +2583,16 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {honor.year}
                     </span>
                     <div className="space-y-0.5">
                       <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                        <h3 className="text-sm sm:text-base font-extrabold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {honor.title}
                         </h3>
                         {honor.badge && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300/80 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30 tracking-tight font-mono">
                             <Award className="w-3 h-3 text-rose-600 dark:text-rose-400" />
                             <span>{honor.badge}</span>
                           </span>
@@ -2628,18 +2628,18 @@ export default function AcademicPortfolio() {
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 sm:p-7 shadow-sm mb-6 transition-all duration-300">
                   {/* 상단 뱃지 & 연도 */}
                   <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
-                      <Trophy className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-rose-600 text-white dark:bg-rose-500 dark:text-white shadow-xs tracking-wide font-mono uppercase">
+                      <Trophy className="w-3.5 h-3.5 text-white" />
                       <span>{data.competitions.featured.badge}</span>
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums font-mono">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums">
                       {data.competitions.featured.year}
                     </span>
                   </div>
 
                   {/* 타이틀 및 발급 기관 */}
                   <div className="space-y-1.5">
-                    <h3 className="text-base sm:text-xl font-extrabold text-black dark:text-white leading-snug tracking-tight">
+                    <h3 className="text-lg sm:text-2xl font-black text-black dark:text-white leading-tight tracking-tight">
                       {data.competitions.featured.title}
                     </h3>
                     {data.competitions.featured.titleSub && (
@@ -2731,16 +2731,17 @@ export default function AcademicPortfolio() {
                     key={idx}
                     className="group -mx-3.5 px-3.5 py-3 rounded-2xl transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700/60 grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-1 sm:gap-4 items-baseline"
                   >
-                    <span className="text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400 tabular-nums">
+                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 tabular-nums tracking-tight">
                       {comp.year}
                     </span>
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm font-bold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                        <h3 className="text-sm sm:text-base font-extrabold text-black dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                           {comp.title}
                         </h3>
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200/80 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20 tracking-tight font-mono">
-                          [{comp.award}]
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300/80 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/30 tracking-tight font-mono">
+                          <Trophy className="w-3 h-3 text-rose-600 dark:text-rose-400 shrink-0" />
+                          <span>{comp.award}</span>
                         </span>
                       </div>
                       <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-300">
@@ -2799,14 +2800,14 @@ export default function AcademicPortfolio() {
               <div className="space-y-5">
                 {data.skills.groups.map((skillGroup, idx) => (
                   <div key={idx} className="space-y-2">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-black dark:text-white">
+                    <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
                       {skillGroup.category}
                     </h3>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {skillGroup.items.map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium bg-zinc-100 border border-zinc-200 text-zinc-800 hover:border-zinc-300 hover:text-black dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:text-white transition-all shadow-sm cursor-default"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-zinc-100 border border-zinc-200 text-zinc-900 hover:border-zinc-300 hover:text-black dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-100 dark:hover:border-zinc-700 dark:hover:text-white transition-all shadow-xs cursor-default"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
                           <span>{skill}</span>
